@@ -76,7 +76,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns>JObject</returns>
         public JObject BotAdd(string botName, string botDesc, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTLIST);
+            var aipReq = DefaultRequest(BOTADD);
 
             aipReq.Bodys["botName"] = botName;
             aipReq.Bodys["botDesc"] = botDesc;
