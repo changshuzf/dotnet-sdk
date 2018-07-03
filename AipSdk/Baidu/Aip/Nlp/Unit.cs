@@ -66,5 +66,26 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 功能描述： 新增 bot
+        /// </summary>
+        /// <param name="botName">bot 名称，长度范围 1~30</param>
+        /// <param name="botDesc">bot 描述，长度范围 0~50</param>
+        /// <param name="options"></param>
+        /// <returns>JObject</returns>
+        public JObject BotAdd(string botName, string botDesc, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(BOTLIST);
+
+            aipReq.Bodys["botName"] = botName;
+            aipReq.Bodys["botDesc"] = botDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
     }
 }
