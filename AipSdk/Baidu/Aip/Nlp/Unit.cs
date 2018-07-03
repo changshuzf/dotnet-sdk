@@ -28,6 +28,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string BOTADD  =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/add";
 
+        private const string BOTUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/bot/update";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -87,5 +90,29 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 修改 bot 属性
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="botName">bot 名称，长度范围 1~30</param>
+        /// <param name="botDesc">bot 描述，长度范围 0~50</param>
+        /// <param name="options"></param>
+        /// <returns>JObject</returns>
+        public JObject BotUpdate(long botId, string botName,string botDesc, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(BOTUPDATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["botName"] = botName;
+            aipReq.Bodys["botDesc"] = botDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
     }
 }
