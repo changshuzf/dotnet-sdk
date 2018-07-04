@@ -120,6 +120,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/pattern/info";
 
+        private const string PATTERNIMPORT =
+            "https://aip.baidubce.com/rpc/2.0/unit/pattern/import";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -905,6 +908,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["patternId"] = patternId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 导入模板
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="patternSetId">模板包 id</param>
+        /// <param name="filePath">文件下载链接，通过上传接口产生</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternImport(long botId, long patternSetId, string filePath, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNIMPORT);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["patternSetId"] = patternSetId;
+            aipReq.Bodys["filePath"] = filePath;
             PreAction();
 
             if (options != null)
