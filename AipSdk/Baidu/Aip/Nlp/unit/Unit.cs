@@ -111,6 +111,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/query/delete";
 
+        private const string PATTERNSETLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/patternSet/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -825,6 +828,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["queryId"] = queryId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 获取模板包列表
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternSetList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNSETLIST);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
