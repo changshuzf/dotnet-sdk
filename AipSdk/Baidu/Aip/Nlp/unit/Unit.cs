@@ -138,6 +138,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/keyword/update";
 
+        private const string KEYWORDDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/keyword/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1084,6 +1087,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["dictPath"] = dictPath;
             aipReq.Bodys["blacklistDictPath"] = blacklistDictPath;
             aipReq.Bodys["keywordSysDict"] = JsonConvert.SerializeObject(keywordSysDict, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除特征词
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="keywordId">特征词 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KeywordDelete(long botId, long keywordId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KEYWORDDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["keywordId"] = keywordId;
             PreAction();
 
             if (options != null)
