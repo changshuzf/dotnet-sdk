@@ -108,6 +108,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/query/update";
 
+        private const string QUERYDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/query/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -799,6 +802,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["query"] = JsonConvert.SerializeObject(query,Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除样本
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="querySetId">样本包 id</param>
+        /// <param name="queryId">样本 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryDelete(long botId, long querySetId, long queryId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["queryId"] = queryId;
             PreAction();
 
             if (options != null)
