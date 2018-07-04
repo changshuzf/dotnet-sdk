@@ -159,6 +159,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQCLEAR =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/clear";
 
+        private const string FAQIMPORT =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/import";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1287,6 +1290,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 导入问答对
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="filePath">文件下载链接，通过上传接口产生</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQImport(long botId, long skillId, long intentId,string filePath, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQIMPORT);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["filePath"] = filePath;
             PreAction();
 
             if (options != null)
