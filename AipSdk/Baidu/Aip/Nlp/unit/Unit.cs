@@ -156,6 +156,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/delete";
 
+        private const string FAQCLEAR =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/clear";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1261,6 +1264,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["faqId"] = faqId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 清空问答对数据
+        /// </summary>
+        /// <param name="botId">bot Id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQClear(long botId, long skillId, long intentId,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQCLEAR);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
             PreAction();
 
             if (options != null)
