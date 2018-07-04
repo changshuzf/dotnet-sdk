@@ -775,7 +775,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["query"] = query;
+            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
             PreAction();
 
             if (options != null)
