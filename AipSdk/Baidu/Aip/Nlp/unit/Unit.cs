@@ -84,6 +84,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELTRAIN =
             "https://aip.baidubce.com/rpc/2.0/unit/model/train";
 
+        private const string MODELDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/model/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -591,6 +594,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["modelDesc"] = modelDesc;
             aipReq.Bodys["trainOption"] = trainOption;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除有效模型
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="modelId">模型 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ModelDelete(long botId,long modelId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(MODELDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["modelId"] = modelId;
             PreAction();
 
             if (options != null)
