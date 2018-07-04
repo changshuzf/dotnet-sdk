@@ -153,6 +153,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/update";
 
+        private const string FAQDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1232,6 +1235,32 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["faqId"] = faqId;
             aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
             aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除单个问答对
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="faqId">问答对 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQDelete(long botId, long skillId, long intentId,
+            long faqId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["faqId"] = faqId;
             PreAction();
 
             if (options != null)
