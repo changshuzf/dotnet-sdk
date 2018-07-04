@@ -141,6 +141,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/keyword/delete";
 
+        private const string FAQLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1108,6 +1111,34 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["keywordId"] = keywordId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 获取问答对列表
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQList(long botId,long skillId,long intentId,
+            int pageNo,int pageSize , Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQLIST);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
