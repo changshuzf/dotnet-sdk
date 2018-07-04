@@ -75,6 +75,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/update";
 
+        private const string SLOTDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -494,6 +497,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented);
             aipReq.Bodys["slotDictPathEfficient"] = slotDictPathEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        ///  删除词槽
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="slotId">词槽 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SLotDelete(long botId, long skillId, long slotId,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
             PreAction();
 
             if (options != null)
