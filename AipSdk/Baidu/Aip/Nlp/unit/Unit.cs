@@ -1200,8 +1200,8 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["faqId"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
-            aipReq.Bodys["faqId"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
+            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
             PreAction();
 
             if (options != null)
