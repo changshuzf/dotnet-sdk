@@ -90,6 +90,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/querySet/list";
 
+        private const string QUERYSETADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/querySet/add";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -641,6 +644,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 新增样本包
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="querySetName">样本包名称，长度范围 1~30</param>
+        /// <param name="dictPath">文件下载链接，通过上传接口产生</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QuerySetAdd(long botId,string querySetName,string dictPath, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYSETADD);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetName"] = querySetName;
+            aipReq.Bodys["dictPath"] = dictPath;
             PreAction();
 
             if (options != null)
