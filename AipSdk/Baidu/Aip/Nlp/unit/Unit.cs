@@ -123,6 +123,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNIMPORT =
             "https://aip.baidubce.com/rpc/2.0/unit/pattern/import";
 
+        private const string PATTERNCLEAR =
+            "https://aip.baidubce.com/rpc/2.0/unit/pattern/clear";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -931,6 +934,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["filePath"] = filePath;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 清空模板
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="patternSetId">模板包 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternClear(long botId, long patternSetId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNCLEAR);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["patternSetId"] = patternSetId;
             PreAction();
 
             if (options != null)
