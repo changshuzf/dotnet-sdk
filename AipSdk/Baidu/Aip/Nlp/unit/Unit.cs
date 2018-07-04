@@ -16,6 +16,7 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using AipSdk.Baidu.Aip.Nlp.unit;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Baidu.Aip.Nlp.Unit
 {
@@ -161,6 +162,9 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string FAQIMPORT =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/import";
+
+        private const string FILEUPLOAD =
+            "https://aip.baidubce.com/rpc/2.0/unit/file/upload";
 
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -1315,6 +1319,24 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["filePath"] = filePath;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="file">单次上传文件大小限制为 10M，每个用户每个APP 每天上传限制为 100M</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FileUpload(string file,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FILEUPLOAD);
+            var fileraw = File.ReadAllBytes(file);
+            aipReq.Bodys["file"] = System.Convert.ToBase64String(fileraw);
             PreAction();
 
             if (options != null)
