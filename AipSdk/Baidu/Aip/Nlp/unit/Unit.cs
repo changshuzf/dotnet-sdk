@@ -327,7 +327,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject IntentDelete(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(INTENTUPDATE);
+            var aipReq = DefaultRequest(INTENTDELETE);
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
