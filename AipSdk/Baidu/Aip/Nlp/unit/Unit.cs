@@ -144,6 +144,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/list";
 
+        private const string FAQINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/info";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1139,6 +1142,32 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查询问答对明细
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="faqId">问答对 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQInfo(long botId, long skillId, long intentId,
+            long faqId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQINFO);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["faqId"] = faqId;
             PreAction();
 
             if (options != null)
