@@ -117,6 +117,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/pattern/list";
 
+        private const string PATTERNINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/pattern/info";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -879,6 +882,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查看模板详细信息
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="patternSetId">模板包 id</param>
+        /// <param name="patternId">模板 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternInfo(long botId, long patternSetId,long patternId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNINFO);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["patternSetId"] = patternSetId;
+            aipReq.Bodys["patternId"] = patternId;
             PreAction();
 
             if (options != null)
