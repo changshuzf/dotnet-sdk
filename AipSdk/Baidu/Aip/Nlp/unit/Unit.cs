@@ -72,6 +72,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/add";
 
+        private const string SLOTUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/update";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -447,6 +450,44 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotName"] = slotName;
+            aipReq.Bodys["slotDesc"] = slotDesc;
+            aipReq.Bodys["slotDictPath"] = slotDictPath;
+            aipReq.Bodys["slotBlacklistDictPath"] = slotBlacklistDictPath;
+            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented);
+            aipReq.Bodys["slotDictPathEfficient"] = slotDictPathEfficient;
+            aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        ///  修改词槽
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="slotId">词槽 id</param>
+        /// <param name="slotDesc">词槽描述，长度范围 0~50</param>
+        /// <param name="slotDictPath">自定义词槽词典标识，通过上传接口产生</param>
+        /// <param name="slotBlacklistDictPath">词槽黑名单词典标识，通过上传接口产生</param>
+        /// <param name="slotSysDict">系统词槽名称</param>
+        /// <param name="slotDictPathEfficient">自定义词槽词典和黑名单词典是否使用:1(使用)、 0(未使用)</param>
+        /// <param name="slotSysDictEfficient">系统词槽词典是否使用: 1(使用)、 0(未使用)</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SLotUpdate(long botId, long skillId, long slotId, string slotDesc,
+            string slotDictPath, string slotBlacklistDictPath, JArray slotSysDict,
+            int slotDictPathEfficient, int slotSysDictEfficient,
+            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTUPDATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotDesc"] = slotDesc;
             aipReq.Bodys["slotDictPath"] = slotDictPath;
             aipReq.Bodys["slotBlacklistDictPath"] = slotBlacklistDictPath;
