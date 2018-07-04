@@ -105,6 +105,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYADD =
             "https://aip.baidubce.com/rpc/2.0/unit/query/add";
 
+        private const string QUERYUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/query/update";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -773,6 +776,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["query"] = query;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 修改样本
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="querySetId">样本包 id</param>
+        /// <param name="query">样本信息</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryUpdate(long botId, long querySetId, JObject query, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYADD);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query,Formatting.Indented);
             PreAction();
 
             if (options != null)
