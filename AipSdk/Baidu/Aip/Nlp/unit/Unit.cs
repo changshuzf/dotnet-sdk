@@ -147,6 +147,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/faq/info";
 
+        private const string FAQADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/faq/add";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1168,6 +1171,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["faqId"] = faqId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 新增一个问答对
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">问答意图 id</param>
+        /// <param name="faqQuestions">问题列表</param>
+        /// <param name="faqAnswers">回答列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQAdd(long botId, long skillId, long intentId,
+            JArray faqQuestions,JArray faqAnswers, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQADD);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["faqId"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
+            aipReq.Bodys["faqId"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
             PreAction();
 
             if (options != null)
