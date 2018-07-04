@@ -129,6 +129,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/keyword/list";
 
+        private const string KEYWORDVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/keyword/value";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -979,6 +982,31 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(KEYWORDLIST);
 
             aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查看特征词词典详情
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="keywordId">keyword id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~5000</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KeywordValue(long botId,long keywordId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KEYWORDVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["keywordId"] = keywordId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
