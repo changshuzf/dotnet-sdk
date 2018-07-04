@@ -43,4 +43,114 @@ namespace AipSdk.Baidu.Aip.Nlp.unit
         /// </summary>
         public string updateTime { get; set; }
     }
+
+    public class Request
+    {
+        /// <summary>
+        /// 与BOT对话的用户id（如果BOT客户端是用户未登录状态情况下对话的，
+        /// 也需要尽量通过其他标识（比如设备id）来唯一区分用户），
+        /// 方便今后在平台的日志分析模块定位分析问题、从用户维度统计分析相关对话情况。
+        /// </summary>
+        public string user_id { get; set; }
+        /// <summary>
+        /// 本轮请求query（用户说的话），详情见【参数详细说明】
+        /// </summary>
+        public string query { get; set; }
+        /// <summary>
+        /// 本轮请求query的附加信息。
+        /// </summary>
+        public Query_Info query_info { get; set; }
+        /// <summary>
+        /// client希望传给BOT的本地信息，以一组K-V形式保存，
+        /// 如不需要此字段，需填充一个默认值：
+        /// {"client_results":"", "candidate_options":[]}。
+        ///如果需要此字段，其定义详见【参数详细说明】
+        /// </summary>
+        public string client_session { get; set; }
+        /// <summary>
+        /// 干预信息。详情见【参数详细说明】
+        /// </summary>
+        public Updates updates { get; set; }
+        /// <summary>
+        /// 系统自动发现不置信意图/词槽，
+        /// 并据此主动发起澄清确认的敏感程度。
+        /// 取值范围：0(关闭)、1(中敏感度)、2(高敏感度)。
+        /// 取值越高BOT主动发起澄清的频率就越高，建议值为1。
+        /// </summary>
+        public int bernard_level { get; set; }
+    }
+
+    public class Query_Info
+    {
+        /// <summary>
+        /// ="TEXT"，请求信息类型，当前为固定值TEXT，
+        /// 表示客户端请求的内容类型是一段文本。
+        /// 后续会支持"EVENT"类型，让客户端在BOT里直接触发一个意图或填充一些词槽等操作，
+        /// 比如客户端发现用户打开对话窗口了，
+        /// 可以由BOT主动触发一个请求 给用户问个好、介绍一下自己能解决什么问题。
+        /// </summary>
+        public string type { get; set; }
+        /// <summary>
+        /// 请求信息来源，可选值："ASR","KEYBOARD"。
+        /// ASR为语音输入，KEYBOARD为键盘文本输入，
+        /// ASR输入的UNIT平台内置了异常信息纠错机制，
+        /// 尝试解决语音输入中的一些常见错误。
+        /// </summary>
+        public string source { get; set; }
+        /// <summary>
+        /// 请求信息来源若为ASR，该字段为ASR候选信息。
+        /// （如果调用百度语音的API会有词信息，
+        /// BOT可能会参考该候选信息做综合判断处理。）
+        /// </summary>
+        public List<Asr_Candidate> asr_candidates { get; set; }
+    }
+
+    public class Updates
+    {
+        /// <summary>
+        /// 干预方式，可选值：
+        /// DEFINE：抛弃系统解析结果，转而由updates字段来定义)；
+        /// MODIFY：修改系统解析结果
+        /// </summary>
+        public string type { get; set; }
+        /// <summary>
+        /// 具体操作集
+        /// </summary>
+        public List<OpItem> ops { get; set; }
+    }
+
+    public class Asr_Candidate
+    {
+        /// <summary>
+        /// 语音输入候选文本
+        /// </summary>
+        public string text { get; set; }
+        /// <summary>
+        /// 语音输入候选置信度
+        /// </summary>
+        public float confidence { get; set; }
+    }
+
+    public class OpItem
+    {
+        /// <summary>
+        /// 操作方式，可选值：
+        /// DEFINE：定义一个对象（当且仅当type为DEFINE时取此值，type为DEFINE时op只可以取此值）
+        /// REMOVE： 删除一个对象
+        /// ADD：增添一个对象（隐含操作：删除与之冲突的其他对象）
+        /// </summary>
+        public string op { get; set; }
+        /// <summary>
+        /// 操作针对的对象，可选值为意图、词槽：INTENT SLOT
+        /// </summary>
+        public string target { get; set; }
+        /// <summary>
+        /// target对象的值
+        /// </summary>
+        public Value value { get; set; }
+    }
+
+    public class Value
+    {
+    }  
 }

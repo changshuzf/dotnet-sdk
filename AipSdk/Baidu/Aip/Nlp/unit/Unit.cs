@@ -17,6 +17,8 @@ using Newtonsoft.Json.Linq;
 using AipSdk.Baidu.Aip.Nlp.unit;
 using Newtonsoft.Json;
 using System.IO;
+using AipSdk.Baidu.Aip.Nlp.unit;
+using AipSdk.Baidu.Aip.Nlp.unit.unitjson;
 
 namespace Baidu.Aip.Nlp.Unit
 {
@@ -25,6 +27,9 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public class Unit : AipServiceBase   {
         
+        private const string BOTCHAT =
+            "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
+
         private const string BOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/list";
 
@@ -183,6 +188,57 @@ namespace Baidu.Aip.Nlp.Unit
                 ContentEncoding = Encoding.GetEncoding("UTF-8")
             };
         }
+
+        /// <summary>
+        /// UNIT对话服务
+        /// </summary>
+        /// <param name="bot_id">BOT唯一标识，在『我的BOT』的BOT列表中第一列数字即为bot_id</param>
+        /// <param name="log_id">开发者需要在客户端生成的唯一id，用来定位请求，响应中会返回该字段。对话中每轮请求都需要一个log_id。</param>
+        /// <param name="request">本轮请求体</param>
+        /// <param name="version">=2.0，当前api版本对应协议版本号为2.0，固定值。</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public ReturnJsonBotChat BotChat(string bot_id ,Request request,string bot_session,
+            string user_id,string chat_msg, string version = "2.0", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(BOTCHAT);
+
+            aipReq.Bodys["version"] = version;
+            aipReq.Bodys["bot_id"] = bot_id;
+            System.Random r = new System.Random(10000000);
+            aipReq.Bodys["log_id"] = r.Next().ToString();
+
+            Request req = new Request();
+            req.user_id = user_id;
+            req.query = chat_msg;
+
+            ///QueryInfo
+            Query_Info qi = new Query_Info();
+            qi.source = "KEYBOARD";
+            qi.type = "TEXT";
+
+            ///List Asr_Candidate
+            List<Asr_Candidate> list = new List<Asr_Candidate>();
+            qi.asr_candidates = list;
+
+            req.query_info = qi;
+
+            //client session
+            req.client_session = @"{ ""client_results"":"""", ""candidate_options"":[]}";
+            //bernard_level
+            req.bernard_level = 0;
+
+            aipReq.Bodys["request"] = req;
+            aipReq.Bodys["bot_session"] = bot_session;
+            string s = JsonConvert.SerializeObject(aipReq.Bodys);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return JsonConvert.DeserializeObject<ReturnJsonBotChat>(PostAction(aipReq).ToString());
+        }
+
 
         /// <summary>
         /// 功能描述：查询用户的 bot 列表
