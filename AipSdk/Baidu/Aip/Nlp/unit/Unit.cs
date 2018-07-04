@@ -688,7 +688,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="querySetId">样本包 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetDelete(long botId, string querySetId, Dictionary<string, object> options = null)
+        public JObject QuerySetDelete(long botId, long querySetId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETDELETE);
 
