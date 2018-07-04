@@ -166,6 +166,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FILEUPLOAD =
             "https://aip.baidubce.com/rpc/2.0/unit/file/upload";
 
+        private const string JOBINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/job/info";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1337,6 +1340,26 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FILEUPLOAD);
             var fileraw = File.ReadAllBytes(file);
             aipReq.Bodys["file"] = System.Convert.ToBase64String(fileraw);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        ///  查询任务信息
+        /// </summary>
+        /// <param name="botId">bot Id</param>
+        /// <param name="jobId">job id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject JobInfo(long botId,long jobId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(JOBINFO);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["jobId"] = jobId;
             PreAction();
 
             if (options != null)
