@@ -87,6 +87,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/model/delete";
 
+        private const string QUERYSETLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/querySet/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -615,6 +618,29 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["modelId"] = modelId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        ///  获取样本包列表
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QuerySetList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYSETLIST);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
