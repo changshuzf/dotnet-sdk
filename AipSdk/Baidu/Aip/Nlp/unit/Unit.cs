@@ -63,6 +63,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/list";
 
+        private const string SYSSLOTLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/sysSlot/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -368,5 +371,21 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 查询系统词槽列表
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SysSlotList(Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SYSSLOTLIST);
+
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
     }
 }
