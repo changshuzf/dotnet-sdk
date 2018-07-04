@@ -57,6 +57,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/intent/update";
 
+        private const string INTENTDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/intent/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -306,6 +309,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = JsonConvert.SerializeObject(intentData, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除意图
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">意图 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject IntentDelete(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(INTENTUPDATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
             PreAction();
 
             if (options != null)
