@@ -14,6 +14,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using AipSdk.Baidu.Aip.Nlp.unit;
+using Newtonsoft.Json;
 
 namespace Baidu.Aip.Nlp.Unit
 {
@@ -36,6 +38,9 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/setting/info";
+
+        private const string SETTINGUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/setting/update";
 
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -149,6 +154,27 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(SETTINGINFO);
 
             aipReq.Bodys["botId"] = botId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 修改 bot 高级设置
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="botSetting">高级设置具体内容</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SettingUpdate(long botId, BotSetting botSetting, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SETTINGUPDATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(botSetting,Formatting.Indented);
             PreAction();
 
             if (options != null)
