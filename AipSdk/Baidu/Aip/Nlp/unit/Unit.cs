@@ -285,7 +285,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = JsonConvert.SerializeObject(intentData,Formatting.Indented);
+            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData,Formatting.Indented);
             PreAction();
 
             if (options != null)
