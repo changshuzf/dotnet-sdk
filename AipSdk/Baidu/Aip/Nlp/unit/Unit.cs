@@ -93,6 +93,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETADD =
             "https://aip.baidubce.com/rpc/2.0/unit/querySet/add";
 
+        private const string QUERYSETDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/querySet/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -667,6 +670,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetName"] = querySetName;
             aipReq.Bodys["dictPath"] = dictPath;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 删除样本包
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="querySetId">样本包 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QuerySetDelete(long botId, string querySetId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYSETDELETE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
             PreAction();
 
             if (options != null)
