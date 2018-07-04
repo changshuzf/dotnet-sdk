@@ -48,6 +48,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/intent/list";
 
+        private const string INTENTINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/intent/info";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -228,6 +231,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查询意图详情
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="intentId">意图 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject IntentInfo(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(INTENTINFO);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentId"] = intentId;
             PreAction();
 
             if (options != null)
