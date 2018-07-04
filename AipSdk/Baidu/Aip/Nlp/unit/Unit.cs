@@ -126,6 +126,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNCLEAR =
             "https://aip.baidubce.com/rpc/2.0/unit/pattern/clear";
 
+        private const string KEYWORDLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/keyword/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -955,6 +958,29 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["patternSetId"] = patternSetId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查询特征词词典列表
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KeywordList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KEYWORDLIST);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
