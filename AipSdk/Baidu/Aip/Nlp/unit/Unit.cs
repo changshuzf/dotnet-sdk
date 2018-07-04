@@ -99,6 +99,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/query/list";
 
+        private const string QUERYINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/query/info";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -721,6 +724,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["status"] = status;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查看样本详细内容
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="querySetId">样本包 id</param>
+        /// <param name="queryId">样本 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryInfo(long botId, long querySetId,long queryId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYINFO);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["queryId"] = queryId;
             PreAction();
 
             if (options != null)
