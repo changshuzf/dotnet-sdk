@@ -42,6 +42,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/setting/update";
 
+        private const string SKILLLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/skill/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -175,6 +178,28 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(botSetting,Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        /// <summary>
+        /// 查询技能列表
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SkillList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SKILLLIST);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
