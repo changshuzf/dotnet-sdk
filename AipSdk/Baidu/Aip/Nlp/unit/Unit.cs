@@ -78,6 +78,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/delete";
 
+        private const string MODELLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/model/list";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -520,6 +523,25 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 查询模型列表
+        /// </summary>
+        /// <param name="botId">botId</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ModelList(long botId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(MODELLIST);
+
+            aipReq.Bodys["botId"] = botId;
             PreAction();
 
             if (options != null)
