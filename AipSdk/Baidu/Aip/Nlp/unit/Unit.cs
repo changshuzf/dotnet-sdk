@@ -81,6 +81,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/model/list";
 
+        private const string MODELTRAIN =
+            "https://aip.baidubce.com/rpc/2.0/unit/model/train";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -542,6 +545,52 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(MODELLIST);
 
             aipReq.Bodys["botId"] = botId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 训练模型
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="modelDesc">模型描述, 长度范围 0~50</param>
+        /// <param name="trainOption">
+        ///     用户训练参数，json 结构，包含两部分信息
+        //      1. 训练数据的选择，包含模板包和样本包
+        //      2. 训练方式的选择，用户可选方式有两种：
+        //      a.快速训练(smartqu)
+        //      b.快速训练(smartqu)+深度训练(mlqu)
+        //      选择，填写 true；否则，填写 false
+        //      3. 具体样例为：
+        //      {
+        //      "configure":{
+        //      "smartqu": "true",
+        //      "mlqu": "true"
+        //      },
+        //      "data":{
+        //      "querySetIds":[
+        //      1,
+        //      2
+        //      ],
+        //      "patternSetIds":[
+        //      100
+        //      ]
+        //          }
+        //      }
+        /// </param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ModelTrain(long botId,string modelDesc,string trainOption, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(MODELTRAIN);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["modelDesc"] = modelDesc;
+            aipReq.Bodys["trainOption"] = trainOption;
             PreAction();
 
             if (options != null)
