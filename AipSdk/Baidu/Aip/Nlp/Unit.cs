@@ -31,6 +31,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string BOTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/update";
 
+        private const string BOTDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/bot/delete";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -106,6 +109,24 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["botName"] = botName;
             aipReq.Bodys["botDesc"] = botDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        /// <summary>
+        /// 删除BOT
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject BotDelete(long botId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(BOTDELETE);
+
+            aipReq.Bodys["botId"] = botId;
             PreAction();
 
             if (options != null)
