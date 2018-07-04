@@ -66,6 +66,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SYSSLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/sysSlot/list";
 
+        private const string SLOTVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/value";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -380,6 +383,35 @@ namespace Baidu.Aip.Nlp.Unit
         {
             var aipReq = DefaultRequest(SYSSLOTLIST);
 
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        ///  查询自定义词槽词典详细信息
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="slotId">词槽 id</param>
+        /// <param name="slotType">词槽词典类别用户自定义(user)黑名单(black)，传递空字符串时返回所有类型</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~5000</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SLotValue(long botId,long skillId,long slotId,string slotType,int pageNo,int pageSize,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
