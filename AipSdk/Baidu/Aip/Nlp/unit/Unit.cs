@@ -198,39 +198,20 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="version">=2.0，当前api版本对应协议版本号为2.0，固定值。</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public ReturnJsonBotChat BotChat(string bot_id ,Request request,string bot_session,
-            string user_id,string chat_msg, string version = "2.0", Dictionary<string, object> options = null)
+        public ReturnJsonBotChat BotChat(string bot_id, Request request, string log_id ="",
+            string version = "2.0", string bot_session = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(BOTCHAT);
 
             aipReq.Bodys["version"] = version;
             aipReq.Bodys["bot_id"] = bot_id;
-            System.Random r = new System.Random(10000000);
-            aipReq.Bodys["log_id"] = r.Next().ToString();
-
-            Request req = new Request();
-            req.user_id = user_id;
-            req.query = chat_msg;
-
-            ///QueryInfo
-            Query_Info qi = new Query_Info();
-            qi.source = "KEYBOARD";
-            qi.type = "TEXT";
-
-            ///List Asr_Candidate
-            List<Asr_Candidate> list = new List<Asr_Candidate>();
-            qi.asr_candidates = list;
-
-            req.query_info = qi;
-
-            //client session
-            req.client_session = @"{ ""client_results"":"""", ""candidate_options"":[]}";
-            //bernard_level
-            req.bernard_level = 0;
-
-            aipReq.Bodys["request"] = req;
+            if (log_id == "")
+            {
+                System.Random r = new System.Random(10000000);
+                aipReq.Bodys["log_id"] = r.Next().ToString();
+            }
+            aipReq.Bodys["request"] = request;
             aipReq.Bodys["bot_session"] = bot_session;
-            string s = JsonConvert.SerializeObject(aipReq.Bodys);
             PreAction();
 
             if (options != null)

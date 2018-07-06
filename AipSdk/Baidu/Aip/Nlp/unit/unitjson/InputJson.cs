@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AipSdk.Baidu.Aip.Nlp.unit.unitemnu;
 
 namespace AipSdk.Baidu.Aip.Nlp.unit
 {
@@ -46,6 +47,42 @@ namespace AipSdk.Baidu.Aip.Nlp.unit
 
     public class Request
     {
+        public Request(string user_id, string query, string client_session = @"{ ""client_results"":"""", ""candidate_options"":[]}", enum_bernard_level bernard_level = enum_bernard_level.中度敏感, Query_Info query_info = null, string updates = "")
+        {
+            //Request req = new Request();
+            //req.user_id = user_id;
+            //req.query = query;
+
+            /////QueryInfo
+            //Query_Info qi = new Query_Info();
+            //qi.source = "KEYBOARD";
+            //qi.type = "TEXT";
+
+            /////List Asr_Candidate
+            //List<Asr_Candidate> list = new List<Asr_Candidate>();
+            //qi.asr_candidates = list;
+
+            //req.query_info = qi;
+
+            ////client session
+            //req.client_session = @"{ ""client_results"":"""", ""candidate_options"":[]}";
+            ////bernard_level
+            //req.bernard_level = 0;
+
+            this.user_id = user_id;
+            this.query = query;
+            if (query_info == null)
+            {
+                Query_Info qi = new Query_Info();
+                this.query_info = qi;
+            }
+            this.client_session = client_session;
+            this.updates = updates;
+            this.bernard_level = (int)enum_bernard_level.中度敏感;
+
+
+        }
+
         /// <summary>
         /// 与BOT对话的用户id（如果BOT客户端是用户未登录状态情况下对话的，
         /// 也需要尽量通过其他标识（比如设备id）来唯一区分用户），
@@ -70,7 +107,7 @@ namespace AipSdk.Baidu.Aip.Nlp.unit
         /// <summary>
         /// 干预信息。详情见【参数详细说明】
         /// </summary>
-        public Updates updates { get; set; }
+        public string updates { get; set; }
         /// <summary>
         /// 系统自动发现不置信意图/词槽，
         /// 并据此主动发起澄清确认的敏感程度。
@@ -82,6 +119,17 @@ namespace AipSdk.Baidu.Aip.Nlp.unit
 
     public class Query_Info
     {
+        public Query_Info(List<Asr_Candidate> asr_candidates = null , enum_query_info_type type = enum_query_info_type.TEXT,enum_query_info_source source = enum_query_info_source.KEYBOARD)
+        {
+            this.type = type.ToString();
+            this.source = source.ToString();
+            if (asr_candidates == null)
+            {
+                List<Asr_Candidate> list = new List<Asr_Candidate>();
+                this.asr_candidates = list;
+            }
+        }
+
         /// <summary>
         /// ="TEXT"，请求信息类型，当前为固定值TEXT，
         /// 表示客户端请求的内容类型是一段文本。
