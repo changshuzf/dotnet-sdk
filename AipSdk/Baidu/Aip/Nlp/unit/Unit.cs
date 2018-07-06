@@ -250,7 +250,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="botDesc">bot 描述，长度范围 0~50</param>
         /// <param name="options"></param>
         /// <returns>JObject</returns>
-        public JObject BotAdd(string botName, string botDesc, Dictionary<string, object> options = null)
+        public JObject BotAdd(string botName, string botDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(BOTADD);
 
