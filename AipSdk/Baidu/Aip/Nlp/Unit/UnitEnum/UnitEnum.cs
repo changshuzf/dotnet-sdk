@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace AipSdk.Baidu.Aip.Nlp.unit.unitemnu
+namespace Baidu.Aip.Nlp.Unit
 {
     /// <summary>
     /// 系统自动发现不置信意图/词槽，并据此主动发起澄清确认的敏感程度。取值范围：0(关闭)、1(中敏感度)、2(高敏感度)。取值越高BOT主动发起澄清的频率就越高，建议值为1。
     /// </summary>
     public enum enum_bernard_level
     {
+        /// <summary>
+        /// test
+        /// </summary>
         关闭 = 0,
         中度敏感 = 1,
         高度敏感 = 2

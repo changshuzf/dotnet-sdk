@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AipSdk.Baidu.Aip.Nlp.unit.unitjson
+namespace Baidu.Aip.Nlp.Unit
 {
     /// <summary>
     /// BotChat返回JSON

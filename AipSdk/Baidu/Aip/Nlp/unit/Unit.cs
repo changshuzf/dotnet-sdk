@@ -14,11 +14,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json.Linq;
-using AipSdk.Baidu.Aip.Nlp.unit;
 using Newtonsoft.Json;
 using System.IO;
-using AipSdk.Baidu.Aip.Nlp.unit;
-using AipSdk.Baidu.Aip.Nlp.unit.unitjson;
+using Baidu.Aip.Nlp.Unit;
 
 namespace Baidu.Aip.Nlp.Unit
 {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AipSdk.Baidu.Aip.Nlp.unit.unitemnu;
+using Baidu.Aip.Nlp.Unit;
 
-namespace AipSdk.Baidu.Aip.Nlp.unit
+namespace Baidu.Aip.Nlp.Unit
 {
     /// <summary>
     /// bot 高级设置 botSetting 结构
