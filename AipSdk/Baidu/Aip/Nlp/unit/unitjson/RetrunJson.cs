@@ -45,7 +45,11 @@ namespace Baidu.Aip.Nlp.Unit
             get
             {
                 string s = "";
-                s = this.retMsg;
+                s = this.result.response.action_list.FirstOrDefault().say + "\n";
+                foreach (var item in this.result.response.action_list.FirstOrDefault().refine_detail.option_list)
+                {
+                    s = s + item.option + "\n";
+                }
                 s = s.Replace("<br>", "\n");
                 s = s.Replace("<div>", "");
                 s = s.Replace("</div>", "\n");
