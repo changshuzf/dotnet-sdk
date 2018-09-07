@@ -21,6 +21,9 @@ namespace Baidu.Aip.Nlp.Unit
         public string error_msg { get; set; }
         public Result result { get; set; }
         
+        /// <summary>
+        /// 包括html标签的消息
+        /// </summary>
         public string retMsg
         {
             get
@@ -31,6 +34,21 @@ namespace Baidu.Aip.Nlp.Unit
                 {
                     s = s + item.option + "\n";
                 }
+                return s;
+            }
+        }
+        /// <summary>
+        /// retWeiXingMsg删除<br><div></div>标签，和微信里面消息兼容
+        /// </summary>
+        public  string retWeiXinMsg
+        {
+            get
+            {
+                string s = "";
+                s = this.retMsg;
+                s = s.Replace("<br>", "\n");
+                s = s.Replace("<div>", "");
+                s = s.Replace("</div>", "\n");
                 return s;
             }
         }
