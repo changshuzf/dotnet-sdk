@@ -5,6 +5,20 @@ using System.Text;
 
 namespace Baidu.Aip.Nlp.Unit
 {
+    #region 百度Unit管理API Return对象
+    public class BotSettingReturnJson : BotSettingInputJSON
+    {
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public string createTime { get; set; }
+        /// <summary>
+        /// 更新时间
+        /// </summary>
+        public string updateTime { get; set; }
+    }
+    #endregion
+
     /// <summary>
     /// BotChat返回JSON
     /// </summary>

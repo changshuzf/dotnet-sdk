@@ -332,7 +332,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="botSetting">高级设置具体内容</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SettingUpdate(long botId, BotSetting botSetting, Dictionary<string, object> options = null)
+        public JObject SettingUpdate(long botId, BotSettingInputJSON botSetting, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SETTINGUPDATE);
 

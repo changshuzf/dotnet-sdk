@@ -9,7 +9,7 @@ namespace Baidu.Aip.Nlp.Unit
     /// <summary>
     /// bot 高级设置 botSetting 结构
     /// </summary>
-    public class BotSetting
+    public class BotSettingInputJSON
     {
         /// <summary>
         /// 切换意图时是否自动重置 session取值范围： 0(不重置)、 1(重置)
@@ -32,17 +32,38 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         public string faqGuideAskFreq { get; set; }
         /// <summary>
+        /// top1 阈值
+        //取值范围：0~40，bot 初始化时为 30
+        //说明：开发者 query 与问答库中最相似
+        //问题的相似度>=top1 阈值时，只返回
+        //相似度最高的问题和对应答案。否则将
+        //按相似度从高到底返回多个相似问题让
+        //开发者进一步选择
+        /// </summary>
+        public int faqGuideTopFreq = 30;
+        /// <summary>
+        /// 召回阈值
+        /// 取值范围：0~40，且小于等于 top1 阈值，
+        /// bot 初始化时为 20
+        //说明：问答库中的问题与开发者 query
+        //的相似度大于等于召回阈值时，对应的
+        //问题和答案会被返回
+        /// </summary>
+        public int faqGuideLowFreq = 20;
+        /// <summary>
+        /// 最多返回相似问题数
+        //取值范围：1~20，bot 初始化时为 3
+        /// </summary>
+        public int topFaqGuideNo = 3;
+        /// <summary>
         /// 识别异常话术
         /// </summary>
         public string failAction { get; set; }
         /// <summary>
-        /// 创建时间
+        // 标识是否使用离线开源对话流程管理
+        // DM Kit，可选值为：0（未使用）、 1（使用），默认为 0
         /// </summary>
-        public string createTime { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public string updateTime { get; set; }
+        public int skipDialogueManager = 0;
     }
 
     public class Request
