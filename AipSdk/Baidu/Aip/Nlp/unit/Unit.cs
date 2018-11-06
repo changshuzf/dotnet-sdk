@@ -377,12 +377,13 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject IntentList(long botId,long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject IntentList(long botId,long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null,string intentType = "")
         {
             var aipReq = DefaultRequest(INTENTLIST);
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["intentType"] = intentType;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
