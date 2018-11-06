@@ -19,10 +19,10 @@ namespace Baidu.Aip.Nlp.Unit.ResourceAPI
         /// <summary>
         /// 对象
         /// </summary>
-        public ResourceAPIResult result { get; set; }
+        ResourceAPIResult result { get; set; }
     }
 
-    public class ResourceAPIResult
+    class ResourceAPIResult
     {
         /// <summary>
         /// 现在仅支持纯文本返回text，其他预留

@@ -229,12 +229,13 @@ namespace Baidu.Aip.Nlp.Unit
         /// </param>
         /// <return>JObject</return>
         ///
-        public JObject BotList(int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject BotList(int pageNo,int pageSize, Dictionary<string, object> options = null, string botCategory = "")
         {
             var aipReq = DefaultRequest(BOTLIST);
             
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["botCategory"] = botCategory;
             PreAction();
 
             if (options != null)
