@@ -179,6 +179,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string DEPLOYMENTUPDATEMODELVERSION =
             "https://aip.baidubce.com/rpc/2.0/unit/deployment/updateModelVersion";
 
+        private const string DEPLOYMENTGETSTATUS =
+            "https://aip.baidubce.com/rpc/2.0/unit/deployment/getStatus";
+
 
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -1449,6 +1452,26 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["region"] = region;
             aipReq.Bodys["modelVersion"] = modelVersion;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.8.3 查询部署任务执行状态
+        /// </summary>
+        /// <param name="botId">bot Id</param>
+        /// <param name="deploymentId">部署任务 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentGetStatus(long botId,int deploymentId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTGETSTATUS);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["deploymentId"] = deploymentId;
             PreAction();
 
             if (options != null)
