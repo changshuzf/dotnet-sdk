@@ -172,6 +172,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string JOBINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/job/info";
 
+        private const string  DEPLOYMENTADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/deployment/add";
+
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1404,5 +1407,26 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
-    }
+
+        /// <summary>
+        /// 2.8.1 新增生产环境部署
+        /// </summary>
+        /// <param name="botId">bot Idparam>
+        /// <param name="region">部署地域：bj（华北）、su（华东）、gz（华南）只可填写一个部署地域</param>
+        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒生效的模型版本</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentAdd(long botId,string region,string modelVersion = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTADD);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["region"] = region;
+            aipReq.Bodys["modelVersion"] = modelVersion;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
 }
