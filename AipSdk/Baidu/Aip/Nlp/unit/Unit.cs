@@ -182,6 +182,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string DEPLOYMENTGETSTATUS =
             "https://aip.baidubce.com/rpc/2.0/unit/deployment/getStatus";
 
+        private const string DEPLOYMENTLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/deployment/list";
+
 
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -1472,6 +1475,28 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(DEPLOYMENTGETSTATUS);
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["deploymentId"] = deploymentId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.8.4 查询部署任务记录
+        /// </summary>
+        /// <param name="botId">bot Id</param>
+        /// <param name="pageNo">页码，从 1 开始</param>
+        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentGetStatus(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTLIST);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
