@@ -23,15 +23,16 @@ namespace Baidu.Aip.Nlp.Unit
     /// <summary>
     /// 理解与交互技术Unit
     /// </summary>
-    public class Unit : AipServiceBase   {
-        
+    public class Unit : AipServiceBase
+    {
+
         private const string BOTCHAT =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
 
         private const string BOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/list";
 
-        private const string BOTADD  =
+        private const string BOTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/add";
 
         private const string BOTUPDATE =
@@ -172,8 +173,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string JOBINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/job/info";
 
-        private const string  DEPLOYMENTADD =
+        private const string DEPLOYMENTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/deployment/add";
+
+        private const string DEPLOYMENTUPDATEMODELVERSION =
+            "https://aip.baidubce.com/rpc/2.0/unit/deployment/updateModelVersion";
+
 
         public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -199,7 +204,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="version">=2.0，当前api版本对应协议版本号为2.0，固定值。</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public ReturnJsonBotChat BotChat(string bot_id, Request request, string log_id ="",
+        public ReturnJsonBotChat BotChat(string bot_id, Request request, string log_id = "",
             string version = "2.0", string bot_session = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(BOTCHAT);
@@ -232,10 +237,10 @@ namespace Baidu.Aip.Nlp.Unit
         /// </param>
         /// <return>JObject</return>
         ///
-        public JObject BotList(int pageNo,int pageSize, Dictionary<string, object> options = null, string botCategory = "")
+        public JObject BotList(int pageNo, int pageSize, Dictionary<string, object> options = null, string botCategory = "")
         {
             var aipReq = DefaultRequest(BOTLIST);
-            
+
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["botCategory"] = botCategory;
@@ -276,7 +281,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="botDesc">bot 描述，长度范围 0~50</param>
         /// <param name="options"></param>
         /// <returns>JObject</returns>
-        public JObject BotUpdate(long botId, string botName,string botDesc = "", Dictionary<string, object> options = null)
+        public JObject BotUpdate(long botId, string botName, string botDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(BOTUPDATE);
 
@@ -340,7 +345,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(SETTINGUPDATE);
 
             aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(botSetting,Formatting.Indented);
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(botSetting, Formatting.Indented);
             PreAction();
 
             if (options != null)
@@ -356,7 +361,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SkillList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject SkillList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SKILLLIST);
 
@@ -380,7 +385,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject IntentList(long botId,long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null,string intentType = "")
+        public JObject IntentList(long botId, long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null, string intentType = "")
         {
             var aipReq = DefaultRequest(INTENTLIST);
 
@@ -434,7 +439,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData,Formatting.Indented);
+            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented);
             PreAction();
 
             if (options != null)
@@ -498,7 +503,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SlotList(long botId, long skillId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject SlotList(long botId, long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTLIST);
 
@@ -542,7 +547,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~5000</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotValue(long botId,long skillId,long slotId,string slotType,int pageNo,int pageSize,Dictionary<string, object> options = null)
+        public JObject SLotValue(long botId, long skillId, long slotId, string slotType, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTVALUE);
 
@@ -574,9 +579,9 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="slotSysDictEfficient">系统词槽词典是否使用: 1(使用)、 0(未使用)</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotAdd(long botId, long skillId, string slotName,string slotDesc,
-            string slotDictPath,string slotBlacklistDictPath, JArray slotSysDict, 
-            int slotDictPathEfficient,int slotSysDictEfficient,
+        public JObject SLotAdd(long botId, long skillId, string slotName, string slotDesc,
+            string slotDictPath, string slotBlacklistDictPath, JArray slotSysDict,
+            int slotDictPathEfficient, int slotSysDictEfficient,
             Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTADD);
@@ -644,7 +649,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="slotId">词槽 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotDelete(long botId, long skillId, long slotId,Dictionary<string, object> options = null)
+        public JObject SLotDelete(long botId, long skillId, long slotId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTDELETE);
 
@@ -709,7 +714,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// </param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ModelTrain(long botId,string modelDesc,string trainOption, Dictionary<string, object> options = null)
+        public JObject ModelTrain(long botId, string modelDesc, string trainOption, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(MODELTRAIN);
 
@@ -731,7 +736,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="modelId">模型 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ModelDelete(long botId,long modelId, Dictionary<string, object> options = null)
+        public JObject ModelDelete(long botId, long modelId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(MODELDELETE);
 
@@ -753,7 +758,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject QuerySetList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETLIST);
 
@@ -776,7 +781,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="dictPath">文件下载链接，通过上传接口产生</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetAdd(long botId,string querySetName,string dictPath, Dictionary<string, object> options = null)
+        public JObject QuerySetAdd(long botId, string querySetName, string dictPath, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETADD);
 
@@ -822,7 +827,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="status">查询的列表类型： 0/未标注的 1/已标注的 2/全部的</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryList(long botId, long querySetId,int pageNo,int pageSize,int status, Dictionary<string, object> options = null)
+        public JObject QueryList(long botId, long querySetId, int pageNo, int pageSize, int status, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYLIST);
 
@@ -847,7 +852,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="queryId">样本 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryInfo(long botId, long querySetId,long queryId, Dictionary<string, object> options = null)
+        public JObject QueryInfo(long botId, long querySetId, long queryId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYINFO);
 
@@ -899,7 +904,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query,Formatting.Indented);
+            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
             PreAction();
 
             if (options != null)
@@ -939,7 +944,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject PatternSetList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject PatternSetList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNSETLIST);
 
@@ -963,7 +968,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject PatternList(long botId, long patternSetId,int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject PatternList(long botId, long patternSetId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNLIST);
 
@@ -987,7 +992,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="patternId">模板 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject PatternInfo(long botId, long patternSetId,long patternId, Dictionary<string, object> options = null)
+        public JObject PatternInfo(long botId, long patternSetId, long patternId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNINFO);
 
@@ -1054,7 +1059,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject KeywordList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDLIST);
 
@@ -1078,7 +1083,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~5000</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordValue(long botId,long keywordId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject KeywordValue(long botId, long keywordId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDVALUE);
 
@@ -1105,8 +1110,8 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="keywordSysDict">系统词典</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordAdd(long botId,string keywordName,string keywordDesc,
-            string dictPath,string blacklistDictPath,JArray keywordSysDict,
+        public JObject KeywordAdd(long botId, string keywordName, string keywordDesc,
+            string dictPath, string blacklistDictPath, JArray keywordSysDict,
             Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDADD);
@@ -1116,7 +1121,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["keywordDesc"] = keywordDesc;
             aipReq.Bodys["dictPath"] = dictPath;
             aipReq.Bodys["blacklistDictPath"] = blacklistDictPath;
-            aipReq.Bodys["keywordSysDict"] = JsonConvert.SerializeObject(keywordSysDict,Formatting.Indented);
+            aipReq.Bodys["keywordSysDict"] = JsonConvert.SerializeObject(keywordSysDict, Formatting.Indented);
             PreAction();
 
             if (options != null)
@@ -1142,9 +1147,9 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="keywordSysDict">系统词典</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordUpdate(long botId,long keywordId, string keywordName, 
-            string keywordDesc,string dictPath, string blacklistDictPath, 
-            JArray keywordSysDict,Dictionary<string, object> options = null)
+        public JObject KeywordUpdate(long botId, long keywordId, string keywordName,
+            string keywordDesc, string dictPath, string blacklistDictPath,
+            JArray keywordSysDict, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDUPDATE);
 
@@ -1194,8 +1199,8 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject FAQList(long botId,long skillId,long intentId,
-            int pageNo,int pageSize , Dictionary<string, object> options = null)
+        public JObject FAQList(long botId, long skillId, long intentId,
+            int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQLIST);
 
@@ -1249,7 +1254,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject FAQAdd(long botId, long skillId, long intentId,
-            JArray faqQuestions,JArray faqAnswers, Dictionary<string, object> options = null)
+            JArray faqQuestions, JArray faqAnswers, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQADD);
 
@@ -1278,7 +1283,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject FAQUpdate(long botId, long skillId, long intentId,
-            long faqId,JArray faqQuestions, JArray faqAnswers, Dictionary<string, object> options = null)
+            long faqId, JArray faqQuestions, JArray faqAnswers, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQUPDATE);
 
@@ -1330,7 +1335,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="intentId">问答意图 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject FAQClear(long botId, long skillId, long intentId,Dictionary<string, object> options = null)
+        public JObject FAQClear(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQCLEAR);
 
@@ -1354,7 +1359,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="filePath">文件下载链接，通过上传接口产生</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject FAQImport(long botId, long skillId, long intentId,string filePath, Dictionary<string, object> options = null)
+        public JObject FAQImport(long botId, long skillId, long intentId, string filePath, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQIMPORT);
 
@@ -1375,7 +1380,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="file">单次上传文件大小限制为 10M，每个用户每个APP 每天上传限制为 100M</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject FileUpload(string file,Dictionary<string, object> options = null)
+        public JObject FileUpload(string file, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FILEUPLOAD);
             var fileraw = File.ReadAllBytes(file);
@@ -1395,7 +1400,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="jobId">job id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject JobInfo(long botId,long jobId, Dictionary<string, object> options = null)
+        public JObject JobInfo(long botId, long jobId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(JOBINFO);
             aipReq.Bodys["botId"] = botId;
@@ -1416,7 +1421,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒生效的模型版本</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentAdd(long botId,string region,string modelVersion = "", Dictionary<string, object> options = null)
+        public JObject DeploymentAdd(long botId, string region, string modelVersion = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTADD);
             aipReq.Bodys["botId"] = botId;
@@ -1429,4 +1434,27 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 2.8.2 更新生产环境模型版本
+        /// </summary>
+        /// <param name="botId">bot Idparam>
+        /// <param name="region">部署地域：bj（华北）、su（华东）、gz（华南）只可填写一个部署地域</param>
+        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒生效的模型版本</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentUpdateModelVersion(long botId, string region, string modelVersion = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTUPDATEMODELVERSION);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["region"] = region;
+            aipReq.Bodys["modelVersion"] = modelVersion;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+    }
 }
