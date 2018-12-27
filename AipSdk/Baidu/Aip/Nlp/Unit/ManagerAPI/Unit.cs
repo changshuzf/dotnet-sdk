@@ -17,6 +17,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.IO;
 using Baidu.Aip.Nlp.Unit;
+using Baidu.Aip;
 
 namespace Baidu.Aip.Nlp.Unit
 {
