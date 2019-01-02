@@ -26,8 +26,7 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public class Unit : AipServiceBase
     {
-
-        private const string BOTCHAT =
+        private const string SKILLCHAT =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
 
         private const string BOTLIST =
@@ -204,6 +203,12 @@ namespace Baidu.Aip.Nlp.Unit
 
         /// <summary>
         /// UNIT对话服务
+        ///沙盒环境
+        //【不区分机房】https://aip.baidubce.com/rpc/2.0/unit/bot/chat
+        //生产环境
+        //【华北机房】https://unit.bj.baidubce.com/rpc/2.0/unit/bot/chat
+        //【华东机房】https://unit.su.baidubce.com/rpc/2.0/unit/bot/chat
+        //【华南机房】https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat
         /// </summary>
         /// <param name="bot_id">BOT唯一标识，在『我的BOT』的BOT列表中第一列数字即为bot_id</param>
         /// <param name="log_id">开发者需要在客户端生成的唯一id，用来定位请求，响应中会返回该字段。对话中每轮请求都需要一个log_id。</param>
@@ -211,10 +216,10 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="version">=2.0，当前api版本对应协议版本号为2.0，固定值。</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public ReturnJsonBotChat BotChat(string bot_id, Request request, string log_id = "",
+        public ReturnJsonBotChat SkillChat(string bot_id, Request request, string log_id = "",
             string version = "2.0", string bot_session = "", Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTCHAT);
+            var aipReq = DefaultRequest(SKILLCHAT);
 
             aipReq.Bodys["version"] = version;
             aipReq.Bodys["bot_id"] = bot_id;
