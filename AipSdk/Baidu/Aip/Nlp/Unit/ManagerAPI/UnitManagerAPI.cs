@@ -24,7 +24,7 @@ namespace Baidu.Aip.Nlp.Unit
     /// <summary>
     /// 理解与交互技术Unit
     /// </summary>
-    public class Unit : AipServiceBase
+    public class UnitManagerAPI : AipServiceBase
     {
         private const string BOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/list";
@@ -183,7 +183,7 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/deployment/list";
 
 
-        public Unit(string apiKey, string secretKey) : base(apiKey, secretKey)
+        public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
         }
