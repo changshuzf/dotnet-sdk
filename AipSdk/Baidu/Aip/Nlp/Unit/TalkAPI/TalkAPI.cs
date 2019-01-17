@@ -30,5 +30,15 @@ namespace AipSdk.Baidu.Aip.Nlp.Unit.TalkAPI
         {
 
         }
+
+        protected AipHttpRequest DefaultRequest(string uri)
+        {
+            return new AipHttpRequest(uri)
+            {
+                Method = "POST",
+                BodyType = AipHttpRequest.BodyFormat.Json,
+                ContentEncoding = Encoding.GetEncoding("UTF-8")
+            };
+        }
     }
 }
