@@ -25,5 +25,10 @@ namespace AipSdk.Baidu.Aip.Nlp.Unit.TalkAPI
     {
         private const string BOTCHAT =
     "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
+
+        public TalkAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
+        {
+
+        }
     }
 }
