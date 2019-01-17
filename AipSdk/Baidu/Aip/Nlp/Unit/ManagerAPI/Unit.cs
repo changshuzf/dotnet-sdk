@@ -219,7 +219,7 @@ namespace Baidu.Aip.Nlp.Unit
         public ReturnJsonBotChat BotChat(string service_id, Request request, string log_id = "",
             string version = "2.0",List<string> skill_ids = null, string session_id = "",object dialog_state = null, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(SKILLCHAT);
+            var aipReq = DefaultRequest(BOTCHAT);
 
             aipReq.Bodys["version"] = version;
             aipReq.Bodys["service_id"] = service_id;
