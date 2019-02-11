@@ -87,7 +87,10 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
 
         private const string SLOTUPDATEVALUE =
-        "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
+
+        private const string SLOTDELETEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/deleteValue";
 
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/model/list";
@@ -716,6 +719,33 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["slotType"] = slotType;
             aipReq.Bodys["valueId"] = valueId;
             aipReq.Bodys["slotValue"] = slotValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.4.10 删除词槽词典值
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="slotId">词槽 id</param>
+        /// <param name="slotType">词槽词典类别，开发者自定义(user)/黑名单(black)</param>
+        /// <param name="valueId">词槽词典值 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotDeleteValue(long botId, long skillId, long slotId, string slotType, long valueId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTUPDATEVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["valueId"] = valueId;
             PreAction();
 
             if (options != null)
