@@ -125,6 +125,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/query/delete";
 
+        private const string QUERYQUICKANNOTATE =
+             "https://aip.baidubce.com/rpc/2.0/unit/query/quickAnnotate";
+
         private const string PATTERNSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/patternSet/list";
 
@@ -1018,6 +1021,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["queryId"] = queryId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.6.1.9 批量确认样本
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="querySetId"></param>
+        /// <param name="queryIds"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryQuickAnnotate(long botId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYQUICKANNOTATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["queryIds"] = queryIds;
             PreAction();
 
             if (options != null)
