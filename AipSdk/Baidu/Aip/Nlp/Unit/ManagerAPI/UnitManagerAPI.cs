@@ -85,7 +85,10 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string SLOTADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
-        
+
+        private const string SLOTUPDATEVALUE =
+        "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
+
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/model/list";
 
@@ -683,6 +686,35 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["slotValue"] = slotValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.4.9 更新词槽词典值 
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="skillId"></param>
+        /// <param name="slotId"></param>
+        /// <param name="slotType"></param>
+        /// <param name="valueId"></param>
+        /// <param name="slotValue"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotUpdateValue(long botId, long skillId, long slotId, string slotType,long valueId, string slotValue, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTUPDATEVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["valueId"] = valueId;
             aipReq.Bodys["slotValue"] = slotValue;
             PreAction();
 
