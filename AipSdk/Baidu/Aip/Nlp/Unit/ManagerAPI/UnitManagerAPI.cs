@@ -1604,7 +1604,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentGetStatus(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject DeploymentList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTLIST);
             aipReq.Bodys["botId"] = botId;
