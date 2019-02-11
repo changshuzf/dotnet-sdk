@@ -197,6 +197,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string DEPLOYMENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/deployment/list";
 
+        private const string DEPLOYMENTDELETEREGION =
+           "https://aip.baidubce.com/rpc/2.0/unit/deployment/deleteRegion";
+
 
         public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -1607,6 +1610,26 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.8.5 删除生产环境
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="region">部署地域：bj（华北）、 su（华东）、 gz（华南）只可填写一个部署地域</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentDeleteRegion(long botId, string region, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTDELETEREGION);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["region"] = region;
             PreAction();
 
             if (options != null)
