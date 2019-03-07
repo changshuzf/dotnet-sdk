@@ -45,7 +45,7 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// UNIT机器人对话API文档
+        /// UNIT机器人对话API，机器人对话API
         /// </summary>
         /// <param name="service_id">机器人ID，service_id 与skill_ids不能同时缺失，至少一个有值。</param>
         /// <param name="request"></param>
