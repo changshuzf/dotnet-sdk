@@ -37,7 +37,7 @@ namespace Baidu.Aip.Nlp.Unit
         KEYBOARD = 2
     }
 
-    public  enum action_list_type
+    public  enum enum_action_list_type
         {
         /// <summary>
         /// 澄清
