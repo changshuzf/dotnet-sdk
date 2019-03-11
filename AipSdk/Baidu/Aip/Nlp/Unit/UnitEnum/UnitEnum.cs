@@ -72,4 +72,20 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         Event = 8
     }
+
+    public enum enum_action_list_refine_detail_interact
+    {
+        /// <summary>
+        /// 给出选项供选择
+        /// </summary>
+        select = 1,
+        /// <summary>
+        /// 提问
+        /// </summary>
+        ask = 2,
+        /// <summary>
+        /// 给出选项并且追加提问
+        /// </summary>
+        selectandask = 3
+    }
 }
