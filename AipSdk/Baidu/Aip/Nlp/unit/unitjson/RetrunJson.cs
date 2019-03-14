@@ -122,7 +122,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <summary>
         /// 
         /// </summary>
-        public string status { get; set; }
+        public int status { get; set; }
     }
 
     public class Qu_Res
