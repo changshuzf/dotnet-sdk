@@ -33,7 +33,14 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public enum enum_query_info_source
     {
+        /// <summary>
+        /// 语音输入
+        /// 针对ASR输入，UNIT平台内置了纠错机制，会尝试解决语音输入中的一些常见错误
+        /// </summary>
         ASR = 1,
+        /// <summary>
+        /// 键盘文本输入
+        /// </summary>
         KEYBOARD = 2
     }
 
