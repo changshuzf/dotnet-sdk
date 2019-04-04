@@ -80,6 +80,7 @@ namespace Baidu.Aip.Nlp.Unit
         Event = 8
     }
 
+    [Flags]
     public enum enum_action_list_refine_detail_interact
     {
         /// <summary>
@@ -94,5 +95,6 @@ namespace Baidu.Aip.Nlp.Unit
         /// 给出选项并且追加提问
         /// </summary>
         selectandask = 3
+        
     }
 }

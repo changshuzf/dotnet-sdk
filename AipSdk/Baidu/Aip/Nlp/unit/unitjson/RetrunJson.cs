@@ -368,7 +368,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <summary>
         /// 具体有以下几种：select/ask/selectandask
         /// </summary>
-        public enum_action_list_refine_detail_interact interact { get; set; }
+        public string interact { get; set; }
         /// <summary>
         /// 『泛澄清』选项列表。这里的『选项』是广义的选项，
         /// 在意图、词槽不置信or缺失澄清，以及faqguide时，
