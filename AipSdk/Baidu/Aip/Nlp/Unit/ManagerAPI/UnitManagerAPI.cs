@@ -41,6 +41,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICELISTSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/listSkill";
 
+        private const string SERVICEADDSKILL =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/addSkill";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -322,6 +325,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["serviceId"] = serviceId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.1.6. 添加技能
+        /// 1）接⼝描述：给机器⼈添加技能
+        /// 2）接⼝地址： service/addSkill
+        /// </summary>
+        /// <param name="serviceId">机器⼈ID</param>
+        /// <param name="list">技能ID列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ServiceAddSkill(string serviceId, List<string> list, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SERVICEADDSKILL);
+
+            aipReq.Bodys["serviceId"] = serviceId;
+            aipReq.Bodys["list"] = list;
             PreAction();
 
             if (options != null)
