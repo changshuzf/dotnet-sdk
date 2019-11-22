@@ -29,8 +29,8 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICELIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/list";
 
-        private const string BOTADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/add";
+        private const string SERVICEADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/add";
 
         private const string BOTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/update";
@@ -223,18 +223,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 功能描述： 新增 bot
+        /// 功能描述：新建机器⼈  接⼝地址： service/add
         /// </summary>
-        /// <param name="botName">bot 名称，长度范围 1~30</param>
-        /// <param name="botDesc">bot 描述，长度范围 0~50</param>
+        /// <param name="serviceName">机器⼈名称</param>
+        /// <param name="serviceDesc">机器⼈描述</param>
         /// <param name="options"></param>
         /// <returns>JObject</returns>
-        public JObject BotAdd(string botName, string botDesc = "", Dictionary<string, object> options = null)
+        public JObject ServiceAdd(string serviceName, string serviceDesc = "", Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTADD);
+            var aipReq = DefaultRequest(SERVICEADD);
 
-            aipReq.Bodys["botName"] = botName;
-            aipReq.Bodys["botDesc"] = botDesc;
+            aipReq.Bodys["serviceName"] = serviceName;
+            aipReq.Bodys["serviceDesc"] = serviceDesc;
             PreAction();
 
             if (options != null)
