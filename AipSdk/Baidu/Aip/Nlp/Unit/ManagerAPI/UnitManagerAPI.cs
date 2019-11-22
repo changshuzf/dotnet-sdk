@@ -26,27 +26,51 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public class UnitManagerAPI : AipServiceBase
     {
+        /// <summary>
+        /// 2.1.1. 查询机器⼈列表
+        /// </summary>
         private const string SERVICELIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/list";
 
+        /// <summary>
+        /// 2.1.2. 新建机器⼈
+        /// </summary>
         private const string SERVICEADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/add";
 
+        /// <summary>
+        /// 2.1.3. 修改机器⼈属性
+        /// </summary>
         private const string SERVICEUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/update";
 
+        /// <summary>
+        /// 2.1.4. 删除机器⼈
+        /// </summary>
         private const string SERVICEDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/delete";
 
+        /// <summary>
+        /// 2.1.5. 查询机器⼈详情
+        /// </summary>
         private const string SERVICELISTSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/listSkill";
 
+        /// <summary>
+        /// 2.1.6. 添加技能
+        /// </summary>
         private const string SERVICEADDSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/addSkill";
 
+        /// <summary>
+        /// 2.1.7. 修改技能优先级
+        /// </summary>
         private const string SERVICESORTSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/sortSkill";
 
+        /// <summary>
+        /// 2.1.8. 移除技能
+        /// </summary>
         private const string SERVICEDELETESKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/deleteSkill";
 
@@ -232,7 +256,9 @@ namespace Baidu.Aip.Nlp.Unit
 
 
         /// <summary>
-        /// 功能描述：查询机器⼈列表
+        /// 2.1.1. 查询机器⼈列表
+        /// 1）功能描述：查询机器⼈列表
+        /// 2）接⼝地址： service/list
         /// </summary>
         /// <param name="pageNo">⻚码⼤于等于1</param>
         /// <param name="pageSize"> 每⻚记录数
@@ -253,7 +279,9 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 功能描述：新建机器⼈  接⼝地址： service/add
+        /// 2.1.2. 新建机器⼈
+        /// 1）功能描述：新建机器⼈
+        /// 2）接⼝地址： service/add
         /// </summary>
         /// <param name="serviceName">机器⼈名称</param>
         /// <param name="serviceDesc">机器⼈描述</param>
@@ -274,7 +302,9 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 功能描述：修改机器⼈属性    接⼝地址： service/update
+        /// 2.1.3. 修改机器⼈属性
+        /// 1）功能描述：修改机器⼈属性
+        /// 2）接⼝地址： service/update
         /// </summary>
         /// <param name="serviceId">机器⼈ID</param>
         /// <param name="serviceName">机器⼈名称</param>
@@ -296,7 +326,9 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
         /// <summary>
-        /// 删除机器⼈ 接⼝地址： service/delete
+        /// 2.1.4. 删除机器⼈
+        /// 1）功能描述：修改机器⼈属性
+        /// 2）接⼝地址： service/delete
         /// </summary>
         /// <param name="botId">机器⼈ID</param>
         /// <param name="options"></param>
