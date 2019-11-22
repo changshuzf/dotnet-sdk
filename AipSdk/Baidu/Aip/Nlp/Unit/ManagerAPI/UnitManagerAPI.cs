@@ -27,160 +27,160 @@ namespace Baidu.Aip.Nlp.Unit
     public class UnitManagerAPI : AipServiceBase
     {
         private const string BOTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/bot/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/list";
 
         private const string BOTADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/bot/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/add";
 
         private const string BOTUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/bot/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/update";
 
         private const string BOTDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/bot/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/delete";
 
         private const string SETTINGINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/setting/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
         private const string SETTINGUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/setting/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/update";
 
         private const string SKILLLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/skill/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/list";
 
         private const string INTENTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/intent/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/list";
 
         private const string INTENTINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/intent/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/info";
 
         private const string INTENTADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/intent/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/add";
 
         private const string INTENTUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/intent/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/update";
 
         private const string INTENTDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/intent/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/delete";
 
         private const string SLOTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/list";
 
         private const string SYSSLOTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/sysSlot/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/sysSlot/list";
 
         private const string SLOTVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/value";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/value";
 
         private const string SLOTADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/add";
 
         private const string SLOTUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/update";
 
         private const string SLOTDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/delete";
 
         private const string MODELLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/model/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/model/list";
 
         private const string MODELTRAIN =
-            "https://aip.baidubce.com/rpc/2.0/unit/model/train";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/model/train";
 
         private const string MODELDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/model/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/model/delete";
 
         private const string QUERYSETLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/querySet/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/list";
 
         private const string QUERYSETADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/querySet/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/add";
 
         private const string QUERYSETDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/querySet/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/delete";
 
         private const string QUERYLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/query/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/list";
 
         private const string QUERYINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/query/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/info";
 
         private const string QUERYADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/query/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/add";
 
         private const string QUERYUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/query/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/update";
 
         private const string QUERYDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/query/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/delete";
 
         private const string PATTERNSETLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/patternSet/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/patternSet/list";
 
         private const string PATTERNLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/pattern/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/list";
 
         private const string PATTERNINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/pattern/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/info";
 
         private const string PATTERNIMPORT =
-            "https://aip.baidubce.com/rpc/2.0/unit/pattern/import";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/import";
 
         private const string PATTERNCLEAR =
-            "https://aip.baidubce.com/rpc/2.0/unit/pattern/clear";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/clear";
 
         private const string KEYWORDLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/keyword/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/list";
 
         private const string KEYWORDVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/keyword/value";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/value";
 
         private const string KEYWORDADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/keyword/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/add";
 
         private const string KEYWORDUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/keyword/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/update";
 
         private const string KEYWORDDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/keyword/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/delete";
 
         private const string FAQLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
         private const string FAQINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/info";
 
         private const string FAQADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/add";
 
         private const string FAQUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/update";
 
         private const string FAQDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/delete";
 
         private const string FAQCLEAR =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/clear";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/clear";
 
         private const string FAQIMPORT =
-            "https://aip.baidubce.com/rpc/2.0/unit/faq/import";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/import";
 
         private const string FILEUPLOAD =
-            "https://aip.baidubce.com/rpc/2.0/unit/file/upload";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/file/upload";
 
         private const string JOBINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/job/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/job/info";
 
         private const string DEPLOYMENTADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/deployment/add";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/add";
 
         private const string DEPLOYMENTUPDATEMODELVERSION =
-            "https://aip.baidubce.com/rpc/2.0/unit/deployment/updateModelVersion";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/updateModelVersion";
 
         private const string DEPLOYMENTGETSTATUS =
-            "https://aip.baidubce.com/rpc/2.0/unit/deployment/getStatus";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/getStatus";
 
         private const string DEPLOYMENTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/deployment/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/list";
 
 
         public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
