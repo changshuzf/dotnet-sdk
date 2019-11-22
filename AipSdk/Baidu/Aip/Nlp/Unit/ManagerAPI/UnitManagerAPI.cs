@@ -44,6 +44,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICEADDSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/addSkill";
 
+        private const string SERVICESORTSKILL =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/sortSkill";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -342,12 +345,35 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="list">技能ID列表</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ServiceAddSkill(string serviceId, List<string> list, Dictionary<string, object> options = null)
+        public JObject ServiceAddSkill(string serviceId, List<string> skillIds, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SERVICEADDSKILL);
 
             aipReq.Bodys["serviceId"] = serviceId;
-            aipReq.Bodys["list"] = list;
+            aipReq.Bodys["skillIds"] = skillIds;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.1.7. 修改技能优先级
+        /// 1）接⼝描述：修改技能优先级
+        /// 2）接⼝地址： service/sortSkill
+        /// </summary>
+        /// <param name="serviceId">机器⼈ID</param>
+        /// <param name="skillIds">技能ID列表，列表id顺序即为排序顺序</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ServiceSortSkill(string serviceId, List<string> skillIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SERVICESORTSKILL);
+
+            aipReq.Bodys["serviceId"] = serviceId;
+            aipReq.Bodys["skillIds"] = skillIds;
             PreAction();
 
             if (options != null)
