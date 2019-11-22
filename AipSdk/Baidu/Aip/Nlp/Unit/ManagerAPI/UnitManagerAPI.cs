@@ -26,8 +26,8 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public class UnitManagerAPI : AipServiceBase
     {
-        private const string BOTLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/list";
+        private const string SERVICELIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/list";
 
         private const string BOTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/add";
@@ -198,26 +198,22 @@ namespace Baidu.Aip.Nlp.Unit
             };
         }
 
-        
+
 
 
         /// <summary>
-        /// 功能描述：查询用户的 bot 列表
+        /// 功能描述：查询机器⼈列表
         /// </summary>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize"> 每页数量，取值范围 1~200
-        ///     <list type="bullet">
-        ///     </list>
-        /// </param>
+        /// <param name="pageNo">⻚码⼤于等于1</param>
+        /// <param name="pageSize"> 每⻚记录数
         /// <return>JObject</return>
         ///
-        public JObject BotList(int pageNo, int pageSize, Dictionary<string, object> options = null, string botCategory = "")
+        public JObject ServiceList(int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTLIST);
+            var aipReq = DefaultRequest(SERVICELIST);
 
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["botCategory"] = botCategory;
             PreAction();
 
             if (options != null)
