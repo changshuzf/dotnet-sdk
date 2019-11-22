@@ -32,8 +32,8 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICEADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/add";
 
-        private const string BOTUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/update";
+        private const string SERVICEUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/update";
 
         private const string BOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/delete";
@@ -244,20 +244,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 修改 bot 属性
+        /// 功能描述：修改机器⼈属性    接⼝地址： service/update
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="botName">bot 名称，长度范围 1~30</param>
-        /// <param name="botDesc">bot 描述，长度范围 0~50</param>
+        /// <param name="serviceId">机器⼈ID</param>
+        /// <param name="serviceName">机器⼈名称</param>
+        /// <param name="serviceDesc">机器⼈描述</param>
         /// <param name="options"></param>
         /// <returns>JObject</returns>
-        public JObject BotUpdate(long botId, string botName, string botDesc = "", Dictionary<string, object> options = null)
+        public JObject BotUpdate(string serviceId, string serviceName, string serviceDesc = "", Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTUPDATE);
+            var aipReq = DefaultRequest(SERVICEUPDATE);
 
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["botName"] = botName;
-            aipReq.Bodys["botDesc"] = botDesc;
+            aipReq.Bodys["serviceId"] = serviceId;
+            aipReq.Bodys["serviceName"] = serviceName;
+            aipReq.Bodys["serviceDesc"] = serviceDesc;
             PreAction();
 
             if (options != null)
