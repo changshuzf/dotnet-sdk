@@ -71,6 +71,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SYSSLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/sysSlot/list";
 
+        private const string SLOTINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/info";
+
         private const string SLOTVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/value";
 
@@ -82,6 +85,15 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string SLOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/delete";
+
+        private const string SLOTADDVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
+
+        private const string SLOTUPDATEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
+
+        private const string SLOTDELETEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/slot/deleteValue";
 
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/list";
@@ -115,6 +127,9 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string QUERYDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/delete";
+
+        private const string QUERYQUICKANNOTATE =
+             "https://aip.baidubce.com/rpc/2.0/unit/query/quickAnnotate";
 
         private const string PATTERNSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/patternSet/list";
@@ -184,6 +199,9 @@ namespace Baidu.Aip.Nlp.Unit
 
         private const string DEPLOYMENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/list";
+
+        private const string DEPLOYMENTDELETEREGION =
+           "https://aip.baidubce.com/rpc/2.0/unit/deployment/deleteRegion";
 
 
         public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
@@ -535,6 +553,27 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
+        /// V1.7.6 2.4.3 查询自定义词槽词典详细信息
+        /// </summary>
+        /// <param name="botId">botid</param>
+        /// <param name="slotId">slotid</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotInfo(long botId, long slotId,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTINFO);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["slotId"] = slotId;
+
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
         ///  查询自定义词槽词典详细信息
         /// </summary>
         /// <param name="botId">bot id</param>
@@ -654,6 +693,89 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.4.8 新增词槽词典值
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="skillId"></param>
+        /// <param name="slotId"></param>
+        /// <param name="slotType"></param>
+        /// <param name="slotValue"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotAddValue(long botId, long skillId, long slotId,string slotType,string slotValue, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTADDVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["slotValue"] = slotValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.4.9 更新词槽词典值 
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="skillId"></param>
+        /// <param name="slotId"></param>
+        /// <param name="slotType"></param>
+        /// <param name="valueId"></param>
+        /// <param name="slotValue"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotUpdateValue(long botId, long skillId, long slotId, string slotType,long valueId, string slotValue, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTUPDATEVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["valueId"] = valueId;
+            aipReq.Bodys["slotValue"] = slotValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.4.10 删除词槽词典值
+        /// </summary>
+        /// <param name="botId">bot id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="slotId">词槽 id</param>
+        /// <param name="slotType">词槽词典类别，开发者自定义(user)/黑名单(black)</param>
+        /// <param name="valueId">词槽词典值 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SlotDeleteValue(long botId, long skillId, long slotId, string slotType, long valueId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SLOTUPDATEVALUE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotType"] = slotType;
+            aipReq.Bodys["valueId"] = valueId;
             PreAction();
 
             if (options != null)
@@ -926,6 +1048,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["queryId"] = queryId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.6.1.9 批量确认样本
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="querySetId"></param>
+        /// <param name="queryIds"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryQuickAnnotate(long botId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYQUICKANNOTATE);
+
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["queryIds"] = queryIds;
             PreAction();
 
             if (options != null)
@@ -1483,12 +1628,32 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentGetStatus(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject DeploymentList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTLIST);
             aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// V1.7.6 2.8.5 删除生产环境
+        /// </summary>
+        /// <param name="botId"></param>
+        /// <param name="region">部署地域：bj（华北）、 su（华东）、 gz（华南）只可填写一个部署地域</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DeploymentDeleteRegion(long botId, string region, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DEPLOYMENTDELETEREGION);
+            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["region"] = region;
             PreAction();
 
             if (options != null)

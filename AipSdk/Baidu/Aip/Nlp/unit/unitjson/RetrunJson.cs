@@ -122,7 +122,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <summary>
         /// 
         /// </summary>
-        public string status { get; set; }
+        public int status { get; set; }
     }
 
     public class Qu_Res
@@ -356,7 +356,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 类型，具体有以下几种:clarify/satisfy/guide/faqguide/understood(理解达成)/failure(理解失败)/chat(聊天话术)/event(触发事件，
         /// 在"对话意图--场景bot回应--答复"选择了"执行函数"将返回event类型)
         /// </summary>
-        public string type { get; set; }
+        public enum_action_list_type type { get; set; }
         /// <summary>
         /// 『泛澄清』时，即clarify/guide/faqguide时有效
         /// </summary>

@@ -33,7 +33,68 @@ namespace Baidu.Aip.Nlp.Unit
     /// </summary>
     public enum enum_query_info_source
     {
-        ASR = 1 ,
+        /// <summary>
+        /// 语音输入
+        /// 针对ASR输入，UNIT平台内置了纠错机制，会尝试解决语音输入中的一些常见错误
+        /// </summary>
+        ASR = 1,
+        /// <summary>
+        /// 键盘文本输入
+        /// </summary>
         KEYBOARD = 2
+    }
+
+    public  enum enum_action_list_type
+        {
+        /// <summary>
+        /// 澄清
+        /// </summary>
+        clarify = 1,
+        /// <summary>
+        /// 满足
+        /// </summary>
+        satisfy = 2,
+        /// <summary>
+        /// 引导到对话意图
+        /// </summary>
+        guide = 3,
+        /// <summary>
+        /// 引导到问答意图
+        /// </summary>
+        faqguide = 4,
+        /// <summary>
+        /// 理解达成，注：内部使用
+        /// </summary>
+        understood = 5,
+        /// <summary>
+        /// 理解失败
+        /// </summary>
+        failure = 6,
+        /// <summary>
+        /// 聊天话术
+        /// </summary>
+        chat = 7,
+        /// <summary>
+        /// 触发事件，在答复型对话回应中选择了"执行函数"，将返回event类型的action
+        /// </summary>
+        Event = 8
+    }
+
+    [Flags]
+    public enum enum_action_list_refine_detail_interact
+    {
+        /// <summary>
+        /// 给出选项供选择
+        /// </summary>
+        select = 1,
+        /// <summary>
+        /// 提问
+        /// </summary>
+        ask = 2,
+        /// <summary>
+        /// 给出选项并且追加提问
+        /// </summary>
+        selectandask = 3
+        
     }
 }

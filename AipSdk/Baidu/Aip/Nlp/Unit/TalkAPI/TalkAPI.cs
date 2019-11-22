@@ -45,7 +45,7 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// UNIT机器人对话API文档
+        /// UNIT机器人对话API，机器人对话API
         /// </summary>
         /// <param name="service_id">机器人ID，service_id 与skill_ids不能同时缺失，至少一个有值。</param>
         /// <param name="request"></param>
@@ -79,13 +79,13 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// UNIT对话服务
+        /// UNIT对话服务,技能对话API
         ///沙盒环境
-        //【不区分机房】https://aip.baidubce.com/rpc/2.0/unit/bot/chat
-        //生产环境
-        //【华北机房】https://unit.bj.baidubce.com/rpc/2.0/unit/bot/chat
-        //【华东机房】https://unit.su.baidubce.com/rpc/2.0/unit/bot/chat
-        //【华南机房】https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat
+        ///【不区分机房】https://aip.baidubce.com/rpc/2.0/unit/bot/chat
+        ///生产环境
+        ///【华北机房】https://unit.bj.baidubce.com/rpc/2.0/unit/bot/chat
+        ///【华东机房】https://unit.su.baidubce.com/rpc/2.0/unit/bot/chat
+        ///【华南机房】https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat
         /// </summary>
         /// <param name="bot_id">BOT唯一标识，在『我的BOT』的BOT列表中第一列数字即为bot_id</param>
         /// <param name="log_id">开发者需要在客户端生成的唯一id，用来定位请求，响应中会返回该字段。对话中每轮请求都需要一个log_id。</param>

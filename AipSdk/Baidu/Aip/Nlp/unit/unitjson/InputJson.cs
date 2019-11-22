@@ -99,9 +99,7 @@ namespace Baidu.Aip.Nlp.Unit
             }
             this.client_session = client_session;
             this.updates = updates;
-            this.bernard_level = (int)enum_bernard_level.中度敏感;
-
-
+            this.bernard_level = (int)bernard_level;
         }
 
         /// <summary>
