@@ -74,14 +74,19 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICEDELETESKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/deleteSkill";
 
+        /// <summary>
+        /// 2.2.1. 查询技能列表
+        /// </summary>
+        private const string SKILLLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/list";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
         private const string SETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/update";
 
-        private const string SKILLLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/list";
+
 
         private const string INTENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/list";
@@ -441,6 +446,33 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
+        /// 2.2.1. 查询技能列表
+        /// 1）功能描述：查询开发者的技能列表
+        /// 2）接⼝地址： skill/list
+        /// </summary>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="options"></param>
+        /// <param name="skillCategory"></param>
+        /// <param name="skillType"></param>
+        /// <returns></returns>
+        public JObject SkillList(int pageNo, int pageSize, Dictionary<string, object> options = null,string skillCategory = "", string skillType = "")
+        {
+            var aipReq = DefaultRequest(SKILLLIST);
+
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["skillCategory"] = skillCategory;
+            aipReq.Bodys["skillType"] = skillType;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
         /// 查询 bot 高级设置
         /// </summary>
         /// <param name="botId">botId</param>
@@ -479,28 +511,7 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
-        /// <summary>
-        /// 查询技能列表
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~200</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject SkillList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(SKILLLIST);
 
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["pageNo"] = pageNo;
-            aipReq.Bodys["pageSize"] = pageSize;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
 
         /// <summary>
         /// 获取意图列表
