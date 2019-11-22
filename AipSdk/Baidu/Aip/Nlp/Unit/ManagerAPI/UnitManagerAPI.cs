@@ -35,8 +35,8 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICEUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/update";
 
-        private const string BOTDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/bot/delete";
+        private const string SERVICEDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/delete";
 
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
@@ -251,7 +251,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="serviceDesc">机器⼈描述</param>
         /// <param name="options"></param>
         /// <returns>JObject</returns>
-        public JObject BotUpdate(string serviceId, string serviceName, string serviceDesc = "", Dictionary<string, object> options = null)
+        public JObject ServiceUpdate(string serviceId, string serviceName, string serviceDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SERVICEUPDATE);
 
@@ -266,16 +266,16 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
         /// <summary>
-        /// 删除BOT
+        /// 删除机器⼈
         /// </summary>
-        /// <param name="botId">bot id</param>
+        /// <param name="botId">机器⼈ID</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject BotDelete(long botId, Dictionary<string, object> options = null)
+        public JObject ServiceDelete(string serviceId, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(BOTDELETE);
+            var aipReq = DefaultRequest(SERVICEDELETE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["serviceId"] = serviceId;
             PreAction();
 
             if (options != null)
