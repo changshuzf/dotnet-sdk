@@ -38,6 +38,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICEDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/delete";
 
+        private const string SERVICELISTSKILL =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/listSkill";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -266,7 +269,7 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
         /// <summary>
-        /// 删除机器⼈
+        /// 删除机器⼈ 接⼝地址： service/delete
         /// </summary>
         /// <param name="botId">机器⼈ID</param>
         /// <param name="options"></param>
@@ -276,6 +279,31 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(SERVICEDELETE);
 
             aipReq.Bodys["serviceId"] = serviceId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.1.5. 查询机器⼈详情 
+        /// 1) 接⼝描述：查询机器⼈技能列表
+        /// 2）接⼝地址： service/listSkill
+        /// </summary>
+        /// <param name="serviceId">机器⼈ID</param>
+        /// <param name="pageNo">⻚码⼤于等于1</param>
+        /// <param name="pageSize">每⻚记录数</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ServiceListSkill(string serviceId,string pageNo,string pageSize,Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SERVICEDELETE);
+
+            aipReq.Bodys["serviceId"] = serviceId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
