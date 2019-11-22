@@ -47,6 +47,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SERVICESORTSKILL =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/service/sortSkill";
 
+        private const string SERVICEDELETESKILL =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/service/deleteSkill";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -371,6 +374,29 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject ServiceSortSkill(string serviceId, List<string> skillIds, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SERVICESORTSKILL);
+
+            aipReq.Bodys["serviceId"] = serviceId;
+            aipReq.Bodys["skillIds"] = skillIds;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.1.8. 移除技能
+        /// 1）接⼝描述：移除技能
+        /// 2）接⼝地址： service/deleteSkill
+        /// </summary>
+        /// <param name="serviceId"></param>
+        /// <param name="skillIds"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ServiceDeleteSkill(string serviceId, List<string> skillIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SERVICEDELETESKILL);
 
             aipReq.Bodys["serviceId"] = serviceId;
             aipReq.Bodys["skillIds"] = skillIds;
