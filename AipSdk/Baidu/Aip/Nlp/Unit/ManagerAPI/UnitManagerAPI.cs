@@ -216,6 +216,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/add";
 
+        /// <summary>
+        /// 2.3.6.3. 修改对话样本集
+        /// </summary>
+        private const string QUERYSETUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/update";
+
         private const string QUERYSETDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/delete";
 
@@ -1308,6 +1314,31 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(QUERYSETADD);
 
             aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["querySetName"] = querySetName;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.6.3. 修改对话样本集
+        /// 1）功能描述：修改对话样本集命名
+        /// 2）接⼝地址： querySet/update
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="querySetId"></param>
+        /// <param name="querySetName"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QuerySetUpdate(long skillId,long querySetId, string querySetName, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYSETUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["querySetName"] = querySetName;
             PreAction();
 
