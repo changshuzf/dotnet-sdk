@@ -210,6 +210,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/list";
 
+        /// <summary>
+        /// 2.3.6.2. 新建对话样本集
+        /// </summary>
         private const string QUERYSETADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/add";
 
@@ -1292,20 +1295,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 新增样本包
+        /// 2.3.6.2. 新建对话样本集
+        /// 1）功能描述：新增对话样本集
+        /// 2）接⼝地址： querySet/add
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetName">样本包名称，长度范围 1~30</param>
-        /// <param name="dictPath">文件下载链接，通过上传接口产生</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetName">样本包名称，⻓度范围1~30</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetAdd(long botId, string querySetName, string dictPath, Dictionary<string, object> options = null)
+        public JObject QuerySetAdd(long skillId, string querySetName, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETADD);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetName"] = querySetName;
-            aipReq.Bodys["dictPath"] = dictPath;
             PreAction();
 
             if (options != null)
