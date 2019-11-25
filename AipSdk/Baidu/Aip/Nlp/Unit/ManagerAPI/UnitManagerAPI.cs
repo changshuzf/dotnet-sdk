@@ -315,6 +315,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDUPDATEVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/updateValue";
 
+        /// <summary>
+        /// 2.3.4.7. 删除特征词词典值
+        /// </summary>
+        private const string KEYWORDDELETEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/deleteValue";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -1815,6 +1821,40 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["keywordId"] = keywordId;
             aipReq.Bodys["keywordValueId"] = keywordValueId;
             aipReq.Bodys["keywordValue"] = keywordValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.4.7. 删除特征词词典值
+        /// 1）功能描述：删除特征词词典值
+        /// 2）接⼝地址： keyword/deleteValue
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordId">特征词 id</param>
+        /// <param name="keywordValueIds">特征词词典值id列表</param>
+        /// <param name="keywordType">特征词词典值类型，⽤于前端返回删除后当前⻚码</param>
+        /// <param name="pageSize">每⻚⼤⼩，⽤于前端返回删除后当前⻚码</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KeywordDeleteValue(long skillId,
+                                        long keywordId,
+                                        List<long> keywordValueIds,
+                                        string keywordType = "",
+                                        int pageSize = 10,
+                                        Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KEYWORDDELETEVALUE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordId"] = keywordId;
+            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented);
+            aipReq.Bodys["keywordType"] = keywordType;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
