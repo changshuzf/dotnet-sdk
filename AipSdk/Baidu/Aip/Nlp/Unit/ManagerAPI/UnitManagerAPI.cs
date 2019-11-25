@@ -264,6 +264,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNPRIORITY =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/priority";
 
+        /// <summary>
+        /// 2.3.3.6. 删除对话模板(批量)
+        /// </summary>
+        private const string PATTERNBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/batchDelete";
+
         private const string PATTERNIMPORT =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/import";
 
@@ -1561,6 +1567,37 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["patternId"] = patternId;
             aipReq.Bodys["adjustType"] = adjustType;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.3.6. 删除对话模板(批量)
+        /// 1）功能描述：删除已有对话模板(批量)
+        /// 2）接⼝地址： pattern/batchDelete
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="patternSetId"></param>
+        /// <param name="patternIds"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternBatchDelete(long skillId,
+                            long patternSetId,
+                            JArray patternIds,
+                            int pageSize = 10,
+                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNBATCHDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["patternSetId"] = patternSetId;
+            aipReq.Bodys["patternIds"] = JsonConvert.SerializeObject(patternIds, Formatting.Indented);
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
