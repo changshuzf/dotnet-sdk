@@ -92,6 +92,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SKILLUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/update";
 
+        /// <summary>
+        /// 2.2.4. 删除技能
+        /// </summary>
+        private const string SKILLDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/delete";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -524,6 +530,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["skillName"] = skillName;
             aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.2.4. 删除技能
+        /// 1）功能描述：删除技能
+        /// 2）接⼝地址： skill/delete
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SkillDelete(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SKILLDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
             PreAction();
 
             if (options != null)
