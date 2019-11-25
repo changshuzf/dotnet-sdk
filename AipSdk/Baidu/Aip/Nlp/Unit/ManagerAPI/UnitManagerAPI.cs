@@ -183,6 +183,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/addValue";
 
+        /// <summary>
+        /// 2.3.2.9. 修改⾃定义词典值
+        /// </summary>
         private const string SLOTUPDATEVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
 
@@ -1002,27 +1005,36 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+
         /// <summary>
-        /// V1.7.6 2.4.9 更新词槽词典值 
+        /// 2.3.2.9. 修改⾃定义词典值
+        /// 1）功能描述：修改⾃定义词典值
+        /// 2）接⼝地址： slot/updateValue
         /// </summary>
-        /// <param name="botId"></param>
-        /// <param name="skillId"></param>
-        /// <param name="slotId"></param>
-        /// <param name="slotType"></param>
-        /// <param name="valueId"></param>
-        /// <param name="slotValue"></param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="slotId">词槽id</param>
+        /// <param name="slotType">词槽词典类别，开发者⾃定义(user)/⿊名单(black)</param>
+        /// <param name="valueId">词槽词典值id</param>
+        /// <param name="slotValue">词槽词典值</param>
+        /// <param name="slotNormalizedValue">词槽词典值归⼀化值，默认为空（词典值⽆归⼀化词）。当词典类别为⿊名单时，归⼀化值⽆效</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SlotUpdateValue(long botId, long skillId, long slotId, string slotType,long valueId, string slotValue, Dictionary<string, object> options = null)
+        public JObject SlotUpdateValue(long skillId,
+                                        long slotId,
+                                        string slotType,
+                                        long valueId,
+                                        string slotValue,
+                                        string slotNormalizedValue = "",
+                                        Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTUPDATEVALUE);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotType"] = slotType;
             aipReq.Bodys["valueId"] = valueId;
             aipReq.Bodys["slotValue"] = slotValue;
+            aipReq.Bodys["slotNormalizedValue"] = slotNormalizedValue;
             PreAction();
 
             if (options != null)
