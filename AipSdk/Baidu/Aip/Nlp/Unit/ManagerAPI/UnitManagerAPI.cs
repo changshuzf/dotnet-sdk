@@ -285,8 +285,7 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/list";
 
-        private const string KEYWORDVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/value";
+
 
         /// <summary>
         /// 2.3.4.2. 新建特征词
@@ -302,6 +301,12 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string KEYWORDBATCHDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/delete";
+
+        /// <summary>
+        /// 2.3.4.4. 查询特征词词典值列表
+        /// </summary>
+        private const string KEYWORDVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/value";
 
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
@@ -1690,22 +1695,26 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查看特征词词典详情
+        /// 2.3.4.4. 查询特征词词典值列表
+        /// 1）功能描述：查看特征词词典值列表
+        /// 2）接⼝地址： keyword/value
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="keywordId">keyword id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~5000</param>
+        /// <param name="skillId"></param>
+        /// <param name="keywordId"></param>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="keywordType"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordValue(long botId, long keywordId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject KeywordValue(long skillId, long keywordId, int pageNo, int pageSize,string keywordType = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDVALUE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["keywordType"] = keywordType;
             PreAction();
 
             if (options != null)
