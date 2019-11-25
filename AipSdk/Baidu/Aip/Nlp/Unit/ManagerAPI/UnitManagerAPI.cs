@@ -347,6 +347,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/update";
 
+        /// <summary>
+        /// 2.3.5.4. 删除⼝语化词
+        /// </summary>
+        private const string OMITBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/batchDelete";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2007,6 +2013,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["omitId"] = omitId;
             aipReq.Bodys["omitValue"] = omitValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.5.4. 删除⼝语化词
+        /// 1）功能描述：删除⼝语化词
+        /// 2）接⼝地址： omit/batchDelete
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="omitIds">⼝语化词id列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject OmitBatchDelete(long skillId, List<int> omitIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(OMITBATCHDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented); ;
             PreAction();
 
             if (options != null)
