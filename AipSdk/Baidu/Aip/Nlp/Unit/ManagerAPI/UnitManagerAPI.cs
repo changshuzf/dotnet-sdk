@@ -341,6 +341,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/add";
 
+        /// <summary>
+        /// 2.3.5.3. 修改⼝语化词
+        /// </summary>
+        private const string OMITUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/update";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -1925,7 +1931,7 @@ namespace Baidu.Aip.Nlp.Unit
         {
             var aipReq = DefaultRequest(KEYWORDBATCHDELETE);
 
-            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented);
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
@@ -1950,7 +1956,7 @@ namespace Baidu.Aip.Nlp.Unit
         {
             var aipReq = DefaultRequest(OMITLIST);
 
-            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
@@ -1974,7 +1980,7 @@ namespace Baidu.Aip.Nlp.Unit
         {
             var aipReq = DefaultRequest(OMITADD);
 
-            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["omitValue"] = omitValue;
             PreAction();
 
@@ -1983,6 +1989,32 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 2.3.5.3. 修改⼝语化词
+        /// 1）功能描述：修改⼝语化词
+        /// 2）接⼝地址： omit/update
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="omitId">⼝语化词id</param>
+        /// <param name="omitValue">⼝语化词词典值</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject OmitUpdate(long skillId,int omitId, string omitValue, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(OMITUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["omitId"] = omitId;
+            aipReq.Bodys["omitValue"] = omitValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
 
         /// <summary>
         /// 获取问答对列表
