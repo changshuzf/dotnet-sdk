@@ -258,6 +258,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/update";
 
+        /// <summary>
+        /// 2.3.3.5. 修改对话模板优先级
+        /// </summary>
+        private const string PATTERNPRIORITY =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/priority";
+
         private const string PATTERNIMPORT =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/import";
 
@@ -1527,6 +1533,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["threshold"] = threshold;
             aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented);
             aipReq.Bodys["filledOtherSlotsLabel"] = filledOtherSlotsLabel;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.3.5. 修改对话模板优先级
+        /// 1）功能描述：置顶、置底对话模板顺序
+        /// 2）接⼝地址： pattern/priority
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="patternId"></param>
+        /// <param name="adjustType"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternPriority(long skillId,
+                                    long patternId,
+                                    string adjustType,
+                                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNPRIORITY);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["patternId"] = patternId;
+            aipReq.Bodys["adjustType"] = adjustType;
             PreAction();
 
             if (options != null)
