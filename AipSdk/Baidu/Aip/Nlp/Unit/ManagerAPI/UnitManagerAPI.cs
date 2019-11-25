@@ -181,7 +181,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.3.2.8. 新建⾃定义词典值
         /// </summary>
         private const string SLOTADDVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/addValue";
 
         private const string SLOTUPDATEVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
@@ -968,36 +968,32 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
-
         /// <summary>
-        /// 2.3.2.7. 查询⾃定义词槽词典值列表
-        /// 1）功能描述：查询⾃定义词槽词典值列表
-        /// 2）接⼝地址： slot/value
+        /// 2.3.2.8. 新建⾃定义词典值
+        /// 1）功能描述：新建⾃定义词典值
+        /// 2）接⼝地址： slot/addValue
         /// </summary>
         /// <param name="skillId">技能id</param>
         /// <param name="slotId">词槽id</param>
-        /// <param name="slotType">词槽词典类别，开发者⾃定义(user)/⿊名单(black)，传递空字符串时返回所有类型</param>
-        /// <param name="pageNo">⻚码，从1开始</param>
-        /// <param name="pageSize">每⻚数量，取值范围1~5000</param>
-        /// <param name="isNormalizedValue">词槽词典值是否为归⼀格式， 1(是)、 0(否)，不传不进⾏此项筛选</param>
+        /// <param name="slotValue">词槽词典值</param>
+        /// <param name="slotType">词槽词典类别，开发者⾃定义(user)/⿊名单(black),默认为user</param>
+        /// <param name="slotNormalizedValue">词槽词典值归⼀化值，默认为空（词典值⽆归⼀化词）。当词典类别为⿊名单时，归⼀化值⽆效。</param>
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject SlotAddValue(long skillId,
                                     long slotId,
-                                    string slotType,
-                                    int pageNo,
-                                    int pageSize,
-                                    int isNormalizedValue = 0,
+                                    string slotValue,
+                                    string slotType = "user",
+                                    string slotNormalizedValue = "",
                                     Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTADDVALUE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
+            aipReq.Bodys["slotValue"] = slotValue;
             aipReq.Bodys["slotType"] = slotType;
-            aipReq.Bodys["pageNo"] = pageNo;
-            aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["isNormalizedValue"] = isNormalizedValue;
+            aipReq.Bodys["slotNormalizedValue"] = slotNormalizedValue;
             PreAction();
 
             if (options != null)
