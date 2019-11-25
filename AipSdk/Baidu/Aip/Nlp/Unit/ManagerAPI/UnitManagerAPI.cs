@@ -195,6 +195,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTDELETEVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/deleteValue";
 
+        /// <summary>
+        /// 2.3.7.1. 查询模型列表
+        /// </summary>
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/list";
 
@@ -1220,16 +1223,22 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询模型列表
+        /// 2.3.7.1. 查询模型列表
+        /// 1）功能描述：查询有效模型列表
+        /// 2）接⼝地址： model/list
         /// </summary>
-        /// <param name="botId">botId</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ModelList(long botId, Dictionary<string, object> options = null)
+        public JObject ModelList(long skillId,int pageNo,int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(MODELLIST);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
