@@ -240,6 +240,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/list";
 
+        /// <summary>
+        /// 2.3.6.8. 查询对话样本详情
+        /// </summary>
         private const string QUERYINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/info";
 
@@ -1442,18 +1445,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查看样本详细内容
+        /// 2.3.6.8. 查询对话样本详情
+        /// 1）功能描述：样本详情查看
+        /// 2）接⼝地址： query/info
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetId">样本包 id</param>
-        /// <param name="queryId">样本 id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetId">样本包id</param>
+        /// <param name="queryId">样本id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryInfo(long botId, long querySetId, long queryId, Dictionary<string, object> options = null)
+        public JObject QueryInfo(long skillId, long querySetId, long queryId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYINFO);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["queryId"] = queryId;
             PreAction();
