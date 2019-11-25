@@ -86,13 +86,17 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SKILLADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/add";
 
+        /// <summary>
+        /// 2.2.3. 修改技能属性
+        /// </summary>
+        private const string SKILLUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/update";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
         private const string SETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/update";
-
-
 
         private const string INTENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/list";
@@ -495,6 +499,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillName"] = skillName;
             aipReq.Bodys["skillDesc"] = skillDesc;
             aipReq.Bodys["skillType"] = skillType;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.2.3. 修改技能属性
+        /// 1）功能描述：修改技能的名称和属性
+        /// 2）接⼝地址： skill/update
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="skillName">技能名称，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SkillUpdate(long skillId,string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SKILLUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
             PreAction();
 
             if (options != null)
