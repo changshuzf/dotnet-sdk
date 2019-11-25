@@ -288,6 +288,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/value";
 
+        /// <summary>
+        /// 2.3.4.2. 新建特征词
+        /// </summary>
         private const string KEYWORDADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/add";
 
@@ -1709,28 +1712,28 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 新建特征词
+        /// 2.3.4.2. 新建特征词
+        /// 1）功能描述：新建特征词
+        /// 2）接⼝地址： keyword/add
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="keywordName">特征词名称，长度范围 1~20</param>
-        /// <param name="keywordDesc">特征词描述，长度范围 0~50</param>
-        /// <param name="dictPath">自定义词典下载链接文件，通过上传接口产生</param>
-        /// <param name="blacklistDictPath">黑名单词典下载链接，通过上传接口产生</param>
-        /// <param name="keywordSysDict">系统词典</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordName">特征词名称，⻓度范围1~20, 以kw_开头</param>
+        /// <param name="keywordValues">特征词词典值</param>
+        /// <param name="keywordDesc">特征词描述，⻓度范围0~50</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordAdd(long botId, string keywordName, string keywordDesc,
-            string dictPath, string blacklistDictPath, JArray keywordSysDict,
-            Dictionary<string, object> options = null)
+        public JObject KeywordAdd(long skillId,
+                                string keywordName,
+                                List<string> keywordValues,
+                                string keywordDesc = "",
+                                Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDADD);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordName"] = keywordName;
+            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented);
             aipReq.Bodys["keywordDesc"] = keywordDesc;
-            aipReq.Bodys["dictPath"] = dictPath;
-            aipReq.Bodys["blacklistDictPath"] = blacklistDictPath;
-            aipReq.Bodys["keywordSysDict"] = JsonConvert.SerializeObject(keywordSysDict, Formatting.Indented);
             PreAction();
 
             if (options != null)
