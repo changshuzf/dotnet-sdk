@@ -231,6 +231,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYQUICKANNOTATE =
              "https://aip.baidubce.com/rpc/2.0/unit/query/quickAnnotate";
 
+        /// <summary>
+        /// 2.3.3.7. 获取模板包列表
+        /// </summary>
         private const string PATTERNSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/patternSet/list";
 
@@ -1399,18 +1402,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 获取模板包列表
+        /// 2.3.3.7. 获取模板包列表
+        /// 1）功能描述：获取模板包列表
+        /// 2）接⼝地址： patternSet/list
         /// </summary>
-        /// <param name="botId">bot id</param>
+        /// <param name="botId">技能 id</param>
         /// <param name="pageNo">页码，从 1 开始</param>
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject PatternSetList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject PatternSetList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNSETLIST);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
