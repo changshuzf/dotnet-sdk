@@ -335,6 +335,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/list";
 
+        /// <summary>
+        /// 2.3.5.2. 新建⼝语化词
+        /// </summary>
+        private const string OMITADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/add";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -1947,6 +1953,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["botId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.5.2. 新建⼝语化词
+        /// 1）功能描述：新建⼝语化词列表
+        /// 2）接⼝地址： omit/add
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="omitValue"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject OmitAdd(long skillId, string omitValue, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(OMITADD);
+
+            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["omitValue"] = omitValue;
             PreAction();
 
             if (options != null)
