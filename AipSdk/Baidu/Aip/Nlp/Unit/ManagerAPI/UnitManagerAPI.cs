@@ -252,6 +252,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/add";
 
+        /// <summary>
+        /// 2.3.6.9. 修改对话样本详情
+        /// </summary>
         private const string QUERYUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/update";
 
@@ -1494,19 +1497,22 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+
         /// <summary>
-        /// 修改样本
+        /// 2.3.6.9. 修改对话样本详情
+        /// 1）功能描述：修改对话样本详情
+        /// 2）接⼝地址： query/update
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetId">样本包 id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetId">样本包id</param>
         /// <param name="query">样本信息</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryUpdate(long botId, long querySetId, JObject query, Dictionary<string, object> options = null)
+        public JObject QueryUpdate(long skillId, long querySetId, JObject query, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYADD);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
             PreAction();
