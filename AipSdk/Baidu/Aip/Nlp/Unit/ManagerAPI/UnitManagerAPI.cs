@@ -204,6 +204,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/delete";
 
+        /// <summary>
+        /// 2.3.6.1. 查询对话样本集列表
+        /// </summary>
         private const string QUERYSETLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/list";
 
@@ -1264,18 +1267,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        ///  获取样本包列表
+        /// 2.3.6.1. 查询对话样本集列表
+        /// 1）功能描述：查询对话样本集列表
+        /// 2）接⼝地址： querySet/list
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="skillId"></param>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject QuerySetList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETLIST);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
