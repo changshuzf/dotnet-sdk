@@ -201,6 +201,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/list";
 
+        /// <summary>
+        /// 2.3.7.2. 训练模型
+        /// </summary>
         private const string MODELTRAIN =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/train";
 
@@ -1248,41 +1251,28 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 训练模型
+        /// 2.3.7.2. 训练模型
+        /// 1）功能描述：训练新模型
+        /// 2）接⼝地址： model/train
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="modelDesc">模型描述, 长度范围 0~50</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelDesc">模型描述, ⻓度范围0~50</param>
         /// <param name="trainOption">
-        ///     用户训练参数，json 结构，包含两部分信息
-        //      1. 训练数据的选择，包含模板包和样本包
-        //      2. 训练方式的选择，用户可选方式有两种：
-        //      a.快速训练(smartqu)
-        //      b.快速训练(smartqu)+深度训练(mlqu)
-        //      选择，填写 true；否则，填写 false
-        //      3. 具体样例为：
-        //      {
-        //      "configure":{
-        //      "smartqu": "true",
-        //      "mlqu": "true"
-        //      },
-        //      "data":{
-        //      "querySetIds":[
-        //      1,
-        //      2
-        //      ],
-        //      "patternSetIds":[
-        //      100
-        //      ]
-        //          }
-        //      }
+        /// 开发者训练参数， json结构，包含两部分信息
+        //  1. 训练数据的选择，包含模板包和样本包
+        //  2. 训练⽅式的选择，开发者可选⽅式有三种：快速训练
+        //  (smartqu); 深度训练(mlqu); 快速⽣效taskflow配置
+        //    (taskflow)
+        //  选择，填写true；否则，填写false
+        //  具体样例如下
         /// </param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ModelTrain(long botId, string modelDesc, string trainOption, Dictionary<string, object> options = null)
+        public JObject ModelTrain(long skillId, string trainOption, string modelDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(MODELTRAIN);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["modelDesc"] = modelDesc;
             aipReq.Bodys["trainOption"] = trainOption;
             PreAction();
