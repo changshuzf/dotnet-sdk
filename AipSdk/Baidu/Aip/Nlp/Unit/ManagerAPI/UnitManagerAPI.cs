@@ -167,6 +167,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/update";
 
+        /// <summary>
+        /// 2.3.2.6. 删除词槽
+        /// </summary>
         private const string SLOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/delete";
 
@@ -926,19 +929,20 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+
         /// <summary>
-        ///  删除词槽
+        /// 2.3.2.6. 删除词槽
+        /// 1）功能描述：删除词槽
+        /// 2）接⼝地址： slot/delete
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="slotId">词槽 id</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="slotId">词槽id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotDelete(long botId, long skillId, long slotId, Dictionary<string, object> options = null)
+        public JObject SLotDelete(long skillId, long slotId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTDELETE);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             PreAction();
