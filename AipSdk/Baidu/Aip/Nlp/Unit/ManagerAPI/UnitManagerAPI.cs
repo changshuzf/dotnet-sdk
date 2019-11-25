@@ -152,6 +152,10 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/info";
 
+        /// <summary>
+        /// 2.3.2.7. 查询⾃定义词槽词典值列表
+        /// </summary>
+
         private const string SLOTVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/value";
 
@@ -172,6 +176,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string SLOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/delete";
+
 
         private const string SLOTADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
@@ -819,26 +824,34 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        ///  查询自定义词槽词典详细信息
+        /// 2.3.2.7. 查询⾃定义词槽词典值列表
+        /// 1）功能描述：查询⾃定义词槽词典值列表
+        /// 2）接⼝地址： slot/value
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="slotId">词槽 id</param>
-        /// <param name="slotType">词槽词典类别用户自定义(user)黑名单(black)，传递空字符串时返回所有类型</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~5000</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="slotId">词槽id</param>
+        /// <param name="slotType">词槽词典类别，开发者⾃定义(user)/⿊名单(black)，传递空字符串时返回所有类型</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~5000</param>
+        /// <param name="isNormalizedValue">词槽词典值是否为归⼀格式， 1(是)、 0(否)，不传不进⾏此项筛选</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotValue(long botId, long skillId, long slotId, string slotType, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject SlotValue(long skillId,
+                                    long slotId,
+                                    string slotType,
+                                    int pageNo,
+                                    int pageSize,
+                                    int isNormalizedValue = 0,
+                                    Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(SLOTVALUE);
+            var aipReq = DefaultRequest(SLOTADDVALUE);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotType"] = slotType;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["isNormalizedValue"] = isNormalizedValue;
             PreAction();
 
             if (options != null)
@@ -953,25 +966,36 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+
         /// <summary>
-        /// V1.7.6 2.4.8 新增词槽词典值
+        /// 2.3.2.7. 查询⾃定义词槽词典值列表
+        /// 1）功能描述：查询⾃定义词槽词典值列表
+        /// 2）接⼝地址： slot/value
         /// </summary>
-        /// <param name="botId"></param>
-        /// <param name="skillId"></param>
-        /// <param name="slotId"></param>
-        /// <param name="slotType"></param>
-        /// <param name="slotValue"></param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="slotId">词槽id</param>
+        /// <param name="slotType">词槽词典类别，开发者⾃定义(user)/⿊名单(black)，传递空字符串时返回所有类型</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~5000</param>
+        /// <param name="isNormalizedValue">词槽词典值是否为归⼀格式， 1(是)、 0(否)，不传不进⾏此项筛选</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SlotAddValue(long botId, long skillId, long slotId,string slotType,string slotValue, Dictionary<string, object> options = null)
+        public JObject SlotAddValue(long skillId,
+                                    long slotId,
+                                    string slotType,
+                                    int pageNo,
+                                    int pageSize,
+                                    int isNormalizedValue = 0,
+                                    Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTADDVALUE);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotType"] = slotType;
-            aipReq.Bodys["slotValue"] = slotValue;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["isNormalizedValue"] = isNormalizedValue;
             PreAction();
 
             if (options != null)
