@@ -146,6 +146,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SYSSLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/sysSlot/list";
 
+        /// <summary>
+        /// 2.3.2.4. 查询词槽详情
+        /// </summary>
         private const string SLOTINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/info";
 
@@ -787,16 +790,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// V1.7.6 2.4.3 查询自定义词槽词典详细信息
+        /// 2.3.2.4. 查询词槽详情
+        /// 1）功能描述：查询⾃定义词槽详细信息
+        /// 2）接⼝地址： slot/info
         /// </summary>
-        /// <param name="botId">botid</param>
-        /// <param name="slotId">slotid</param>
+        /// <param name="skillId"></param>
+        /// <param name="slotId"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SlotInfo(long botId, long slotId,Dictionary<string, object> options = null)
+        public JObject SlotInfo(long skillId, long slotId,Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTINFO);
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
 
             PreAction();
