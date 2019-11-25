@@ -222,6 +222,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/update";
 
+        /// <summary>
+        /// 2.3.6.4. 合并对话样本集
+        /// </summary>
+        private const string QUERYSETMERGE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/merge";
+
         private const string QUERYSETDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/delete";
 
@@ -1339,6 +1345,31 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["querySetName"] = querySetName;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.6.4. 合并对话样本集
+        /// 1）功能描述：合并对话样本集
+        /// 2）接⼝地址： querySet/merge
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetIds">待合并样本集id</param>
+        /// <param name="querySetName">样本集名称，⻓度范围1~30</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QuerySetMerge(long skillId, List<long> querySetIds, string querySetName, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYSETMERGE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["querySetIds"] = JsonConvert.SerializeObject(querySetIds, Formatting.Indented);
             aipReq.Bodys["querySetName"] = querySetName;
             PreAction();
 
