@@ -285,16 +285,11 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/list";
 
-
-
         /// <summary>
         /// 2.3.4.2. 新建特征词
         /// </summary>
         private const string KEYWORDADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/add";
-
-        private const string KEYWORDUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/update";
 
         /// <summary>
         /// 2.3.4.3. 删除特征词
@@ -313,6 +308,12 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string KEYWORDADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/addValue";
+
+        /// <summary>
+        /// 2.3.4.6. 修改特征词词典值
+        /// </summary>
+        private const string KEYWORDUPDATEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/updateValue";
 
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
@@ -1792,35 +1793,28 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 更新特征词
+        /// 2.3.4.6. 修改特征词词典值
+        /// 1）功能描述：修改特征词词典值
+        /// 2）接⼝地址： keyword/updateValue
         /// </summary>
-        /// <param name="botId">Bot id</param>
+        /// <param name="skillId">技能id</param>
         /// <param name="keywordId">特征词 id</param>
-        /// <param name="keywordName">特征词名称，长度范围 1~20</param>
-        /// <param name="keywordDesc">特征词描述，长度范围 0~50</param>
-        /// <param name="dictPath">自定义词典下载链接，通过上传接口产生，
-        ///                        若传递空字符串代表清空该特征词，传递保
-        ///                        留字符串 KEEP 代表不改内容
-        /// </param>
-        /// <param name="blacklistDictPath">黑名单词典下载链接，通过上传接口产生，
-        ///                                 若传递空字符串代表清空该特征词，传递保留字符串 KEEP 代表不改内容
-        /// </param>
-        /// <param name="keywordSysDict">系统词典</param>
+        /// <param name="keywordValueId">特征词词典值 id</param>
+        /// <param name="keywordValue">特征词词典值</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordUpdate(long botId, long keywordId, string keywordName,
-            string keywordDesc, string dictPath, string blacklistDictPath,
-            JArray keywordSysDict, Dictionary<string, object> options = null)
+        public JObject KeywordUpdateValue(long skillId,
+            long keywordId, 
+            long keywordValueId,
+            string keywordValue,
+            Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(KEYWORDUPDATE);
+            var aipReq = DefaultRequest(KEYWORDUPDATEVALUE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
-            aipReq.Bodys["keywordName"] = keywordName;
-            aipReq.Bodys["keywordDesc"] = keywordDesc;
-            aipReq.Bodys["dictPath"] = dictPath;
-            aipReq.Bodys["blacklistDictPath"] = blacklistDictPath;
-            aipReq.Bodys["keywordSysDict"] = JsonConvert.SerializeObject(keywordSysDict, Formatting.Indented);
+            aipReq.Bodys["keywordValueId"] = keywordValueId;
+            aipReq.Bodys["keywordValue"] = keywordValue;
             PreAction();
 
             if (options != null)
