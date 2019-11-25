@@ -134,6 +134,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/delete";
 
+        /// <summary>
+        /// 2.3.2.1 查询词槽列表
+        /// </summary>
         private const string SLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/list";
 
@@ -734,19 +737,19 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询自定义词槽列表
+        /// 2.3.2.1 查询词槽列表
+        /// 1）功能描述：查询⾃定义词槽列表
+        /// 2）接⼝地址： slot/list
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SlotList(long botId, long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject SlotList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTLIST);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
