@@ -359,6 +359,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITCLEAR =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/clear";
 
+        /// <summary>
+        /// 2.3.5.6. 重置⼝语化词
+        /// </summary>
+        private const string OMITRESET =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/reset";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2061,6 +2067,27 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject OmitClear(long skillId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(OMITCLEAR);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.5.6. 重置⼝语化词
+        /// 1）功能描述：重置⼝语化词，恢复⾄初始状态
+        /// 2）接⼝地址： omit/reset
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject OmitReset(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(OMITRESET);
 
             aipReq.Bodys["skillId"] = skillId;
             PreAction();
