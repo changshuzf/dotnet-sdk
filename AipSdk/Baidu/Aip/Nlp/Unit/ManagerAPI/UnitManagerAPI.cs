@@ -261,8 +261,11 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/delete";
 
+        /// <summary>
+        /// 2.3.6.10 确认对话样本(批量）
+        /// </summary>
         private const string QUERYQUICKANNOTATE =
-             "https://aip.baidubce.com/rpc/2.0/unit/query/quickAnnotate";
+             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/quickAnnotate";
 
         /// <summary>
         /// 2.3.3.7. 获取模板包列表
@@ -1547,20 +1550,22 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// V1.7.6 2.6.1.9 批量确认样本
+        /// 2.3.6.10 确认对话样本(批量）
+        /// 1）功能描述：确认对话样本(批量）
+        /// 2）接⼝地址： query/quickAnnotate
         /// </summary>
-        /// <param name="botId"></param>
+        /// <param name="skillId"></param>
         /// <param name="querySetId"></param>
         /// <param name="queryIds"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryQuickAnnotate(long botId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
+        public JObject QueryQuickAnnotate(long skillId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYQUICKANNOTATE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["queryIds"] = queryIds;
+            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented);
             PreAction();
 
             if (options != null)
