@@ -228,6 +228,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYSETMERGE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/merge";
 
+        /// <summary>
+        /// 2.3.6.5. 删除对话样本集
+        /// </summary>
         private const string QUERYSETDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/querySet/delete";
 
@@ -1380,17 +1383,19 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 删除样本包
+        /// 2.3.6.5. 删除对话样本集
+        /// 1）功能描述：删除对话样本集
+        /// 2）接⼝地址： querySet/delete
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetId">样本包 id</param>
+        /// <param name="botId">技能 id</param>
+        /// <param name="querySetId">样本包id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QuerySetDelete(long botId, long querySetId, Dictionary<string, object> options = null)
+        public JObject QuerySetDelete(long skillId, long querySetId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYSETDELETE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
             PreAction();
 
