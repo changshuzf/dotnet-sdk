@@ -128,6 +128,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/update";
 
+        /// <summary>
+        /// 2.3.1.5. 删除意图
+        /// </summary>
         private const string INTENTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/delete";
 
@@ -708,18 +711,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 删除意图
+        /// 2.3.1.5. 删除意图
+        /// 1）功能描述：删除意图
+        /// 2）接⼝地址： intent/delete
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">意图 id</param>
+        /// <param name="skillId"></param>
+        /// <param name="intentId"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject IntentDelete(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
+        public JObject IntentDelete(long skillId, long intentId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(INTENTDELETE);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
             PreAction();
