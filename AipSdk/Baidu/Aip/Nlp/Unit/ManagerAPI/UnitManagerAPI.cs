@@ -297,7 +297,10 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KEYWORDUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/update";
 
-        private const string KEYWORDDELETE =
+        /// <summary>
+        /// 2.3.4.3. 删除特征词
+        /// </summary>
+        private const string KEYWORDBATCHDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/delete";
 
         private const string FAQLIST =
@@ -1781,18 +1784,22 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 删除特征词
+        /// 2.3.4.3. 删除特征词
+        /// 1）功能描述：删除特征词(批量)
+        /// 2）接⼝地址： keyword/batchDelete
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="keywordId">特征词 id</param>
+        /// <param name="skillId"></param>
+        /// <param name="keywordIds"></param>
+        /// <param name="pageSize"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordDelete(long botId, long keywordId, Dictionary<string, object> options = null)
+        public JObject KeywordBatchDelete(long skillId, List<long> keywordIds,int pageSize = 10, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(KEYWORDDELETE);
+            var aipReq = DefaultRequest(KEYWORDBATCHDELETE);
 
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["keywordId"] = keywordId;
+            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented);
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
