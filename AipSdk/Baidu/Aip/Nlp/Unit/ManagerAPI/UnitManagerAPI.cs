@@ -80,6 +80,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SKILLLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/list";
 
+        /// <summary>
+        /// 2.2.2. 新建技能
+        /// </summary>
+        private const string SKILLADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/add";
+
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -463,6 +469,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["skillCategory"] = skillCategory;
+            aipReq.Bodys["skillType"] = skillType;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.2.2. 新建技能
+        /// 1）功能描述：新建技能
+        /// 2）接⼝地址： skill/add
+        /// </summary>
+        /// <param name="skillName">技能名称，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
+        /// <param name="skillType">技能类型： dialogue(对话)、 faq(问答); 不填默认为dialogue(对话)</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SkillAdd(string skillName, string skillDesc = "", string skillType = "dialogue", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SKILLADD);
+
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
             aipReq.Bodys["skillType"] = skillType;
             PreAction();
 
