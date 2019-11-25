@@ -110,14 +110,17 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/list";
 
-        private const string INTENTINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/info";
-
         /// <summary>
         /// 2.3.1.2 新建意图
         /// </summary>
         private const string INTENTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/add";
+
+        /// <summary>
+        /// 2.3.1.3 查询意图详情
+        /// </summary>
+        private const string INTENTINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/info";
 
         private const string INTENTUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/update";
@@ -633,18 +636,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询意图详情
+        /// 2.3.1.3 查询意图详情
+        /// 1）功能描述：查询意图的具体信息
+        /// 2）接⼝地址： intent/info
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">意图 id</param>
+        /// <param name="skillId"></param>
+        /// <param name="intentId"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject IntentInfo(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
+        public JObject IntentInfo(long skillId, long intentId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(INTENTINFO);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentId"] = intentId;
             PreAction();
