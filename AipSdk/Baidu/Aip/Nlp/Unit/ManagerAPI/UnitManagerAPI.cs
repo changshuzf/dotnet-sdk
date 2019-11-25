@@ -279,6 +279,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNCLEAR =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/clear";
 
+        /// <summary>
+        /// 2.3.4.1. 查询特征词列表
+        /// </summary>
         private const string KEYWORDLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/list";
 
@@ -1656,18 +1659,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询特征词词典列表
+        /// 2.3.4.1. 查询特征词列表
+        /// 1）功能描述：查询特征词列表
+        /// 2）接⼝地址： keyword/list
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~200</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject KeywordList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDLIST);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
