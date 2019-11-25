@@ -246,6 +246,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/add";
 
+        /// <summary>
+        /// 2.3.3.3. 查询对话模板详情
+        /// </summary>
         private const string PATTERNINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/info";
 
@@ -1465,18 +1468,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查看模板详细信息
+        /// 2.3.3.3. 查询对话模板详情
+        /// 1）功能描述：查询对话模板详情
+        /// 2）接⼝地址： pattern/info
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="patternSetId">模板包 id</param>
-        /// <param name="patternId">模板 id</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="patternSetId">模板包id</param>
+        /// <param name="patternId">模板id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject PatternInfo(long botId, long patternSetId, long patternId, Dictionary<string, object> options = null)
+        public JObject PatternInfo(long skillId, long patternSetId, long patternId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNINFO);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["patternId"] = patternId;
             PreAction();
