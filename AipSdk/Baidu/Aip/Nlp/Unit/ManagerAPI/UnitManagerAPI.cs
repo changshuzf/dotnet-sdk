@@ -140,6 +140,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/list";
 
+        /// <summary>
+        /// 2.3.2.2. 查询完整的系统词槽列表
+        /// </summary>
         private const string SYSSLOTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/sysSlot/list";
 
@@ -762,7 +765,9 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询系统词槽列表
+        /// 2.3.2.2. 查询完整的系统词槽列表
+        /// 1）功能描述：查询系统词槽列表
+        /// 2）接⼝地址： sysSlot/list
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
