@@ -177,7 +177,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/delete";
 
-
+        /// <summary>
+        /// 2.3.2.8. 新建⾃定义词典值
+        /// </summary>
         private const string SLOTADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/slot/addValue";
 
@@ -844,7 +846,7 @@ namespace Baidu.Aip.Nlp.Unit
                                     int isNormalizedValue = 0,
                                     Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(SLOTADDVALUE);
+            var aipReq = DefaultRequest(SLOTVALUE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
