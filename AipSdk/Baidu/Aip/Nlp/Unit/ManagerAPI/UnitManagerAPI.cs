@@ -113,6 +113,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string INTENTINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/info";
 
+        /// <summary>
+        /// 2.3.1.2 新建意图
+        /// </summary>
         private const string INTENTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/intent/add";
 
@@ -653,18 +656,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 新建意图
+        /// 2.3.1.2 新建意图
+        /// 1）功能描述：新建意图
+        /// 2）接⼝地址： intent/add
         /// </summary>
-        /// <param name="botId">bot id</param>
         /// <param name="skillId">技能 id</param>
         /// <param name="intentData">意图数据</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject IntentAdd(long botId, long skillId, JObject intentData, Dictionary<string, object> options = null)
+        public JObject IntentAdd(long skillId, JObject intentData, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(INTENTADD);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented);
             PreAction();
