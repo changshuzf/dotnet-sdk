@@ -243,6 +243,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string QUERYINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/info";
 
+        /// <summary>
+        /// 2.3.6.7. 新建对话样本
+        /// </summary>
         private const string QUERYADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/query/add";
 
@@ -1462,18 +1465,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 新增样本
+        /// 2.3.6.7. 新建对话样本
+        /// 1）功能描述：新建对话样本
+        /// 2）接⼝地址： query/add
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetId">样本包 id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetId">样本包id</param>
         /// <param name="query">样本信息</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryAdd(long botId, long querySetId, JObject query, Dictionary<string, object> options = null)
+        public JObject QueryAdd(long skillId, long querySetId, JObject query, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYADD);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
             aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
             PreAction();
