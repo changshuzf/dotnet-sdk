@@ -268,6 +268,12 @@ namespace Baidu.Aip.Nlp.Unit
              "https://aip.baidubce.com/rpc/2.0/unit/v3/query/quickAnnotate";
 
         /// <summary>
+        /// 2.3.6.11 删除对话样本(批量）
+        /// </summary>
+        private const string QUERYBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/query/batchDelete";
+
+        /// <summary>
         /// 2.3.3.7. 获取模板包列表
         /// </summary>
         private const string PATTERNSETLIST =
@@ -1562,6 +1568,31 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject QueryQuickAnnotate(long skillId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYQUICKANNOTATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["querySetId"] = querySetId;
+            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.6.11 删除对话样本(批量）
+        /// 1）功能描述：删除对话样本(批量）
+        /// 2）接⼝地址： query/batchDelete
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="querySetId">样本集id</param>
+        /// <param name="queryIds">样本id列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject QueryBatchDelete(long skillId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(QUERYBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
