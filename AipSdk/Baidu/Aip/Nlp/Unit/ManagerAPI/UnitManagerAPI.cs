@@ -152,6 +152,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SLOTVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/value";
 
+        /// <summary>
+        /// 2.3.2.3. 新建词槽
+        /// </summary>
         private const string SLOTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/add";
 
@@ -834,34 +837,37 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        ///  新建词槽
+        /// 2.3.2.3. 新建词槽
+        /// 1）功能描述：新建词槽
+        /// 2）接⼝地址： slot/add
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="slotName">词槽名称，长度范围 1~20</param>
-        /// <param name="slotDesc">词槽描述，长度范围 0~50</param>
-        /// <param name="slotDictPath">自定义词槽词典标识，通过上传接口产生</param>
-        /// <param name="slotBlacklistDictPath">词槽黑名单词典标识，通过上传接口产生</param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="slotName">词槽名称，⻓度范围1~20</param>
+        /// <param name="slotDesc">词槽描述，⻓度范围0~50</param>
+        /// <param name="slotClarifyNameList">词槽别名列表，可包含1~10个别名； 别名，⻓度范围1 ~20</param>
         /// <param name="slotSysDict">系统词槽名称</param>
-        /// <param name="slotDictPathEfficient">自定义词槽词典和黑名单词典是否使用:1(使用)、 0(未使用)</param>
-        /// <param name="slotSysDictEfficient">系统词槽词典是否使用: 1(使用)、 0(未使用)</param>
+        /// <param name="slotDictEfficient">⾃定义词槽词典和⿊名单词典是否使⽤: 1(使⽤)、 0(未使⽤), 默认为使⽤</param>
+        /// <param name="slotSysDictEfficient">系统词槽词典是否使⽤: 1(使⽤)、 0(未使⽤), 默认为使⽤</param>
+        /// <param name=""></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SLotAdd(long botId, long skillId, string slotName, string slotDesc,
-            string slotDictPath, string slotBlacklistDictPath, JArray slotSysDict,
-            int slotDictPathEfficient, int slotSysDictEfficient,
-            Dictionary<string, object> options = null)
+        public JObject SLotAdd(long skillId,
+                                string slotName,
+                                string slotDesc = "",
+                                JArray slotClarifyNameList = null,
+                                JArray slotSysDict = null,
+                                int slotDictEfficient = 1,
+                                int slotSysDictEfficient = 1,
+                                Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTADD);
 
-            aipReq.Bodys["botId"] = botId;
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotName"] = slotName;
             aipReq.Bodys["slotDesc"] = slotDesc;
-            aipReq.Bodys["slotDictPath"] = slotDictPath;
-            aipReq.Bodys["slotBlacklistDictPath"] = slotBlacklistDictPath;
+            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented);
             aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented);
-            aipReq.Bodys["slotDictPathEfficient"] = slotDictPathEfficient;
+            aipReq.Bodys["slotDictEfficient"] = slotDictEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
             PreAction();
 
