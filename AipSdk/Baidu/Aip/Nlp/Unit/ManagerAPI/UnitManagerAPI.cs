@@ -240,6 +240,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string PATTERNLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/list";
 
+        /// <summary>
+        /// 2.3.3.2. 新建对话模板
+        /// </summary>
+        private const string PATTERNADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/add";
+
         private const string PATTERNINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/info";
 
@@ -1413,6 +1419,43 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.3.2. 新建对话模板
+        /// 1）功能描述：新建对话模板
+        /// 2）接⼝地址： pattern/add
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="patternSetId">模板包id</param>
+        /// <param name="intentId">意图id</param>
+        /// <param name="threshold">阈值</param>
+        /// <param name="content">模板内容</param>
+        /// <param name="filledOtherSlotsLabel">解析返回所有词槽： 1-是； 0-否；默认为1</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject PatternAdd(long skillId,
+                                    long patternSetId, 
+                                    long intentId,
+                                    float threshold,
+                                    JArray content, 
+                                    int filledOtherSlotsLabel = 1,
+                                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(PATTERNADD);
+
+            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["patternSetId"] = patternSetId;
+            aipReq.Bodys["intentId"] = intentId;
+            aipReq.Bodys["threshold"] = threshold;
+            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented);
+            aipReq.Bodys["filledOtherSlotsLabel"] = filledOtherSlotsLabel;
             PreAction();
 
             if (options != null)
