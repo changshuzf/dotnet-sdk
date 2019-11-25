@@ -353,6 +353,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITBATCHDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/batchDelete";
 
+        /// <summary>
+        /// 2.3.5.5. 清空⼝语化词
+        /// </summary>
+        private const string OMITCLEAR =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/clear";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2036,6 +2042,27 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.5.5. 清空⼝语化词
+        /// 1）功能描述：清空⼝语化词
+        /// 2）接⼝地址： omit/clear
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject OmitClear(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(OMITCLEAR);
+
+            aipReq.Bodys["skillId"] = skillId;
             PreAction();
 
             if (options != null)
