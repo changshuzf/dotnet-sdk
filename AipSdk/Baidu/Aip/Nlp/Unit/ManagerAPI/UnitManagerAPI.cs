@@ -585,6 +585,7 @@ namespace Baidu.Aip.Nlp.Unit
 
 
         #endregion 2.4.3. 问答技能-标签
+
         #region 2.4.4. 模型
         /// <summary>
         /// 2.4.4.1. 查询模型列表
@@ -611,6 +612,7 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/delete";
 
         #endregion 2.4.4. 模型
+
         #region 2.4.5. 设置
         /// <summary>
         /// 2.4.5.1 查询⾼级设置
@@ -623,6 +625,32 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string FAQSKILLSETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/setting/update";
+        #endregion
+
+        #region 2.4.6. 分享码
+        /// <summary>
+        /// 2.4.6.1. 查询分享码状态
+        /// </summary>
+        private const string FAQSKILLSHARECODESTATUS =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/shareCode/status";
+
+        /// <summary>
+        /// 2.4.6.2. 启⽤分享码
+        /// </summary>
+        private const string FAQSKILLSHARECODESTART =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/shareCode/start";
+
+        /// <summary>
+        /// 2.4.6.3. 终⽌分享码
+        /// </summary>
+        private const string FAQSKILLSHARECODESTOP =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/shareCode/stop";
+
+        /// <summary>
+        /// 2.4.6.4. 使⽤分享码复制技能
+        /// </summary>
+        private const string FAQSKILLSKILLCOPY =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/skill/copy";
         #endregion
 
 
@@ -3340,6 +3368,102 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        #endregion
+
+        #region 2.4.6. 分享码
+        /// <summary>
+        /// 2.4.6.1. 查询分享码状态
+        /// 1) 功能描述：查看技能分享状态，⽆可⽤分享码调⽤时会⽣成新的分享码
+        /// 2) 接⼝地址： faqskill/shareCode/status
+        /// </summary>
+        /// <param name="originalSkillId">原始技能ID</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillShareCodeStatus(long originalSkillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSHARECODESTATUS);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.6.2. 启⽤分享码
+        /// 1) 功能描述：开始分享，设置分享码有效时⻓
+        /// 2) 接⼝地址： faqskill/shareCode/start
+        /// </summary>
+        /// <param name="originalSkillId">原始技能ID</param>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="days">分享码有效期时⻓, ⽬前可传⼊3、 7、 15、 30</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillShareCodeStart(long originalSkillId, string shareCode, string days, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSHARECODESTART);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
+            aipReq.Bodys["shareCode"] = shareCode;
+            aipReq.Bodys["days"] = days;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.6.3. 终⽌分享码
+        /// 1) 功能描述：停⽌分享，分享码失效，该分享码不可再进⾏技能复制
+        /// 2) 接⼝地址： faqskill/shareCode/stop
+        /// </summary>
+        /// <param name="originalSkillId">原始技能ID</param>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillShareCodeStop(long originalSkillId, string shareCode, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSHARECODESTOP);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
+            aipReq.Bodys["shareCode"] = shareCode;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.6.4. 使⽤分享码复制技能
+        /// 1) 功能描述：进⾏技能复制
+        /// 2) 接⼝地址： faqskill/skill/copy
+        /// </summary>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="skillName">技能名称，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillSkillCopy(string shareCode, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSKILLCOPY);
+
+            aipReq.Bodys["shareCode"] = shareCode;
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
             PreAction();
 
             if (options != null)
