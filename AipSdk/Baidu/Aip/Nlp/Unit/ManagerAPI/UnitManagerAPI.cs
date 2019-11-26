@@ -464,6 +464,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/add";
 
+        /// <summary>
+        /// 2.4.1.3. 查询问答对详情
+        /// </summary>
+        private const string FAQSKILLFAQPAIRINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/info";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2468,6 +2474,30 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
             aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
             aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.3. 查询问答对详情
+        /// 1）功能描述：查询问答对详情
+        /// 2）接⼝地址： faqskill/faqPair/info
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="faqId">问答对id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairInfo(long skillId,
+                                            long faqId,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRINFO);
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["faqId"] = faqId;
             PreAction();
 
             if (options != null)
