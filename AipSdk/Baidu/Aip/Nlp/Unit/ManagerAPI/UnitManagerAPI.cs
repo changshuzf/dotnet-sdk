@@ -577,6 +577,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string TAGBATCHDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/batchDelete";
 
+        /// <summary>
+        /// 2.4.3.6. 标签查找
+        /// </summary>
+        private const string TAGSEARCH =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/search";
+
         #endregion
 
 
@@ -3115,6 +3121,40 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.3.6. 标签查找
+        /// 1）功能描述：标签查找
+        /// 2）接⼝地址： tag/search
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="pageNo"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="searchKey"></param>
+        /// <param name="faqIds"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagSearch(long skillId,
+                                int pageNo,
+                                int pageSize,
+                                string searchKey = null,
+                                List<long> faqIds = null,
+                                Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGSEARCH);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["searchKey"] = searchKey;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented); ;
             PreAction();
 
             if (options != null)
