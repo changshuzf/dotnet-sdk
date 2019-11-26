@@ -207,6 +207,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELTRAIN =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/train";
 
+        /// <summary>
+        /// 2.3.7.3. ⽣效到沙盒
+        /// </summary>
+        private const string MODELEFFECT =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/model/effect";
+
         private const string MODELDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/delete";
 
@@ -1275,6 +1281,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["modelDesc"] = modelDesc;
             aipReq.Bodys["trainOption"] = trainOption;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.7.3. ⽣效到沙盒
+        /// 1）功能描述：将模型⽣效到沙盒
+        /// 2）接⼝地址： model/effect
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelId">模型id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ModelEffect(long skillId, long modelId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(MODELEFFECT);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["modelId"] = modelId;
             PreAction();
 
             if (options != null)
