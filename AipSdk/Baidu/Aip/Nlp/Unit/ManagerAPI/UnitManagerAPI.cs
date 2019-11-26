@@ -559,6 +559,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string TAGADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/add";
 
+        /// <summary>
+        /// 2.4.3.3. 修改标签
+        /// </summary>
+        private const string TAGUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/update";
+
         #endregion
 
 
@@ -3018,6 +3024,34 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(TAGADD);
 
             aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["tagName"] = tagName;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.3.3. 修改标签
+        /// 1）功能描述：修改标签
+        /// 2）接⼝地址： tag/update
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="tagId">标签 id</param>
+        /// <param name="tagName">标签名称。⻓度1~8。</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagUpdate(long skillId,
+                                long tagId,
+                                string tagName,
+                                Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["tagId"] = tagId;
             aipReq.Bodys["tagName"] = tagName;
             PreAction();
 
