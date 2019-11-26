@@ -522,6 +522,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/value";
 
+        /// <summary>
+        /// 2.4.2.5. 新建特征词词典值
+        /// </summary>
+        private const string FAQSKILLKEYWORDADDVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/addValue";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2798,6 +2804,37 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["keywordType"] = keywordType;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.5. 新建特征词词典值
+        /// 1）功能描述：新建特征词词典值
+        /// 2）接⼝地址： faqskill/keyword/addValue
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordId">keyword id</param>
+        /// <param name="keywordType">特征词类型:user(⽤户词典值); black(⿊名单)</param>
+        /// <param name="keywordValue">特征词词典值</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKeywordAddValue(long skillId,
+                    long keywordId,
+                    string keywordType,
+                    string keywordValue,
+                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDADDVALUE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordId"] = keywordId;
+            aipReq.Bodys["keywordType"] = keywordType;
+            aipReq.Bodys["keywordValue"] = keywordValue;
             PreAction();
 
             if (options != null)
