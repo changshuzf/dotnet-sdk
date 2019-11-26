@@ -494,6 +494,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRSEARCH =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/search";
 
+        /// <summary>
+        /// 2.4.2.1. 查询特征词列表
+        /// </summary>
+        private const string FAQSKILLKEYWORDLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/list";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2649,6 +2655,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["searchKey"] = searchKey;
             aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.1. 查询特征词列表
+        /// 1）功能描述：查询特征词列表
+        /// 2）接⼝地址： faqskill/keyword/list
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKEYWORDLIST(long skillId,
+                                    int pageNo,
+                                    int pageSize,
+                                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
