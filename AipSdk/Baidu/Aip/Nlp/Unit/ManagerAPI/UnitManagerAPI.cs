@@ -528,6 +528,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDADDVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/addValue";
 
+        /// <summary>
+        /// 2.4.2.6. 修改特征词词典值
+        /// </summary>
+        private const string FAQSKILLKEYWORDUPDATEVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/updateValue";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2834,6 +2840,37 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
             aipReq.Bodys["keywordType"] = keywordType;
+            aipReq.Bodys["keywordValue"] = keywordValue;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.6. 修改特征词词典值
+        /// 1）功能描述：修改特征词词典值
+        /// 2）接⼝地址： faqskill/keyword/updateValue
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordId">keyword id</param>
+        /// <param name="keywordValueId">特征词词典值 id</param>
+        /// <param name="keywordValue">特征词词典值</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKeywordUpdateValue(long skillId,
+                    long keywordId,
+                    long keywordValueId,
+                    string keywordValue,
+                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDUPDATEVALUE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordId"] = keywordId;
+            aipReq.Bodys["keywordValueId"] = keywordValueId;
             aipReq.Bodys["keywordValue"] = keywordValue;
             PreAction();
 
