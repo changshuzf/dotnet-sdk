@@ -571,6 +571,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string TAGSORT =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/sort";
 
+        /// <summary>
+        /// 2.4.3.5. 删除标签(批量)
+        /// </summary>
+        private const string TAGBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/batchDelete";
+
         #endregion
 
 
@@ -3081,6 +3087,31 @@ namespace Baidu.Aip.Nlp.Unit
                                 Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(TAGSORT);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.3.5. 删除标签(批量)
+        /// 1）功能描述：删除标签(批量)
+        /// 2）接⼝地址： tag/batchDelete
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="tagIds">标签ID列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagBatchDelete(long skillId,
+                        List<long> tagIds,
+                        Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
