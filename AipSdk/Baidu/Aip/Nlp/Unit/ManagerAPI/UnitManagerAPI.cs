@@ -476,6 +476,11 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/update";
 
+        /// <summary>
+        /// 2.4.1.5. 修改问答对标签(批量)
+        /// </summary>
+        private const string FAQSKILLFAQPAIRUPDATETAGS =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/updateTags";
 
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
@@ -2545,6 +2550,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
             aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
             aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.5. 修改问答对标签(批量)
+        /// 1）功能描述：批量修改问答对标签
+        /// 2）接⼝地址： faqskill/faqPair/updateTags
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="faqIds">问答对id列表</param>
+        /// <param name="sluTags">标签列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairUpdateTags(long skillId,
+                                            List<long> faqIds,
+                                            List<JObject> sluTags,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRUPDATETAGS);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
+            aipReq.Bodys["sluTags"] = JsonConvert.SerializeObject(sluTags, Formatting.Indented);
             PreAction();
 
             if (options != null)
