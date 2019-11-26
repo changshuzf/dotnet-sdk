@@ -583,7 +583,34 @@ namespace Baidu.Aip.Nlp.Unit
         private const string TAGSEARCH =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/search";
 
-        #endregion
+
+        #endregion 2.4.3. 问答技能-标签
+        #region 2.4.4. 模型
+        /// <summary>
+        /// 2.4.4.1. 查询模型列表
+        /// </summary>
+        private const string FAQSKILLMODELLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/list";
+
+        /// <summary>
+        /// 2.4.4.2. 训练模型
+        /// </summary>
+        private const string FAQSKILLMODELTRAIN =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/train";
+
+        /// <summary>
+        /// 2.4.4.3. ⽣效到沙盒
+        /// </summary>
+        private const string FAQSKILLMODELEFFECT =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/effect";
+
+        /// <summary>
+        /// 2.4.4.4. 删除有效模型
+        /// </summary>
+        private const string FAQSKILLMODELDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/delete";
+
+        #endregion 2.4.4. 模型
 
 
         private const string FAQLIST =
@@ -3163,6 +3190,102 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        #endregion
+
+        #region 2.4.4. 模型
+        /// <summary>
+        /// 2.4.4.1. 查询模型列表
+        /// 1）功能描述：查询模型列表
+        /// 2）接⼝地址： 接⼝地址： faqskill/model/list
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillModelList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLMODELLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.4.2. 训练模型
+        /// 1）功能描述：训练新模型
+        /// 2）接⼝地址： faqskill/model/train
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelDesc">模型描述, ⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillModelTrain(long skillId, string modelDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLMODELTRAIN);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["modelDesc"] = modelDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.4.3. ⽣效到沙盒
+        /// 1）功能描述：将模型⽣效到沙盒
+        /// 2）接⼝地址： faqskill/model/effect
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelId">模型id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillModelEffect(long skillId, long modelId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLMODELEFFECT);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["modelId"] = modelId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.4.4. 删除有效模型
+        /// 1）功能描述：删除有效模型
+        /// 2）接⼝地址： faqskill/model/delete
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelId">模型id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillModelDelete(long skillId, long modelId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLMODELDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["modelId"] = modelId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
         #endregion
 
         /// <summary>
