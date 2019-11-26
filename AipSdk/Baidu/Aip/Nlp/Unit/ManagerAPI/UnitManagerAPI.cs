@@ -129,6 +129,12 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/stop";
 
         /// <summary>
+        /// 2.3.9.4. 使⽤分享码复制技能
+        /// </summary>
+        private const string SKILLCOPY =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/copy";
+
+        /// <summary>
         /// 2.3.1.1 查询意图列表
         /// </summary>
         private const string INTENTLIST =
@@ -899,6 +905,31 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["originalSkillId"] = originalSkillId;
             aipReq.Bodys["shareCode"] = shareCode;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.9.4. 使⽤分享码复制技能
+        /// 1) 功能描述：进⾏技能复制
+        /// 2) 接⼝地址： skill/copy
+        /// </summary>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="skillName">技能名称，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject SkillCopy(string shareCode,string skillName,string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SKILLCOPY);
+
+            aipReq.Bodys["shareCode"] = shareCode;
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
             PreAction();
 
             if (options != null)
