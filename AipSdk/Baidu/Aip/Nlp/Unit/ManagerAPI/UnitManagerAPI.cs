@@ -488,6 +488,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRBATCHDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/batchDelete";
 
+        /// <summary>
+        /// 2.4.1.7. 查找问答对
+        /// </summary>
+        private const string FAQSKILLFAQPAIRSEARCH =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/search";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2609,6 +2615,40 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.7. 查找问答对
+        /// 1）功能描述：查找问答对
+        /// 2）接⼝地址： faqskill/faqPair/search
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
+        /// <param name="searchKey">搜素问题关键词</param>
+        /// <param name="sluTagIds">筛选标签ID列表， ["notag"]代表筛选⽆标签问题</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairSearch(long skillId,
+                                    int pageNo,
+                                    int pageSize,
+                                    string searchKey = "",
+                                    List<long> sluTagIds = null,
+                                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRSEARCH);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["searchKey"] = searchKey;
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
             PreAction();
 
             if (options != null)
