@@ -458,6 +458,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/list";
 
+        /// <summary>
+        /// 2.4.1.2. 新建问答对
+        /// </summary>
+        private const string FAQSKILLFAQPAIRADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/add";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2424,6 +2430,43 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.2. 新建问答对
+        /// 1）功能描述：新建问答对
+        /// 2）接⼝地址： faqskill/faqPair/add
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="faqQuestions">问题列表</param>
+        /// <param name="faqAnswers">回答列表</param>
+        /// <param name="faqStdQuestion">标准问题</param>
+        /// <param name="faqPatterns">问题模板</param>
+        /// <param name="sluTagIds">标签ID列表， 1~10个。</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairAdd(long skillId,
+                                            List<JObject> faqQuestions,
+                                            List<JObject> faqAnswers,
+                                            string faqStdQuestion = "",
+                                            List<string> faqPatterns = null,
+                                            List<long> sluTagIds = null,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRADD);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
+            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
+            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
             aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
             PreAction();
 
