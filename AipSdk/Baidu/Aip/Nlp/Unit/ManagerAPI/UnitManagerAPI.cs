@@ -98,6 +98,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SKILLDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/skill/delete";
 
+        /// <summary>
+        /// 2.3.8.1 查询⾼级设置
+        /// </summary>
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
@@ -767,16 +770,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 查询 bot 高级设置
+        /// 2.3.8.1 查询⾼级设置
+        /// 1）功能描述：查询技能⾼级设置
+        /// 2）接⼝地址： setting/info
         /// </summary>
-        /// <param name="botId">botId</param>
+        /// <param name="skillId">技能 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SettingInfo(long botId, Dictionary<string, object> options = null)
+        public JObject SettingInfo(long skillId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SETTINGINFO);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             PreAction();
 
             if (options != null)
