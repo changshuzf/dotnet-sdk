@@ -104,6 +104,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string SETTINGINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/info";
 
+        /// <summary>
+        /// 2.3.8.2. 修改⾼级设置
+        /// </summary>
         private const string SETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/update";
 
@@ -791,18 +794,24 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 修改 bot 高级设置
+        /// 2.3.8.2. 修改⾼级设置
+        /// 1）功能描述：修改技能⾼级设置
+        /// 2）接⼝地址： setting/update
+        /// 3）请求⽅式： Method: post; Content-Type: multipart/form-data;
+        /// 4）⽂件上传URL前缀为https://aip.baidubce.com/file/2.0/unit/v3
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="botSetting">高级设置具体内容</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="skillSetting">⾼级设置具体内容</param>
+        /// <param name="taskflowFile">当skillSetting中dialogueManagerType为taskflow时有效;问答技能设置不⽣效;</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject SettingUpdate(long botId, BotSettingInputJSON botSetting, Dictionary<string, object> options = null)
+        public JObject SettingUpdate(long skillId, JObject skillSetting,string taskflowFile = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SETTINGUPDATE);
 
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(botSetting, Formatting.Indented);
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
+            aipReq.Bodys["taskflowFile"] = taskflowFile;
             PreAction();
 
             if (options != null)
