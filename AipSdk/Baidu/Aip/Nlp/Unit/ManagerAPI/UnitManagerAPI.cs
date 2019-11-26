@@ -565,6 +565,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string TAGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/update";
 
+        /// <summary>
+        /// 2.4.3.4. 更新标签顺序
+        /// </summary>
+        private const string TAGSORT =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/sort";
+
         #endregion
 
 
@@ -3053,6 +3059,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["tagId"] = tagId;
             aipReq.Bodys["tagName"] = tagName;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.3.4. 更新标签顺序
+        /// 1）功能描述：更新标签顺序
+        /// 2）接⼝地址： tag/sort
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="tagIds">标签ID顺序列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagSort(long skillId,
+                                List<long> tagIds,
+                                Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGSORT);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
             PreAction();
 
             if (options != null)
