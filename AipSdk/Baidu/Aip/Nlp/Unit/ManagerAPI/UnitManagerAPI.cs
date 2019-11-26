@@ -653,6 +653,38 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/skill/copy";
         #endregion
 
+        #region 2.5 对话式⽂档问答技能
+
+        #region 2.5.1. 技能
+        /// <summary>
+        /// 2.5.1.1. 查询技能列表
+        /// </summary>
+        private const string DDAQSKILLLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/list";
+
+        /// <summary>
+        /// 2.5.1.2. 新建技能
+        /// </summary>
+        private const string DDAQSKILLADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/add";
+
+        /// <summary>
+        /// 2.5.1.3. 修改技能属性
+        /// </summary>
+        private const string DDAQSKILLUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/update";
+
+        /// <summary>
+        /// 2.5.1.4. 删除技能
+        /// </summary>
+        private const string DDAQSKILLDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/delete";
+        #endregion
+
+
+        #endregion
+
+
 
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
@@ -3464,6 +3496,103 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["shareCode"] = shareCode;
             aipReq.Bodys["skillName"] = skillName;
             aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        #endregion
+
+        #region 2.5.1. 技能
+        /// <summary>
+        /// 2.5.1.1. 查询技能列表
+        /// 1）功能描述：对话式⽂档问答技能列表
+        /// 2）接⼝地址： ddqa/skill/list
+        /// </summary>
+        /// <param name="skillCategory">技能类别，⽬前仅⽀持 innovation</param>
+        /// <param name="pageNo">⻚码⼤于等于1,默认为1</param>
+        /// <param name="pageSize">每⻚记录数，默认为50</param>
+        /// <param name="options"></param>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public JObject DDQASkillList(string skillCategory = "innovation", int pageNo = 1, int pageSize = 50, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLLIST);
+
+            aipReq.Bodys["skillCategory"] = skillCategory;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.5.1.2. 新建技能
+        /// 1）功能描述：创建对话式⽂档问答技能
+        /// 2）接⼝地址： ddqa/skill/add
+        /// </summary>
+        /// <param name="skillName">技能名称，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDAQSkillAdd(string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLADD);
+
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.5.1.3. 修改技能属性
+        /// 1）功能描述：修改对话式⽂档问答技能
+        /// 2）接⼝地址： ddqa/skill/update
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="skillName">技能名称，⽀持中⽂、英⽂、数字、下划线， 1~30个字符</param>
+        /// <param name="skillDesc">技能描述， 0~50个字符</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDAQSkillUpdate(long skillId, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.5.1.4. 删除技能
+        /// 1）功能描述：删除技能
+        /// 2）接⼝地址： ddqa/skill/delete
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDAQSkillDelete(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
             PreAction();
 
             if (options != null)
