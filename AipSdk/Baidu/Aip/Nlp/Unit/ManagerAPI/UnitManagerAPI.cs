@@ -123,6 +123,12 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/start";
 
         /// <summary>
+        /// 2.3.9.3. 终⽌分享码
+        /// </summary>
+        private const string SHARECODESTOP =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/stop";
+
+        /// <summary>
         /// 2.3.1.1 查询意图列表
         /// </summary>
         private const string INTENTLIST =
@@ -870,6 +876,29 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["originalSkillId"] = originalSkillId;
             aipReq.Bodys["shareCode"] = shareCode;
             aipReq.Bodys["days"] = days;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.9.3. 终⽌分享码
+        /// 1) 功能描述：停⽌分享，分享码失效
+        /// 2) 接⼝地址： shareCode/stop
+        /// </summary>
+        /// <param name="originalSkillId">原始技能ID</param>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ShareCodeStop(long originalSkillId, string shareCode, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SHARECODESTOP);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
+            aipReq.Bodys["shareCode"] = shareCode;
             PreAction();
 
             if (options != null)
