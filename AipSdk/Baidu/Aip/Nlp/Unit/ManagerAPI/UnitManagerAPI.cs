@@ -552,6 +552,13 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string TAGLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/list";
+
+        /// <summary>
+        /// 2.4.3.2. 新建标签
+        /// </summary>
+        private const string TAGADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/add";
+
         #endregion
 
 
@@ -2987,6 +2994,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.3.2. 新建标签
+        /// 1）功能描述：新建标签
+        /// 2）接⼝地址： tag/add
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="tagName">标签名称。⻓度1~8。</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagAdd(long skillId,
+                                string tagName,
+                                Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGADD);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["tagName"] = tagName;
             PreAction();
 
             if (options != null)
