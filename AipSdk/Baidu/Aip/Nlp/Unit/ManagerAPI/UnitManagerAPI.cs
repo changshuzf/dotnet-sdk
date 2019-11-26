@@ -500,6 +500,14 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/list";
 
+        /// <summary>
+        /// 2.4.2.2. 新建特征词
+        /// 1）功能描述：新建特征词
+        /// 2）接⼝地址： faqskill/keyword/add
+        /// </summary>
+        private const string FAQSKILLKEYWORDADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/add";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2683,6 +2691,37 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.2. 新建特征词
+        /// 1）功能描述：新建特征词
+        /// 2）接⼝地址： faqskill/keyword/add
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordName">特征词名称，⻓度范围1~20, 以kw_开头</param>
+        /// <param name="keywordValues">特征词词典值</param>
+        /// <param name="keywordDesc">特征词描述，⻓度范围0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKEYWORDAdd(long skillId,
+                                    string keywordName,
+                                    List<string> keywordValues,
+                                    string keywordDesc = "",
+                                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDADD);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordName"] = keywordName;
+            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented);
+            aipReq.Bodys["keywordDesc"] = keywordDesc;
             PreAction();
 
             if (options != null)
