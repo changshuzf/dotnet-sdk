@@ -470,6 +470,13 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/info";
 
+        /// <summary>
+        /// 2.4.1.4. 修改问答对详情
+        /// </summary>
+        private const string FAQSKILLFAQPAIRUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/update";
+
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2498,6 +2505,46 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRINFO);
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["faqId"] = faqId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.4. 修改问答对详情
+        /// 1）功能描述：修改问答对详情
+        /// 2）接⼝地址： faqskill/faqPair/update
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="faqId"></param>
+        /// <param name="faqQuestions"></param>
+        /// <param name="faqAnswers"></param>
+        /// <param name="faqStdQuestion"></param>
+        /// <param name="faqPatterns"></param>
+        /// <param name="sluTagIds"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairUpdate(long skillId,
+                                            long faqId,
+                                            List<JObject> faqQuestions,
+                                            List<JObject> faqAnswers,
+                                            string faqStdQuestion = "",
+                                            List<string> faqPatterns = null,
+                                            List<long> sluTagIds = null,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["faqId"] = faqId;
+            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
+            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
+            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
             PreAction();
 
             if (options != null)
