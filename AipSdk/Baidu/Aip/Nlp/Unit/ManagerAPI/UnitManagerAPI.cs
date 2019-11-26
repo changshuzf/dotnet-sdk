@@ -546,6 +546,15 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDCLEARVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/clearValue";
 
+        #region 2.4.3. 问答技能-标签
+        /// <summary>
+        /// 2.4.3.1. 查询标签列表
+        /// </summary>
+        private const string TAGLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/tag/list";
+        #endregion
+
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2953,6 +2962,40 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        #region 2.4.3. 问答技能-标签
+        /// <summary>
+        /// 2.4.3.1. 查询标签列表
+        /// 1）功能描述：查询标签列表
+        /// 2）接⼝地址： tag/list
+        /// </summary>
+        /// <param name="skillId">技能ID</param>
+        /// <param name="pageNo">⻚码⼤于等于1</param>
+        /// <param name="pageSize">每⻚记录数</param>
+        /// <param name="faqIds">问答对ID列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject TagList(long skillId,
+                                int pageNo,
+                                int pageSize,
+                                List<long> faqIds = null,
+                                Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(TAGLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion
 
         /// <summary>
         /// 获取问答对列表
