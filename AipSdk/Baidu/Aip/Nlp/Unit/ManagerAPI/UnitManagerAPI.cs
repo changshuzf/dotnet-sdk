@@ -213,6 +213,9 @@ namespace Baidu.Aip.Nlp.Unit
         private const string MODELEFFECT =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/effect";
 
+        /// <summary>
+        /// 2.3.7.4. 删除有效模型
+        /// </summary>
         private const string MODELDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/model/delete";
 
@@ -1313,17 +1316,19 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 删除有效模型
+        /// 2.3.7.4. 删除有效模型
+        /// 1）功能描述：删除有效模型
+        /// 2）接⼝地址： model/delete
         /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="modelId">模型 id</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="modelId">模型id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ModelDelete(long botId, long modelId, Dictionary<string, object> options = null)
+        public JObject ModelDelete(long skillId, long modelId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(MODELDELETE);
 
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["modelId"] = modelId;
             PreAction();
 
