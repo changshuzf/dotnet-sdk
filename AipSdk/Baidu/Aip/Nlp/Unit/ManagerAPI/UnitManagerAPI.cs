@@ -117,6 +117,12 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/status";
 
         /// <summary>
+        /// 2.3.9.2. 启⽤分享码
+        /// </summary>
+        private const string SHARECODESTART =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/start";
+
+        /// <summary>
         /// 2.3.1.1 查询意图列表
         /// </summary>
         private const string INTENTLIST =
@@ -839,6 +845,31 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(SHARECODESTATUS);
 
             aipReq.Bodys["originalSkillId"] = originalSkillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.9.2. 启⽤分享码
+        /// 1) 功能描述：开始分享，设置分享码有效时⻓
+        /// 2) 接⼝地址： shareCode/start
+        /// </summary>
+        /// <param name="originalSkillId">原始技能ID</param>
+        /// <param name="shareCode">分享码</param>
+        /// <param name="days">分享码有效期时⻓, ⽬前可传⼊3、 7、 15、 30</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ShareCodeStart(long originalSkillId,string shareCode,string days, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SHARECODESTART);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
+            aipReq.Bodys["shareCode"] = shareCode;
+            aipReq.Bodys["days"] = days;
             PreAction();
 
             if (options != null)
