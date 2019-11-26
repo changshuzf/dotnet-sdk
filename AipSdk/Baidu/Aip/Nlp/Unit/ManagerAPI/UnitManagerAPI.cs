@@ -452,6 +452,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string OMITRESET =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/omit/reset";
 
+        /// <summary>
+        /// 2.4.1.1. 查询问答对列表
+        /// </summary>
+        private const string FAQSKILLFAQPAIRLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/list";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2345,7 +2351,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(OMITBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented); ;
+            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented);
             PreAction();
 
             if (options != null)
@@ -2396,6 +2402,36 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.4.1.1. 查询问答对列表
+        /// 1）功能描述：查询问答对列表
+        /// 2）接⼝地址： faqskill/faqPair/list
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~200</param>
+        /// <param name="sluTagIds">标签ID列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairList(long skillId,
+                                            int pageNo,
+                                            int pageSize,
+                                            List<long> sluTagIds = null,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
 
         /// <summary>
         /// 获取问答对列表
