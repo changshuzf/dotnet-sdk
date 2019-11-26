@@ -508,6 +508,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/add";
 
+        /// <summary>
+        /// 2.4.2.3. 删除特征词
+        /// </summary>
+        private const string FAQSKILLKEYWORDBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/batchDelete";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2722,6 +2728,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["keywordName"] = keywordName;
             aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented);
             aipReq.Bodys["keywordDesc"] = keywordDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.3. 删除特征词
+        /// 1）功能描述：删除特征词(批量)
+        /// 2）接⼝地址： faqskill/keyword/batchDelete
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="keywordIds"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKEYWORDBatchDelete(long skillId,
+                            List<long> keywordIds,
+                            int pageSize = 10,
+                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDBATCHDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented);
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
