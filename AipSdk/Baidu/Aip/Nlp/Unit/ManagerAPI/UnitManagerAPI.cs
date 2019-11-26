@@ -111,6 +111,12 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/setting/update";
 
         /// <summary>
+        /// 2.3.9.1. 查询分享码状态
+        /// </summary>
+        private const string SHARECODESTATUS =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/shareCode/status";
+
+        /// <summary>
         /// 2.3.1.1 查询意图列表
         /// </summary>
         private const string INTENTLIST =
@@ -812,6 +818,27 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
             aipReq.Bodys["taskflowFile"] = taskflowFile;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.3.9.1. 查询分享码状态
+        /// 1) 功能描述：查看技能分享状态，⾸次调⽤时会⽣成分享码
+        /// 2) 接⼝地址： shareCode/status
+        /// </summary>
+        /// <param name="originalSkillId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject ShareCodeStatus(long originalSkillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(SHARECODESTATUS);
+
+            aipReq.Bodys["originalSkillId"] = originalSkillId;
             PreAction();
 
             if (options != null)
