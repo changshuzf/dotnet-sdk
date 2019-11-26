@@ -540,6 +540,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLKEYWORDDELETEVALUE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/deleteValue";
 
+        /// <summary>
+        /// 2.4.2.8. 清空特征词词典值
+        /// </summary>
+        private const string FAQSKILLKEYWORDCLEARVALUE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/keyword/clearValue";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2912,6 +2918,34 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented);
             aipReq.Bodys["keywordType"] = keywordType;
             aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.2.8. 清空特征词词典值
+        /// 1）功能描述：清空特征词词典值
+        /// 2）接⼝地址： faqskill/keyword/clearValue
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordId">特征词 id</param>
+        /// <param name="keywordType">特征词类型:user(⽤户词典值); black(⿊名单),不传则全部清空</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillKeywordClearValue(long skillId,
+                    long keywordId,
+                    string keywordType = "",
+                    Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLKEYWORDCLEARVALUE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["keywordId"] = keywordId;
+            aipReq.Bodys["keywordType"] = keywordType;
             PreAction();
 
             if (options != null)
