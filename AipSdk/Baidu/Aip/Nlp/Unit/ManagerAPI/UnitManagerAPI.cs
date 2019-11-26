@@ -482,6 +482,12 @@ namespace Baidu.Aip.Nlp.Unit
         private const string FAQSKILLFAQPAIRUPDATETAGS =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/updateTags";
 
+        /// <summary>
+        /// 2.4.1.6. 删除问答对(批量)
+        /// </summary>
+        private const string FAQSKILLFAQPAIRBATCHDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/faqPair/batchDelete";
+
         private const string FAQLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
 
@@ -2578,6 +2584,31 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
             aipReq.Bodys["sluTags"] = JsonConvert.SerializeObject(sluTags, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.1.6. 删除问答对(批量)
+        /// 1）功能描述：删除问答对(批量)
+        /// 2）接⼝地址： faqskill/faqPair/batchDelete
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="faqIds">问答对id列表</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillFAQPairBatchDelete(long skillId,
+                                            List<long> faqIds,
+                                            Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLFAQPAIRBATCHDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
             PreAction();
 
             if (options != null)
