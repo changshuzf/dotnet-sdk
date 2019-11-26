@@ -611,6 +611,19 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/model/delete";
 
         #endregion 2.4.4. 模型
+        #region 2.4.5. 设置
+        /// <summary>
+        /// 2.4.5.1 查询⾼级设置
+        /// </summary>
+        private const string FAQSKILLSETTINGINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/setting/info";
+
+        /// <summary>
+        /// 2.4.5.2. 修改⾼级设置
+        /// </summary>
+        private const string FAQSKILLSETTINGUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/faqskill/setting/update";
+        #endregion
 
 
         private const string FAQLIST =
@@ -3279,6 +3292,54 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["modelId"] = modelId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        #endregion
+
+        #region 2.4.5. 设置
+        /// <summary>
+        /// 2.4.5.1 查询⾼级设置
+        /// 1）功能描述：查询技能⾼级设置
+        /// 2）接⼝地址： faqskill/setting/info
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillSettingInfo(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSETTINGINFO);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.4.5.2. 修改⾼级设置
+        /// 1）功能描述：修改技能⾼级设置
+        /// 2）接⼝地址： faqskill/setting/update
+        /// 3）请求⽅式： Method: post; Content-Type: multipart/form-data;
+        /// 4）⽂件上传URL前缀为https://aip.baidubce.com/file/2.0/unit/v3
+        /// </summary>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="skillSetting">⾼级设置具体内容</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject FAQSkillSettingUpdate(long skillId, JObject skillSetting, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(FAQSKILLSETTINGUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
             PreAction();
 
             if (options != null)
