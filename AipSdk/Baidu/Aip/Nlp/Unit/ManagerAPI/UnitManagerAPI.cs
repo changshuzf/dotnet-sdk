@@ -893,6 +893,20 @@ namespace Baidu.Aip.Nlp.Unit
 
         #endregion
 
+        #region 2.6.6. 模型
+        /// <summary>
+        /// 2.6.6.1. 查询模型列表
+        /// </summary>
+        private const string KBQAMODELLIST =
+           "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/model/list";
+
+        /// <summary>
+        /// 2.6.6.2. 训练模型
+        /// </summary>
+        private const string KBQAMODELTRAIN =
+           "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/model/train";
+        #endregion
+
         #endregion 2.6. 结构化知识问答技能
 
 
@@ -4622,6 +4636,43 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        #endregion
+
+        #region 2.6.6. 模型
+        /// <summary>
+        /// 2.6.6.2. 训练模型
+        /// 1）功能描述：训练新模型
+        /// 2）接⼝地址： kbqa/model/train
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="trainOption">
+        /// 开发者训练参数， json 结构，包含两部分信息：训练数据的选择，包含schema列表训练⽅式的选择，开发者可选⽅式⽬前只有⼀种： 快速训练(kbqa)。具体样例为：
+        /// {
+        /// "configure" ： {
+        /// "kbqa" ： "true"
+        /// },
+        /// "data" ： {
+        /// "schemaIds" ： [ 7 ]
+        ///     }
+        /// }
+        /// </param>
+        /// <param name="modelDesc">模型描述, ⻓度范围 0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAModelTrain(long skillId, JObject trainOption,string modelDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAMODELTRAIN);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["trainOption"] = JsonConvert.SerializeObject(trainOption, Formatting.Indented);
+            aipReq.Bodys["modelDesc"] = modelDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
         #endregion
 
         #endregion 2.6. 结构化知识问答技能
