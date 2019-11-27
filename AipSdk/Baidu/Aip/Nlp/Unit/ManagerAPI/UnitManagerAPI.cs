@@ -679,7 +679,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string DDAQSKILLDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/delete";
-        #endregion
+        #endregion 2.5.1. 技能 
 
         #region 2.5.2. ⽂档
         /// <summary>
@@ -699,7 +699,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string DDQAFILEDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/delete";
-        #endregion
+        #endregion 2.5.2. ⽂档
 
         #region 2.5.3. 模型
         /// <summary>
@@ -707,7 +707,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string DDQAMODELTRAIN =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/model/train";
-        #endregion
+        #endregion 2.5.3. 模型
 
         #region 2.5.4. 设置
         /// <summary>
@@ -715,9 +715,37 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         private const string DDQASETTINGUPDATE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/setting/update";
-        #endregion
+        #endregion 2.5.4. 设置
 
-        #endregion
+        #endregion 2.5 对话式⽂档问答技能
+
+        #region 2.6. 结构化知识问答技能
+        #region 2.6.1. 技能
+        /// <summary>
+        /// 2.6.1.1. 查询技能列表
+        /// </summary>
+        private const string KBQASKILLLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/list";
+
+        /// <summary>
+        /// 2.6.1.2. 新建技能
+        /// </summary>
+        private const string KBQASKILLADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/add";
+
+        /// <summary>
+        /// 2.6.1.3. 修改技能属性
+        /// </summary>
+        private const string KBQASKILLUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/update";
+
+        /// <summary>
+        /// 2.6.1.4. 删除技能
+        /// </summary>
+        private const string KBQASKILLDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/delete";
+        #endregion 2.6.1. 技能
+        #endregion 2.6. 结构化知识问答技能
 
 
 
@@ -3758,6 +3786,36 @@ namespace Baidu.Aip.Nlp.Unit
         #endregion
 
         #endregion
+
+        #region 2.6. 结构化知识问答技能
+        #region 2.6.1. 技能
+        /// <summary>
+        /// 2.6.1.1. 查询技能列表
+        /// 1）功能描述：查询结构化知识问答技能列表
+        /// 2）接⼝地址： kbqa/skill/list
+        /// </summary>
+        /// <param name="pageNo">⻚码，从 1 开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围 1~200</param>
+        /// <param name="skillCategory">技能类别： user(开发者⾃定义) 、 system(系统)；当前仅⽀持开发者⾃定义</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASkillList(int pageNo, int pageSize,string skillCategory = "user", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQASKILLLIST);
+
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["skillCategory"] = skillCategory;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion 2.6.1. 技能
+        #endregion 2.6. 结构化知识问答技能
 
         /// <summary>
         /// 获取问答对列表
