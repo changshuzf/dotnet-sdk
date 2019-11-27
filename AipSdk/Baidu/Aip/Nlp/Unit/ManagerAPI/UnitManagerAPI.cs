@@ -4324,6 +4324,34 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.4.3. 添加同义词对
+        /// 1）功能描述：添加同义词对
+        /// 2）接⼝地址： kbqa/optimization/addSynonym
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="synonymData">schema id</param>
+        /// <param name="synonymCategory">同义词对类型： user， system</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationAddSynonym(long skillId, long schemaId, JArray synonymData,string synonymCategory = "user", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONADDSYNONYM);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented);
+            aipReq.Bodys["synonymCategory"] = synonymCategory;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+
         #endregion
 
         #endregion 2.6. 结构化知识问答技能
