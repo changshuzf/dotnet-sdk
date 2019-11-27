@@ -4156,6 +4156,33 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.3.4. 修改 record 数据
+        /// 1）功能描述：修改 record 数据
+        /// 2）接⼝地址： kbqa/record/update
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="recordId">record id</param>
+        /// <param name="recordData">单条record数据，包含schema中定义的所有属性及属性值</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQARecordUpdate(long skillId, long schemaId,long recordId, JArray recordData, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQARECORDUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["recordId"] = recordId;
+            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.3. Record数据
 
         #endregion 2.6. 结构化知识问答技能
