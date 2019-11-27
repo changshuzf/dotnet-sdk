@@ -4992,16 +4992,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 2.8.3 查询部署任务执行状态
+        /// 2.7.3. 查询部署任务执⾏状态
+        /// 1）功能描述：查询部署任务的状态
+        /// 2）接⼝地址： deployment/getStatus
         /// </summary>
-        /// <param name="botId">bot Id</param>
+        /// <param name="skillId">技能 Id</param>
         /// <param name="deploymentId">部署任务 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentGetStatus(long botId, int deploymentId, Dictionary<string, object> options = null)
+        public JObject DeploymentGetStatus(long skillId, int deploymentId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTGETSTATUS);
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["deploymentId"] = deploymentId;
             PreAction();
 
