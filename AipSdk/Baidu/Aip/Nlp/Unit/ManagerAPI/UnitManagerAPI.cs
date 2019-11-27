@@ -3641,6 +3641,31 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 2.5.2.2. 上传⽂档
+        /// 1）接⼝描述 ：上传⽂件到技能下⾯
+        /// 2）接⼝地址： ddqa/file/upload
+        /// 3）请求⽅式： Method: post; Content-Type: multipart/form-data;
+        /// 4）⽂件上传URL前缀为https://aip.baidubce.com/file/2.0/unit/v3
+        /// </summary>
+        /// <param name="file">⽂件信息，单次上传⽂件⼤⼩限制为10M, 仅⽀持纯⽂本格式的⽂档上传</param>
+        /// <param name="skillId">技能ID</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDQAFileUpload(string file, int skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDQAFILEUPLOAD);
+
+            aipReq.Bodys["file"] = file;
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
         #endregion
 
         /// <summary>
