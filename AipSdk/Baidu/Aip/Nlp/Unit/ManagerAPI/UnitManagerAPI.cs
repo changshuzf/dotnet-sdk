@@ -854,6 +854,45 @@ namespace Baidu.Aip.Nlp.Unit
            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/clearSynonym";
         #endregion
 
+        #region 2.6.5. Reply回复话术
+        /// <summary>
+        /// 2.6.5.1. 查询回复话术列表
+        /// </summary>
+        private const string KBQAOPTIMIZATIONREPLYLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/replyList";
+
+        /// <summary>
+        /// 2.6.5.2. 查询回复话术信息
+        /// </summary>
+        private const string KBQAOPTIMIZATIONREPLYINFO =
+           "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/replyInfo";
+
+        /// <summary>
+        /// 2.6.5.3. 添加回复话术配置
+        /// </summary>
+        private const string KBQAOPTIMIZATIONADDREPLY =
+          "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/addReply";
+
+        /// <summary>
+        /// 2.6.5.4. 修改回复话术配置
+        /// </summary>
+        private const string KBQAOPTIMIZATIONUPDATEREPLY =
+          "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/updateReply";
+
+        /// <summary>
+        /// 2.6.5.5. 删除回复话术配置
+        /// </summary>
+        private const string KBQAOPTIMIZATIONDELETEREPLY =
+          "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/deleteReply";
+
+        /// <summary>
+        /// 2.6.5.6. 清除回复话术配置
+        /// </summary>
+        private const string KBQAOPTIMIZATIONDCLEARREPLY =
+          "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/clearReply";
+
+        #endregion
+
         #endregion 2.6. 结构化知识问答技能
 
 
@@ -4418,6 +4457,36 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion
+
+        #region 2.6.5. Reply回复话术
+        /// <summary>
+        /// 2.6.5.1. 查询回复话术列表
+        /// 1）功能描述：查询 schema 下属性回复话术列表
+        /// 2）接⼝地址： kbqa/optimization/replyList
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1～200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationReplyList(long skillId,long schemaId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONREPLYLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
             if (options != null)
