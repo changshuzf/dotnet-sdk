@@ -938,20 +938,38 @@ namespace Baidu.Aip.Nlp.Unit
         private const string JOBINFO =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/job/info";
 
+        #region 2.7. ⽣产环境部署（含模型发布）
+        /// <summary>
+        /// 2.7.1. 新增⽣产环境部署
+        /// </summary>
         private const string DEPLOYMENTADD =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/add";
 
+        /// <summary>
+        /// 2.7.2. 更新⽣产环境模型版本
+        /// </summary>
         private const string DEPLOYMENTUPDATEMODELVERSION =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/updateModelVersion";
 
+        /// <summary>
+        /// 2.7.3. 查询部署任务执⾏状态
+        /// </summary>
         private const string DEPLOYMENTGETSTATUS =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/getStatus";
 
+        /// <summary>
+        /// 2.7.4. 查询部署任务记录
+        /// </summary>
         private const string DEPLOYMENTLIST =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/deployment/list";
 
+        /// <summary>
+        /// 2.7.5. 删除⽣产环境
+        /// </summary>
         private const string DEPLOYMENTDELETEREGION =
            "https://aip.baidubce.com/rpc/2.0/unit/deployment/deleteRegion";
+        #endregion
+
 
 
         public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
@@ -4922,18 +4940,22 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        #region 2.7. ⽣产环境部署（含模型发布）
+
         /// <summary>
-        /// 2.8.1 新增生产环境部署
+        /// 2.7.1. 新增⽣产环境部署
+        /// 1）功能描述：新增⽣产环境部署
+        /// 2）接⼝地址： deployment/add
         /// </summary>
-        /// <param name="botId">bot Idparam>
-        /// <param name="region">部署地域：bj（华北）、su（华东）、gz（华南）只可填写一个部署地域</param>
-        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒生效的模型版本</param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="region">部署地域： bj（华北）、 su（华东）、 gz（华南） 只可填写⼀个部署地域</param>
+        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒⽣效的模型版本</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentAdd(long botId, string region, string modelVersion = "", Dictionary<string, object> options = null)
+        public JObject DeploymentAdd(long skillId, string region, string modelVersion = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTADD);
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["region"] = region;
             aipReq.Bodys["modelVersion"] = modelVersion;
             PreAction();
@@ -4973,7 +4995,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="deploymentId">部署任务 id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentGetStatus(long botId,int deploymentId, Dictionary<string, object> options = null)
+        public JObject DeploymentGetStatus(long botId, int deploymentId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTGETSTATUS);
             aipReq.Bodys["botId"] = botId;
@@ -4994,7 +5016,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentList(long botId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        public JObject DeploymentList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTLIST);
             aipReq.Bodys["botId"] = botId;
@@ -5027,5 +5049,8 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+        #endregion
+
+
     }
 }
