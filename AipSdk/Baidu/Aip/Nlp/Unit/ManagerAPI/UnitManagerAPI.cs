@@ -3837,6 +3837,31 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.1.3. 修改技能属性
+        /// 1）功能描述：修改结构化知识问答技能
+        /// 2）接⼝地址： kbqa/skill/update
+        /// </summary>
+        /// <param name="skillId">技能ID</param>
+        /// <param name="skillName">技能名称，⽀持中⽂、英⽂、数字、下划线，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围 0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASkillUpdate(long skillId, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQASKILLUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
 
         #endregion 2.6.1. 技能
         #endregion 2.6. 结构化知识问答技能
