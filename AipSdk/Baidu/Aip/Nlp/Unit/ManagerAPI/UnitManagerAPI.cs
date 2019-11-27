@@ -816,6 +816,44 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/clear";
         #endregion 2.6.3. Record数据
 
+        #region 2.6.4. Synoym同义词对
+        /// <summary>
+        /// 2.6.4.1. 查询同义词对列表
+        /// </summary>
+        private const string KBQAOPTIMIZATIONSYNONYMLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/synonymList";
+
+        /// <summary>
+        /// 2.6.4.2. 查询同义词对信息
+        /// </summary>
+        private const string KBQAOPTIMIZATIONSYNONYMINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/synonymInfo";
+
+        /// <summary>
+        /// 2.6.4.3. 添加同义词对
+        /// </summary>
+        private const string KBQAOPTIMIZATIONADDSYNONYM =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/addSynonym";
+
+        /// <summary>
+        /// 2.6.4.4. 修改同义词对
+        /// </summary>
+        private const string KBQAOPTIMIZATIONUPDATESYNONYM =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/updateSynonym";
+
+        /// <summary>
+        /// 2.6.4.5. 删除同义词对
+        /// </summary>
+        private const string KBQAOPTIMIZATIONDELETESYNONYM =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/deleteSynonym";
+
+        /// <summary>
+        /// 2.6.4.6. 清除同义词对
+        /// </summary>
+        private const string KBQAOPTIMIZATIONCLEARSYNONYM =
+           "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/clearSynonym";
+        #endregion
+
         #endregion 2.6. 结构化知识问答技能
 
 
@@ -4232,6 +4270,36 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         #endregion 2.6.3. Record数据
+
+        #region 2.6.4. Synoym同义词对
+        /// <summary>
+        /// 2.6.4.1. 查询同义词对列表
+        /// 1）功能描述：查询 schema 下同义词对列表
+        /// 2）接⼝地址： kbqa/optimization/synonymList
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1～200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationSynonymList(long skillId, long schemaId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONSYNONYMLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion
 
         #endregion 2.6. 结构化知识问答技能
 
