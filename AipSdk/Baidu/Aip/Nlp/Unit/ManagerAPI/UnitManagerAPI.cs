@@ -4574,6 +4574,31 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.5.5. 删除回复话术配置
+        /// 1）功能描述：删除回复话术配置
+        /// 2）接⼝地址： kbqa/optimization/deleteReply
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="replyId">reply id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationDeleteReply(long skillId, long schemaId, long replyId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONDELETEREPLY);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["replyId"] = replyId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion
 
         #endregion 2.6. 结构化知识问答技能
