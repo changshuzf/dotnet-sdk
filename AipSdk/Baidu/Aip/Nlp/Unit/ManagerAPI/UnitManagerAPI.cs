@@ -3944,6 +3944,29 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.2.2. 查询 schema 信息
+        /// 1）功能描述：查询某个schema 信息
+        /// 2）接⼝地址： kbqa/schema/info
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASchemaInfo(long skillId, long schemaId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.2. Schema
 
         #endregion 2.6. 结构化知识问答技能
