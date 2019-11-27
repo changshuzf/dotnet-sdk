@@ -3862,6 +3862,26 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.1.4. 删除技能
+        /// 1）功能描述：删除结构化知识问答技能
+        /// 2）接⼝地址： kbqa/skill/delete
+        /// </summary>
+        /// <param name="skillId">技能ID</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASkillDelete(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQASKILLDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
 
         #endregion 2.6.1. 技能
         #endregion 2.6. 结构化知识问答技能
