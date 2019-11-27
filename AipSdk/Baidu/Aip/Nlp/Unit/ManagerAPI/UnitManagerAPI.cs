@@ -4639,6 +4639,27 @@ namespace Baidu.Aip.Nlp.Unit
         #endregion
 
         #region 2.6.6. 模型
+
+        /// <summary>
+        /// 2.6.6.1. 查询模型列表
+        /// 1）功能描述：查询模型列表
+        /// 2）接⼝地址： kbqa/model/list
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAModelList(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAMODELLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
         /// <summary>
         /// 2.6.6.2. 训练模型
         /// 1）功能描述：训练新模型
