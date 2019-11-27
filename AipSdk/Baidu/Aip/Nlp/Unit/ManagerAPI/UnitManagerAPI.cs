@@ -681,7 +681,25 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/delete";
         #endregion
 
+        #region 2.5.2. ⽂档
+        /// <summary>
+        /// 2.5.2.1. 查询⽂档列表
+        /// </summary>
+        private const string DDQAFILELIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/list";
 
+        /// <summary>
+        /// 2.5.2.2. 上传⽂档
+        /// </summary>
+        private const string DDQAFILEUPLOAD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/upload";
+
+        /// <summary>
+        /// 2.5.2.3. 删除⽂档
+        /// </summary>
+        private const string DDQAFILEDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/delete";
+        #endregion
         #endregion
 
 
@@ -3591,6 +3609,29 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject DDAQSkillDelete(long skillId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DDAQSKILLDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        #endregion
+
+        #region 2.5.2. ⽂档
+        /// <summary>
+        /// 2.5.2.1. 查询⽂档列表
+        /// 1）接⼝描述 ：查询⽂档列表
+        /// 2）接⼝地址： ddqa/file/list
+        /// </summary>
+        /// <param name="skillId">技能ID</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDQAFileList(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDQAFILELIST);
 
             aipReq.Bodys["skillId"] = skillId;
             PreAction();
