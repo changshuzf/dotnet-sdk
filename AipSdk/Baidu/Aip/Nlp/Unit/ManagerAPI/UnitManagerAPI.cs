@@ -3666,6 +3666,29 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+
+        /// <summary>
+        /// 2.5.2.3. 删除⽂档
+        /// 1）功能描述：删除⽂档
+        /// 2）接⼝地址： ddqa/file/delete
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="fileId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDQAFileDelete(long skillId, long fileId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDQAFILEDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["fileId"] = fileId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
         #endregion
 
         /// <summary>
