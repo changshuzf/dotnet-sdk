@@ -4131,6 +4131,31 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.3.3. 添加 record 数据
+        /// 1）功能描述：添加 record 数据，⽀持批量
+        /// 2）接⼝地址： kbqa/record/add
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="recordData">record 数据列表，每条数据包含schema中定义的所有属性及属性值</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQARecordAdd(long skillId, long schemaId, JArray recordData, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQARECORDADD);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented); ;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.3. Record数据
 
         #endregion 2.6. 结构化知识问答技能
