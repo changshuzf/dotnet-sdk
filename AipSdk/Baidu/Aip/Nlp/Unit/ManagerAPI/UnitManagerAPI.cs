@@ -4351,6 +4351,32 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.4.4. 修改同义词对
+        /// 1）功能描述：修改同义词对信息
+        /// 2）接⼝地址： kbqa/optimization/updateSynonym
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="schemaId"></param>
+        /// <param name="synonymId"></param>
+        /// <param name="synonymData"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationUpdateSynonym(long skillId, long schemaId,long synonymId, JArray synonymData, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONUPDATESYNONYM);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["synonymId"] = synonymId;
+            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
 
         #endregion
 
