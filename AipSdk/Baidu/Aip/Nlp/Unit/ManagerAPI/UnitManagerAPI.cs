@@ -3730,6 +3730,33 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        #region 2.5.4. 设置
+        /// <summary>
+        /// 2.5.4.1. 对话式⽂档问答阈值设置
+        /// 1）接⼝描述：对话式⽂档问答阈值设置
+        /// 2）接⼝地址： ddqa/setting/update
+        /// </summary>
+        /// <param name="skillId">技能id</param>
+        /// <param name="recallThreshold">召回阈值, 取值范围0~100</param>
+        /// <param name="top1Threshold">top1阈值，取值范围0~100且recallThreshold <=top1Threshold</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDQASettingUpdate(long skillId,int recallThreshold,int top1Threshold, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDQASETTINGUPDATE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["recallThreshold"] = recallThreshold;
+            aipReq.Bodys["top1Threshold"] = top1Threshold;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+        #endregion
+
         #endregion
 
         /// <summary>
