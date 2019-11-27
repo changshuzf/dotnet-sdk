@@ -700,6 +700,23 @@ namespace Baidu.Aip.Nlp.Unit
         private const string DDQAFILEDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/delete";
         #endregion
+
+        #region 2.5.3. 模型
+        /// <summary>
+        /// 2.5.3.1. 训练模型
+        /// </summary>
+        private const string DDQAMODELTRAIN =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/model/train";
+        #endregion
+
+        #region 2.5.4. 设置
+        /// <summary>
+        /// 2.5.4.1. 对话式⽂档问答阈值设置
+        /// </summary>
+        private const string DDQASETTINGUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/setting/update";
+        #endregion
+
         #endregion
 
 
@@ -3689,6 +3706,30 @@ namespace Baidu.Aip.Nlp.Unit
                     aipReq.Bodys[pair.Key] = pair.Value;
             return PostAction(aipReq);
         }
+        #endregion
+
+        #region 2.5.3. 模型
+        /// <summary>
+        /// 2.5.3.1. 训练模型
+        /// 1）接⼝描述：触发模型训练
+        /// 2）接⼝地址： ddqa/model/train
+        /// </summary>
+        /// <param name="skillId">skillId</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject DDQAModelTrain(long skillId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDQAMODELTRAIN);
+
+            aipReq.Bodys["skillId"] = skillId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion
 
         /// <summary>
