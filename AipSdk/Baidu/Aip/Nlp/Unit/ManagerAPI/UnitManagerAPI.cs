@@ -3814,6 +3814,30 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.1.2. 新建技能
+        /// 1）功能描述： 新建结构化知识问答技能
+        /// 2）接⼝地址： kbqa/skill/add
+        /// </summary>
+        /// <param name="skillName">技能名称，⽀持中⽂、英⽂、数字、下划线，⻓度范围1~30</param>
+        /// <param name="skillDesc">技能描述，⻓度范围 0~50</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASkillAdd(string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQASKILLADD);
+
+            aipReq.Bodys["skillName"] = skillName;
+            aipReq.Bodys["skillDesc"] = skillDesc;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+
         #endregion 2.6.1. 技能
         #endregion 2.6. 结构化知识问答技能
 
