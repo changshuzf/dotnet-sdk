@@ -778,6 +778,44 @@ namespace Baidu.Aip.Nlp.Unit
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/delete";
         #endregion 2.6.2. Schema
 
+        #region 2.6.3. Record数据
+        /// <summary>
+        /// 2.6.3.1. 查询 record 列表
+        /// </summary>
+        private const string KBQARECORDLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/list";
+
+        /// <summary>
+        /// 2.6.3.2. 查询 record 信息
+        /// </summary>
+        private const string KBQARECORDINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/info";
+
+        /// <summary>
+        /// 2.6.3.3. 添加 record 数据
+        /// </summary>
+        private const string KBQARECORDADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/add";
+
+        /// <summary>
+        /// 2.6.3.4. 修改 record 数据
+        /// </summary>
+        private const string KBQARECORDUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/update";
+
+        /// <summary>
+        /// 2.6.3.5. 删除 record 数据
+        /// </summary>
+        private const string KBQARECORDDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/delete";
+
+        /// <summary>
+        /// 2.6.3.6. 清除 record 数据
+        /// </summary>
+        private const string KBQARECORDCLEAR =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/clear";
+        #endregion 2.6.3. Record数据
+
         #endregion 2.6. 结构化知识问答技能
 
 
@@ -4039,6 +4077,36 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         #endregion 2.6.2. Schema
+
+        #region 2.6.3. Record数据
+        /// <summary>
+        /// 2.6.3.1. 查询 record 列表
+        /// 1）功能描述：查询 schema 下record数据列表
+        /// 2）接⼝地址： kbqa/record/list
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1～200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQARecordList(long skillId,long schemaId,int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQARECORDLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion 2.6.3. Record数据
 
         #endregion 2.6. 结构化知识问答技能
 
