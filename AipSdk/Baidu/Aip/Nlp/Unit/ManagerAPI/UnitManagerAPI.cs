@@ -764,7 +764,6 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQASKILLDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/delete";
         #endregion 2.6.1. 技能
-
         #region 2.6.2. Schema
         /// <summary>
         /// 2.6.2.1. 查询 schema 列表
@@ -796,7 +795,6 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQASCHEMADELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/delete";
         #endregion 2.6.2. Schema
-
         #region 2.6.3. Record数据
         /// <summary>
         /// 2.6.3.1. 查询 record 列表
@@ -834,7 +832,6 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQARECORDCLEAR =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/record/clear";
         #endregion 2.6.3. Record数据
-
         #region 2.6.4. Synoym同义词对
         /// <summary>
         /// 2.6.4.1. 查询同义词对列表
@@ -872,7 +869,6 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQAOPTIMIZATIONCLEARSYNONYM =
            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/clearSynonym";
         #endregion
-
         #region 2.6.5. Reply回复话术
         /// <summary>
         /// 2.6.5.1. 查询回复话术列表
@@ -911,7 +907,6 @@ namespace Baidu.Aip.Nlp.Unit
           "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/optimization/clearReply";
 
         #endregion
-
         #region 2.6.6. 模型
         /// <summary>
         /// 2.6.6.1. 查询模型列表
@@ -925,7 +920,6 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQAMODELTRAIN =
            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/model/train";
         #endregion
-
         #endregion 2.6. 结构化知识问答技能
 
         #region 2.7. ⽣产环境部署（含模型发布）
@@ -960,41 +954,6 @@ namespace Baidu.Aip.Nlp.Unit
            "https://aip.baidubce.com/rpc/2.0/unit/deployment/deleteRegion";
         #endregion
 
-        private const string PATTERNIMPORT =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/import";
-
-        private const string PATTERNCLEAR =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/pattern/clear";
-
-        private const string FAQLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/list";
-
-        private const string FAQINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/info";
-
-        private const string FAQADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/add";
-
-        private const string FAQUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/update";
-
-        private const string FAQDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/delete";
-
-        private const string FAQCLEAR =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/clear";
-
-        private const string FAQIMPORT =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/faq/import";
-
-        private const string FILEUPLOAD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/file/upload";
-
-        private const string JOBINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/job/info";
-
-
-
         public UnitManagerAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
 
@@ -1009,7 +968,6 @@ namespace Baidu.Aip.Nlp.Unit
                 ContentEncoding = Encoding.GetEncoding("UTF-8")
             };
         }
-
 
         #region 2.1 机器⼈
         /// <summary>
@@ -4803,298 +4761,5 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
         #endregion
-
-
-        /// <summary>
-        /// 删除样本
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="querySetId">样本包 id</param>
-        /// <param name="queryId">样本 id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject QueryDelete(long botId, long querySetId, long queryId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(QUERYDELETE);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["queryId"] = queryId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 导入模板
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="patternSetId">模板包 id</param>
-        /// <param name="filePath">文件下载链接，通过上传接口产生</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject PatternImport(long botId, long patternSetId, string filePath, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(PATTERNIMPORT);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["patternSetId"] = patternSetId;
-            aipReq.Bodys["filePath"] = filePath;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 清空模板
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="patternSetId">模板包 id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject PatternClear(long botId, long patternSetId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(PATTERNCLEAR);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["patternSetId"] = patternSetId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 获取问答对列表
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="pageNo">页码，从 1 开始</param>
-        /// <param name="pageSize">每页数量，取值范围 1~200</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQList(long botId, long skillId, long intentId,
-            int pageNo, int pageSize, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQLIST);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["pageNo"] = pageNo;
-            aipReq.Bodys["pageSize"] = pageSize;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 查询问答对明细
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="faqId">问答对 id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQInfo(long botId, long skillId, long intentId,
-            long faqId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQINFO);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["faqId"] = faqId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 新增一个问答对
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="faqQuestions">问题列表</param>
-        /// <param name="faqAnswers">回答列表</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQAdd(long botId, long skillId, long intentId,
-            JArray faqQuestions, JArray faqAnswers, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQADD);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
-            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 更新单个问答对
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="faqId">问答对 id</param>
-        /// <param name="faqQuestions">问答对 id</param>
-        /// <param name="faqAnswers">回答列表</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQUpdate(long botId, long skillId, long intentId,
-            long faqId, JArray faqQuestions, JArray faqAnswers, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQUPDATE);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["faqId"] = faqId;
-            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
-            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 删除单个问答对
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="faqId">问答对 id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQDelete(long botId, long skillId, long intentId,
-            long faqId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQDELETE);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["faqId"] = faqId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 清空问答对数据
-        /// </summary>
-        /// <param name="botId">bot Id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQClear(long botId, long skillId, long intentId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQCLEAR);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        /// 导入问答对
-        /// </summary>
-        /// <param name="botId">bot id</param>
-        /// <param name="skillId">技能 id</param>
-        /// <param name="intentId">问答意图 id</param>
-        /// <param name="filePath">文件下载链接，通过上传接口产生</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FAQImport(long botId, long skillId, long intentId, string filePath, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FAQIMPORT);
-
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentId"] = intentId;
-            aipReq.Bodys["filePath"] = filePath;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-        /// <summary>
-        /// 上传文件
-        /// </summary>
-        /// <param name="file">单次上传文件大小限制为 10M，每个用户每个APP 每天上传限制为 100M</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject FileUpload(string file, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(FILEUPLOAD);
-            var fileraw = File.ReadAllBytes(file);
-            aipReq.Bodys["file"] = System.Convert.ToBase64String(fileraw);
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
-        /// <summary>
-        ///  查询任务信息
-        /// </summary>
-        /// <param name="botId">bot Id</param>
-        /// <param name="jobId">job id</param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public JObject JobInfo(long botId, long jobId, Dictionary<string, object> options = null)
-        {
-            var aipReq = DefaultRequest(JOBINFO);
-            aipReq.Bodys["botId"] = botId;
-            aipReq.Bodys["jobId"] = jobId;
-            PreAction();
-
-            if (options != null)
-                foreach (var pair in options)
-                    aipReq.Bodys[pair.Key] = pair.Value;
-            return PostAction(aipReq);
-        }
-
     }
 }
