@@ -745,6 +745,39 @@ namespace Baidu.Aip.Nlp.Unit
         private const string KBQASKILLDELETE =
             "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/skill/delete";
         #endregion 2.6.1. 技能
+
+        #region 2.6.2. Schema
+        /// <summary>
+        /// 2.6.2.1. 查询 schema 列表
+        /// </summary>
+        private const string KBQASCHEMALIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/list";
+
+        /// <summary>
+        /// 2.6.2.2. 查询 schema 信息
+        /// </summary>
+        private const string KBQASCHEMAINFO =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/info";
+
+        /// <summary>
+        /// 2.6.2.3. 新建 schema
+        /// </summary>
+        private const string KBQASCHEMAADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/add";
+
+        /// <summary>
+        /// 2.6.2.4. 更新 schema
+        /// </summary>
+        private const string KBQASCHEMAUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/update";
+
+        /// <summary>
+        /// 2.6.2.5. 删除 schema
+        /// </summary>
+        private const string KBQASCHEMADELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/kbqa/schema/delete";
+        #endregion 2.6.2. Schema
+
         #endregion 2.6. 结构化知识问答技能
 
 
@@ -3884,6 +3917,35 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         #endregion 2.6.1. 技能
+
+        #region 2.6.2. Schema
+        /// <summary>
+        /// 2.6.2.1. 查询 schema 列表
+        /// 1）功能描述：查询技能的 schema 列表
+        /// 2）接⼝地址： kbqa/schema/list
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1～200</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASchemaList(long skillId, int pageNo,int pageSize, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLLIST);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["pageNo"] = pageNo;
+            aipReq.Bodys["pageSize"] = pageSize;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        #endregion 2.6.2. Schema
+
         #endregion 2.6. 结构化知识问答技能
 
         /// <summary>
