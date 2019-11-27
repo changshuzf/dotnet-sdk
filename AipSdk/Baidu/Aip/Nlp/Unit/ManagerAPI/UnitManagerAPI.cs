@@ -5014,17 +5014,19 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 2.8.4 查询部署任务记录
+        /// 2.7.4. 查询部署任务记录
+        /// 1）功能描述：查询部署任务记录
+        /// 2）接⼝地址： deployment/list
         /// </summary>
-        /// <param name="botId">bot Id</param>
+        /// <param name="skillId">技能 Id</param>
         /// <param name="pageNo">页码，从 1 开始</param>
         /// <param name="pageSize">每页数量，取值范围 1~200</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentList(long botId, int pageNo, int pageSize, Dictionary<string, object> options = null)
+        public JObject DeploymentList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTLIST);
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
