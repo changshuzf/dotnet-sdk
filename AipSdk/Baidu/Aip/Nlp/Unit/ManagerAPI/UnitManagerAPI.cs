@@ -4183,6 +4183,31 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.3.5. 删除 record 数据
+        /// 1）功能描述：删除 record 数据
+        /// 2）接⼝地址： kbqa/record/delete
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="schemaId"></param>
+        /// <param name="recordId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQARecordDelete(long skillId, long schemaId, long recordId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQARECORDDELETE);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["recordId"] = recordId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.3. Record数据
 
         #endregion 2.6. 结构化知识问答技能
