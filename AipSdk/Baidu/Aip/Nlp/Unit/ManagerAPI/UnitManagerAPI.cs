@@ -4106,6 +4106,31 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.3.2. 查询 record 信息
+        /// 1）功能描述：查询单条 record信息
+        /// 2）接⼝地址： kbqa/record/info
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="schemaId"></param>
+        /// <param name="recordId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQARecordInfo(long skillId, long schemaId,long recordId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQARECORDINFO);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["recordId"] = recordId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.3. Record数据
 
         #endregion 2.6. 结构化知识问答技能
