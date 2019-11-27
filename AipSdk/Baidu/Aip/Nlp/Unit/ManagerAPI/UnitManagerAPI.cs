@@ -5038,16 +5038,18 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// V1.7.6 2.8.5 删除生产环境
+        /// 2.7.5. 删除⽣产环境
+        /// 1）功能描述：删除⽣产环境
+        /// 2）接⼝地址： deployment/deleteRegion
         /// </summary>
-        /// <param name="botId"></param>
+        /// <param name="skillId">技能 Id</param>
         /// <param name="region">部署地域：bj（华北）、 su（华东）、 gz（华南）只可填写一个部署地域</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentDeleteRegion(long botId, string region, Dictionary<string, object> options = null)
+        public JObject DeploymentDeleteRegion(long skillId, string region, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTDELETEREGION);
-            aipReq.Bodys["botId"] = botId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["region"] = region;
             PreAction();
 
@@ -5057,7 +5059,5 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
         #endregion
-
-
     }
 }
