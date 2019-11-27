@@ -4520,6 +4520,60 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.5.3. 添加回复话术配置
+        /// 1）功能描述：添加回复话术配置
+        /// 2）接⼝地址： kbqa/optimization/addReply
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="replyData">回复话术配置</param>
+        /// <param name="replyCategory">回复话术配置类型： user， system，默认为user</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationAddReply(long skillId, long schemaId, JArray replyData, string replyCategory = "user", Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONADDREPLY);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented);
+            aipReq.Bodys["replyCategory"] = replyCategory;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
+        /// <summary>
+        /// 2.6.5.4. 修改回复话术配置
+        /// 1）功能描述：修改回复话术配置
+        /// 2）接⼝地址： kbqa/optimization/updateReply
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaId">schema id</param>
+        /// <param name="replyId">reply id</param>
+        /// <param name="replyData">回复话术配置</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationUpdateReply(long skillId, long schemaId, long replyId, JArray replyData, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONUPDATEREPLY);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            aipReq.Bodys["replyId"] = replyId;
+            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion
 
         #endregion 2.6. 结构化知识问答技能
