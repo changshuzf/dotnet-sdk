@@ -3967,6 +3967,29 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.2.3. 新建 schema
+        /// 1）功能描述：新建 schema
+        /// 2）接⼝地址： kbqa/schema/add
+        /// </summary>
+        /// <param name="skillId">skill id</param>
+        /// <param name="schemaData">schema数据</param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQASchemaAdd(long skillId, JObject schemaData, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(DDAQSKILLADD);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented);
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion 2.6.2. Schema
 
         #endregion 2.6. 结构化知识问答技能
