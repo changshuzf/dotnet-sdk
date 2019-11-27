@@ -4599,6 +4599,29 @@ namespace Baidu.Aip.Nlp.Unit
             return PostAction(aipReq);
         }
 
+        /// <summary>
+        /// 2.6.5.6. 清除回复话术配置
+        /// 1）功能描述：清除schema下所有回复话术配置
+        /// 2）接⼝地址： kbqa/optimization/clearReply
+        /// </summary>
+        /// <param name="skillId"></param>
+        /// <param name="schemaId"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public JObject KBQAOptimizationClearReply(long skillId, long schemaId, Dictionary<string, object> options = null)
+        {
+            var aipReq = DefaultRequest(KBQAOPTIMIZATIONDCLEARREPLY);
+
+            aipReq.Bodys["skillId"] = skillId;
+            aipReq.Bodys["schemaId"] = schemaId;
+            PreAction();
+
+            if (options != null)
+                foreach (var pair in options)
+                    aipReq.Bodys[pair.Key] = pair.Value;
+            return PostAction(aipReq);
+        }
+
         #endregion
 
         #endregion 2.6. 结构化知识问答技能
