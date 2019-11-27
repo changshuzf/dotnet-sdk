@@ -4967,17 +4967,20 @@ namespace Baidu.Aip.Nlp.Unit
         }
 
         /// <summary>
-        /// 2.8.2 更新生产环境模型版本
+        /// 2.7.2. 更新⽣产环境模型版本
+        /// 1）功能描述：更新⽣产环境模型版本
+        /// 2）接⼝地址： deployment/updateModelVersion
         /// </summary>
-        /// <param name="botId">bot Idparam>
-        /// <param name="region">部署地域：bj（华北）、su（华东）、gz（华南）只可填写一个部署地域</param>
-        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒生效的模型版本</param>
+        /// <param name="skillId">技能 Id</param>
+        /// <param name="region">部署地域： bj（华北）、 su（华东）、 gz（华南） 只可填写⼀个部署地域</param>
+        /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒⽣效的模型版本</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentUpdateModelVersion(long botId, string region, string modelVersion = "", Dictionary<string, object> options = null)
+        public JObject DeploymentUpdateModelVersion(long skillId, string region, string modelVersion = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTUPDATEMODELVERSION);
-            aipReq.Bodys["botId"] = botId;
+
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["region"] = region;
             aipReq.Bodys["modelVersion"] = modelVersion;
             PreAction();
