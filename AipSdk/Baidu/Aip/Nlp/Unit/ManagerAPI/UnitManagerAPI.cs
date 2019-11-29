@@ -1137,16 +1137,16 @@ namespace Baidu.Aip.Nlp.Unit
         /// 1）接⼝描述：移除技能
         /// 2）接⼝地址： service/deleteSkill
         /// </summary>
-        /// <param name="serviceId"></param>
-        /// <param name="skillIds"></param>
+        /// <param name="serviceId">机器⼈ID</param>
+        /// <param name="skillId">技能ID</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ServiceDeleteSkill(string serviceId, List<string> skillIds, Dictionary<string, object> options = null)
+        public JObject ServiceDeleteSkill(string serviceId, int skillId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SERVICEDELETESKILL);
 
             aipReq.Bodys["serviceId"] = serviceId;
-            aipReq.Bodys["skillIds"] = skillIds;
+            aipReq.Bodys["skillId"] = skillId;
             PreAction();
 
             if (options != null)
