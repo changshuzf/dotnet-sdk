@@ -1071,7 +1071,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize">每⻚记录数</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject ServiceListSkill(string serviceId, string pageNo, string pageSize, Dictionary<string, object> options = null)
+        public JObject ServiceListSkill(string serviceId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SERVICEDELETE);
 
