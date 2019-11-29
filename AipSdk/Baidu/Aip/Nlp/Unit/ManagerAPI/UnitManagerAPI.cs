@@ -259,7 +259,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.3.4.3. 删除特征词
         /// </summary>
         private const string KEYWORDBATCHDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/keyword/batchDelete";
 
         /// <summary>
         /// 2.3.4.4. 查询特征词词典值列表
@@ -2487,7 +2487,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject QueryUpdate(long skillId, long querySetId, JObject query, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(QUERYADD);
+            var aipReq = DefaultRequest(QUERYUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
@@ -4005,7 +4005,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KBQASchemaList(long skillId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLLIST);
+            var aipReq = DefaultRequest(KBQASCHEMALIST);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
@@ -4029,7 +4029,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KBQASchemaInfo(long skillId, long schemaId, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLLIST);
+            var aipReq = DefaultRequest(KBQASCHEMAINFO);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
@@ -4052,7 +4052,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KBQASchemaAdd(long skillId, JObject schemaData, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLADD);
+            var aipReq = DefaultRequest(KBQASCHEMAADD);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented);
@@ -4076,7 +4076,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KBQASchemaUpdate(long skillId, long schemaId, JObject schemaData, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLUPDATE);
+            var aipReq = DefaultRequest(KBQASCHEMAUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
@@ -4100,7 +4100,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KBQASchemaDelete(long skillId, long schemaId, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLDELETE);
+            var aipReq = DefaultRequest(KBQASCHEMADELETE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
