@@ -1073,7 +1073,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject ServiceListSkill(string serviceId, int pageNo, int pageSize, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(SERVICEDELETE);
+            var aipReq = DefaultRequest(SERVICELISTSKILL);
 
             aipReq.Bodys["serviceId"] = serviceId;
             aipReq.Bodys["pageNo"] = pageNo;
