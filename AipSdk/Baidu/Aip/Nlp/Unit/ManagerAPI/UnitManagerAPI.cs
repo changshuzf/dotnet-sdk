@@ -1297,7 +1297,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(INTENTADD);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented);
+            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -1343,7 +1343,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(INTENTUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented);
+            aipReq.Bodys["intentData"] = JsonConvert.SerializeObject(intentData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -1449,8 +1449,8 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotName"] = slotName;
             aipReq.Bodys["slotDesc"] = slotDesc;
-            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented);
-            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented);
+            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["slotDictEfficient"] = slotDictEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
             PreAction();
@@ -1512,8 +1512,8 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
             aipReq.Bodys["slotDesc"] = slotDesc;
-            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented);
-            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented);
+            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["slotDictEfficient"] = slotDictEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
             PreAction();
@@ -1739,7 +1739,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["threshold"] = threshold;
-            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented);
+            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["filledOtherSlotsLabel"] = filledOtherSlotsLabel;
             PreAction();
 
@@ -1801,7 +1801,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["patternId"] = patternId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["threshold"] = threshold;
-            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented);
+            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["filledOtherSlotsLabel"] = filledOtherSlotsLabel;
             PreAction();
 
@@ -1860,7 +1860,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["patternSetId"] = patternSetId;
-            aipReq.Bodys["patternIds"] = JsonConvert.SerializeObject(patternIds, Formatting.Indented);
+            aipReq.Bodys["patternIds"] = JsonConvert.SerializeObject(patternIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
@@ -1942,7 +1942,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordName"] = keywordName;
-            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented);
+            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["keywordDesc"] = keywordDesc;
             PreAction();
 
@@ -1967,7 +1967,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(KEYWORDBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented);
+            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
@@ -2093,7 +2093,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
-            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented);
+            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["keywordType"] = keywordType;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
@@ -2222,7 +2222,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(OMITBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented);
+            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2362,7 +2362,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(QUERYSETMERGE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["querySetIds"] = JsonConvert.SerializeObject(querySetIds, Formatting.Indented);
+            aipReq.Bodys["querySetIds"] = JsonConvert.SerializeObject(querySetIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["querySetName"] = querySetName;
             PreAction();
 
@@ -2441,7 +2441,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
+            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2491,7 +2491,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented);
+            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2516,7 +2516,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented);
+            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2541,7 +2541,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented);
+            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2694,7 +2694,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(SETTINGUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["taskflowFile"] = taskflowFile;
             PreAction();
 
@@ -2825,7 +2825,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2858,11 +2858,11 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRADD);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
-            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
-            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2922,11 +2922,11 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["faqId"] = faqId;
-            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented);
-            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented);
+            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
-            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented);
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2953,8 +2953,8 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRUPDATETAGS);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
-            aipReq.Bodys["sluTags"] = JsonConvert.SerializeObject(sluTags, Formatting.Indented);
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["sluTags"] = JsonConvert.SerializeObject(sluTags, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -2979,7 +2979,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented);
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -3013,7 +3013,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["searchKey"] = searchKey;
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented);
+            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -3072,7 +3072,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordName"] = keywordName;
-            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented);
+            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["keywordDesc"] = keywordDesc;
             PreAction();
 
@@ -3100,7 +3100,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLKEYWORDBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented);
+            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
 
@@ -3229,7 +3229,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
-            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented);
+            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["keywordType"] = keywordType;
             aipReq.Bodys["pageSize"] = pageSize;
             PreAction();
@@ -3291,7 +3291,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented); ;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -3369,7 +3369,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(TAGSORT);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
+            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -3394,7 +3394,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(TAGBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented); ;
+            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -3428,7 +3428,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
             aipReq.Bodys["searchKey"] = searchKey;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented); ;
+            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -3571,7 +3571,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLSETTINGUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented);
+            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -4055,7 +4055,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(KBQASCHEMAADD);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented);
+            aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -4080,7 +4080,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
-            aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented);
+            aipReq.Bodys["schemaData"] = JsonConvert.SerializeObject(schemaData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -4183,7 +4183,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
-            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented); ;
+            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -4210,7 +4210,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
             aipReq.Bodys["recordId"] = recordId;
-            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented); ;
+            aipReq.Bodys["recordData"] = JsonConvert.SerializeObject(recordData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
             PreAction();
 
             if (options != null)
@@ -4339,7 +4339,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
-            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented);
+            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["synonymCategory"] = synonymCategory;
             PreAction();
 
@@ -4367,7 +4367,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
             aipReq.Bodys["synonymId"] = synonymId;
-            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented);
+            aipReq.Bodys["synonymData"] = JsonConvert.SerializeObject(synonymData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -4496,7 +4496,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
-            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented);
+            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["replyCategory"] = replyCategory;
             PreAction();
 
@@ -4524,7 +4524,7 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["schemaId"] = schemaId;
             aipReq.Bodys["replyId"] = replyId;
-            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented);
+            aipReq.Bodys["replyData"] = JsonConvert.SerializeObject(replyData, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
@@ -4630,7 +4630,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(KBQAMODELTRAIN);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["trainOption"] = JsonConvert.SerializeObject(trainOption, Formatting.Indented);
+            aipReq.Bodys["trainOption"] = JsonConvert.SerializeObject(trainOption, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["modelDesc"] = modelDesc;
             PreAction();
 
