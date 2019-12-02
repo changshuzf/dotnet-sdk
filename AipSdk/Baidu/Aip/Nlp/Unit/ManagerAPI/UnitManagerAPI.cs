@@ -158,7 +158,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.3.2.4. 查询词槽详情
         /// </summary>
         private const string SLOTINFO =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/info";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/info";
 
         /// <summary>
         /// 2.3.2.5. 修改词槽详情
@@ -189,13 +189,13 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.3.2.9. 修改⾃定义词典值
         /// </summary>
         private const string SLOTUPDATEVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/updateValue";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/updateValue";
 
         /// <summary>
         /// 2.3.2.10. 删除⾃定义词典值
         /// </summary>
         private const string SLOTDELETEVALUE =
-            "https://aip.baidubce.com/rpc/2.0/unit/slot/deleteValue";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/slot/deleteValue";
         #endregion
 
         #region 2.3.3. 对话模板
