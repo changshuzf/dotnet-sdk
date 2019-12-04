@@ -20,6 +20,21 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
 {
     public class intentData
     {
+        /// <summary>
+        /// intentData结构
+        /// </summary>
+        /// <param name="intentName">意图名称，⻓度范围1~30</param>
+        /// <param name="intentType">意图类型： dialog(对话意图)</param>
+        /// <param name="intentDesc">意图描述，⻓度范围0~50</param>
+        /// <param name="intentClarifyName">意图别名，⻓度范围1~20</param>
+        /// <param name="intentClarifyNameArray">
+        /// 意图别名列表，可填写1~10个别名。 intentClarifyName和intentClarifyNameArray⾄少填写⼀个，意图别名信息优先使⽤intentClarifyNameArray中的内容
+        /// </param>
+        /// <param name="sluTags">意图标签列表： 标签由 英⽂、数字、 _ 组成，⻓度1~32 列表中可包含1~10个标签</param>
+        /// <param name="slots">词槽信息</param>
+        /// <param name="answer">答复信息, 当动作类型含有答复时必填</param>
+        /// <param name="guides">对话意图引导信息, 当动作类型含有对话意图引导时必填</param>
+        /// <param name="actionPrioritys">答复、对话意图引导的优先级,当技能⾼级设置为【在UNIT平台上配置】时为必填</param>
         public intentData(string intentName, 
                             string intentType, 
                             string intentDesc = null, 
@@ -96,8 +111,16 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         public List<ActionPioritys> actionPrioritys { get; set; }
     }
 
+    /// <summary>
+    /// actionPrioritys[]结构:
+    /// </summary>
     public class ActionPioritys
     {
+        /// <summary>
+        /// actionPrioritys[]结构:
+        /// </summary>
+        /// <param name="actionType">取值范围： answer(答复)、 guide(引导⾄对话意图)</param>
+        /// <param name="priority">对应actionType的优先级 (1开始如1， 2， 3)</param>
         public ActionPioritys(string actionType, int priority)
         {
             this.actionType = actionType;
@@ -115,8 +138,17 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         public int priority { get; set; }
     }
 
+    /// <summary>
+    /// guides[] (最多10个元素)，每个元素的结构：
+    /// </summary>
     public class Guide
     {
+        /// <summary>
+        /// guides[] (最多10个元素)，每个元素的结构：
+        /// </summary>
+        /// <param name="intentInfos">引导对话意图列表</param>
+        /// <param name="guideScript">引导话术, ⻓度范围1~50</param>
+        /// <param name="conditions">规则条件组, 由⼀个condition组成</param>
         public Guide(List<intentInfo> intentInfos, string guideScript, List<Condition> conditions)
         {
             this.intentInfos = intentInfos;
@@ -140,6 +172,9 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         public List<Condition> conditions { get; set; }
     }
 
+    /// <summary>
+    /// intentInfos[]结构：
+    /// </summary>
     public class intentInfo
     {
         /// <summary>
@@ -164,8 +199,17 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         public string script { get; set; }
     }
 
+    /// <summary>
+    /// answer结构：
+    /// </summary>
     public class Answer
     {
+        /// <summary>
+        /// answer结构：
+        /// </summary>
+        /// <param name="conditions">满⾜答复的条件组列表，最多由25个condition组成</param>
+        /// <param name="customReply">开发者⾃定义应答，⻓度范围为1~30，和应答话术say⼆者选其⼀</param>
+        /// <param name="say">应答话术，⻓度范围为1~300，和开发者⾃定义应答customReply⼆者选其⼀</param>
         public Answer(List<Condition> conditions,
             string customReply = null, 
             string say = null
@@ -198,6 +242,12 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
     /// </summary>
     public class Condition
     {
+        public Condition(string exp, Detail detail)
+        {
+            this.exp = exp;
+            this.detail = detail;
+        }
+
         /// <summary>
         /// 条件类型， sessionSlot(会话过程中) 或quSlot(当前开发者输⼊)、或lastIntent(上轮对话意图)
         /// </summary>
@@ -228,8 +278,19 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
     {
     }
 
+    /// <summary>
+    /// slots[]结构：
+    /// </summary>
     public class slot
     {
+        /// <summary>
+        /// slots[]结构：
+        /// </summary>
+        /// <param name="slotId">词槽id</param>
+        /// <param name="priority">词槽澄清优先级 从1开始，值越⼩优先级越⾼</param>
+        /// <param name="clarifyScript">词槽普通澄清话术，⻓度范围1~50</param>
+        /// <param name="clarifyScriptObject">词槽澄清⽅式及话术 clarifyScript和clarifyScriptObject⾄少填写⼀个，
+        /// 词槽澄清信息优先使⽤clarifyScriptObject中的内容</param>
         public slot(long slotId,
                     int priority,
                     string clarifyScript = null, 
@@ -265,8 +326,19 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         public int priority { get; set; }
     }
 
+    /// <summary>
+    /// clarifyScriptObject结构：
+    /// </summary>
     public class ClarifyScriptObject
     {
+        /// <summary>
+        /// clarifyScriptObject结构：
+        /// </summary>
+        /// <param name="slotType">词槽是否必填： mandatory(必填)、 optional(选填)</param>
+        /// <param name="clarifyType">词槽澄清⽅式： normal(普通澄清)， enumerate(枚举澄清，词典值数量=0或>5时不可选)</param>
+        /// <param name="clarifyCount">取值为1~10。指定clarifyCount轮后放弃要求澄清</param>
+        /// <param name="normal">普通澄清话术列表（clarifyType为normal时有效），可填写1~5个澄清话术 普通和枚举澄清话术不可全部为空</param>
+        /// <param name="enumerate">枚举澄清话术列表（clarifyType为enumerate时有效），可填写1~5个澄清话术 普通和枚举澄清话术不可全部为空</param>
         public ClarifyScriptObject(string slotType, 
                                     string clarifyType, 
                                     int clarifyCount, 
