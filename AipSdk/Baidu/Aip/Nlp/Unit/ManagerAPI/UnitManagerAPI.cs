@@ -1438,8 +1438,8 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject SLotAdd(long skillId,
                                 string slotName,
                                 string slotDesc = "",
-                                JArray slotClarifyNameList = null,
-                                JArray slotSysDict = null,
+                                List<string> slotClarifyNameList = null,
+                                List<SlotSysDict> slotSysDict = null,
                                 int slotDictEfficient = 1,
                                 int slotSysDictEfficient = 1,
                                 Dictionary<string, object> options = null)
