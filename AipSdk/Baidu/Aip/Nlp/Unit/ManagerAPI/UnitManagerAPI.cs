@@ -2362,7 +2362,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(QUERYSETMERGE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["querySetIds"] = JsonConvert.SerializeObject(querySetIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["querySetIds"] = querySetIds;
             aipReq.Bodys["querySetName"] = querySetName;
             PreAction();
 
