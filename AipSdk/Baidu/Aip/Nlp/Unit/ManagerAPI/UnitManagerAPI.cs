@@ -2510,13 +2510,16 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="queryIds"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryQuickAnnotate(long skillId, long querySetId, List<long> queryIds, Dictionary<string, object> options = null)
+        public JObject QueryQuickAnnotate(long skillId, long querySetId, List<long> queryIds = null, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYQUICKANNOTATE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["queryIds"] = JsonConvert.SerializeObject(queryIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            if (queryIds!=null)
+            {
+                aipReq.Bodys["queryIds"] = queryIds;
+            }
             PreAction();
 
             if (options != null)
