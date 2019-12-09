@@ -3101,21 +3101,24 @@ namespace Baidu.Aip.Nlp.Unit
         /// 1）功能描述：删除特征词(批量)
         /// 2）接⼝地址： faqskill/keyword/batchDelete
         /// </summary>
-        /// <param name="skillId"></param>
-        /// <param name="keywordIds"></param>
-        /// <param name="pageSize"></param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="keywordIds">特征词id列表</param>
+        /// <param name="pageSize">每⻚⼤⼩，⽤于前端返回删除后当前⻚码</param>
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject FAQSkillKEYWORDBatchDelete(long skillId,
                             List<long> keywordIds,
-                            int pageSize = 10,
+                            int pageSize = 0,
                             Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQSKILLKEYWORDBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["keywordIds"] = keywordIds;
+            if (pageSize != 0)
+            {
+                aipReq.Bodys["pageSize"] = pageSize;
+            }
             PreAction();
 
             if (options != null)
