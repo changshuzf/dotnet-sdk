@@ -3132,11 +3132,11 @@ namespace Baidu.Aip.Nlp.Unit
         /// 1）功能描述：查看特征词词典值列表
         /// 2）接⼝地址： faqskill/keyword/value
         /// </summary>
-        /// <param name="skillId"></param>
-        /// <param name="keywordId"></param>
-        /// <param name="pageNo"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="keywordType"></param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="keywordId">keyword id</param>
+        /// <param name="pageNo">⻚码，从1开始</param>
+        /// <param name="pageSize">每⻚数量，取值范围1~5000</param>
+        /// <param name="keywordType">特征词词典值类型:user(⽤户词典值); black(⿊名单);默认为空，两者均返回</param>
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject FAQSkillKeywordValue(long skillId,
