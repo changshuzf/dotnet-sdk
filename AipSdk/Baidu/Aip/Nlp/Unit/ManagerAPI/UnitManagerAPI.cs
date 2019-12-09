@@ -3403,7 +3403,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(TAGBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["tagIds"] = JsonConvert.SerializeObject(tagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
+            aipReq.Bodys["tagIds"] = tagIds;
             PreAction();
 
             if (options != null)
