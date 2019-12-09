@@ -2985,7 +2985,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqIds"] = faqIds;
             PreAction();
 
             if (options != null)
