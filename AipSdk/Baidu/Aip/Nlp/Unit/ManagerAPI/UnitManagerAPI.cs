@@ -2828,7 +2828,10 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            if (sluTagIds != null)
+            {
+                aipReq.Bodys["sluTagIds"] = sluTagIds;
+            }
             PreAction();
 
             if (options != null)
