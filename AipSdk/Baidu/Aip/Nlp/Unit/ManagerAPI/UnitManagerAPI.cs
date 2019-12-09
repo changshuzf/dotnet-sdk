@@ -3143,7 +3143,7 @@ namespace Baidu.Aip.Nlp.Unit
                     long keywordId,
                     int pageNo,
                     int pageSize,
-                    string keywordType = "",
+                    string keywordType = null,
                     Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQSKILLKEYWORDVALUE);
@@ -3152,7 +3152,10 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["keywordId"] = keywordId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["keywordType"] = keywordType;
+            if (keywordType != null)
+            {
+                aipReq.Bodys["keywordType"] = keywordType;
+            }
             PreAction();
 
             if (options != null)
