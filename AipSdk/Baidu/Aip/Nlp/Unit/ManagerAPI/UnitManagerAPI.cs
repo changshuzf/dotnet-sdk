@@ -3009,7 +3009,7 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject FAQSkillFAQPairSearch(long skillId,
                                     int pageNo,
                                     int pageSize,
-                                    string searchKey = "",
+                                    string searchKey = null,
                                     List<long> sluTagIds = null,
                                     Dictionary<string, object> options = null)
         {
@@ -3018,10 +3018,15 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["searchKey"] = searchKey;
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            if (searchKey != null)
+            {
+                aipReq.Bodys["searchKey"] = searchKey;
+            }
+            if (sluTagIds != null)
+            {
+                aipReq.Bodys["sluTagIds"] = sluTagIds;
+            }
             PreAction();
-
             if (options != null)
                 foreach (var pair in options)
                     aipReq.Bodys[pair.Key] = pair.Value;
