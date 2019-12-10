@@ -1426,7 +1426,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2）接⼝地址： slot/add
         /// </summary>
         /// <param name="skillId">技能id</param>
-        /// <param name="slotName">词槽名称，⻓度范围1~20</param>
+        /// <param name="slotName">词槽名称，⻓度范围1~20 必须以user_ 开头</param>
         /// <param name="slotDesc">词槽描述，⻓度范围0~50</param>
         /// <param name="slotClarifyNameList">词槽别名列表，可包含1~10个别名； 别名，⻓度范围1 ~20</param>
         /// <param name="slotSysDict">系统词槽名称</param>
