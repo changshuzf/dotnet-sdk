@@ -2092,17 +2092,23 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject KeywordDeleteValue(long skillId,
                                         long keywordId,
                                         List<long> keywordValueIds,
-                                        string keywordType = "",
-                                        int pageSize = 10,
+                                        string keywordType = null,
+                                        int pageSize = 0,
                                         Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDDELETEVALUE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
-            aipReq.Bodys["keywordValueIds"] = JsonConvert.SerializeObject(keywordValueIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["keywordType"] = keywordType;
-            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["keywordValueIds"] = keywordValueIds;
+            if (keywordType!= null)
+            {
+                aipReq.Bodys["keywordType"] = keywordType;
+            }
+            if (pageSize != 0)
+            {
+                aipReq.Bodys["pageSize"] = pageSize;
+            }
             PreAction();
 
             if (options != null)
