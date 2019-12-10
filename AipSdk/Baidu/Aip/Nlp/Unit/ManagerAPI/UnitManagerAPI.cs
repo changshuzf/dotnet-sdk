@@ -1512,20 +1512,26 @@ namespace Baidu.Aip.Nlp.Unit
                                     long slotId,
                                     int slotDictEfficient,
                                     int slotSysDictEfficient,
-                                    string slotDesc = "",
-                                    JArray slotClarifyNameList = null,
-                                    JArray slotSysDict = null,
+                                    List<SlotSysDict> slotSysDict,
+                                    string slotDesc = null,
+                                    List<string> slotClarifyNameList = null,
                                     Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SLOTUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotId"] = slotId;
-            aipReq.Bodys["slotDesc"] = slotDesc;
-            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             aipReq.Bodys["slotDictEfficient"] = slotDictEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
+            aipReq.Bodys["slotSysDict"] = slotSysDict;
+            if (slotDesc != null)
+            {
+                aipReq.Bodys["slotDesc"] = slotDesc;
+            }
+            if (slotClarifyNameList != null)
+            {
+                aipReq.Bodys["slotClarifyNameList"] = slotClarifyNameList;
+            }
             PreAction();
 
             if (options != null)
