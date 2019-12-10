@@ -15,6 +15,11 @@ namespace Baidu.Aip.Nlp.Unit
 {
     public class SlotSysDict
     {
+        public SlotSysDict(string sysDictName)
+        {
+            this.sysDictName = sysDictName;
+        }
+
         /// <summary>
         /// 系统词槽名称
         /// </summary>
