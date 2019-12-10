@@ -1716,7 +1716,7 @@ namespace Baidu.Aip.Nlp.Unit
         {
             var aipReq = DefaultRequest(PATTERNLIST);
 
-            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
