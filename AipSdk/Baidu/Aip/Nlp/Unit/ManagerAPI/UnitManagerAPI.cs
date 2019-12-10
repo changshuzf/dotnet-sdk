@@ -2242,7 +2242,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(OMITBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["omitIds"] = JsonConvert.SerializeObject(omitIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["omitIds"] = omitIds;
             PreAction();
 
             if (options != null)
