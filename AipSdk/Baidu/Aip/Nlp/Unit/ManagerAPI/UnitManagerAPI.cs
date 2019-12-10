@@ -1745,17 +1745,17 @@ namespace Baidu.Aip.Nlp.Unit
                                     long patternSetId,
                                     long intentId,
                                     float threshold,
-                                    JArray content,
+                                    List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.Content> content,
                                     int filledOtherSlotsLabel = 1,
                                     Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(PATTERNADD);
 
-            aipReq.Bodys["botId"] = skillId;
+            aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["patternSetId"] = patternSetId;
             aipReq.Bodys["intentId"] = intentId;
             aipReq.Bodys["threshold"] = threshold;
-            aipReq.Bodys["content"] = JsonConvert.SerializeObject(content, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["content"] = content;
             aipReq.Bodys["filledOtherSlotsLabel"] = filledOtherSlotsLabel;
             PreAction();
 
