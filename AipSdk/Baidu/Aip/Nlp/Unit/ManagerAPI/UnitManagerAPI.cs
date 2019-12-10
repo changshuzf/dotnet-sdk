@@ -1935,15 +1935,18 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject KeywordAdd(long skillId,
                                 string keywordName,
                                 List<string> keywordValues,
-                                string keywordDesc = "",
+                                string keywordDesc = null,
                                 Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDADD);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordName"] = keywordName;
-            aipReq.Bodys["keywordValues"] = JsonConvert.SerializeObject(keywordValues, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["keywordDesc"] = keywordDesc;
+            aipReq.Bodys["keywordValues"] = keywordValues;
+            if (keywordDesc != null)
+            {
+                aipReq.Bodys["keywordDesc"] = keywordDesc;
+            }
             PreAction();
 
             if (options != null)
