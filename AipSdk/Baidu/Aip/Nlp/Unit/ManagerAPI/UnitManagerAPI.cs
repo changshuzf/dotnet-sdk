@@ -2188,8 +2188,8 @@ namespace Baidu.Aip.Nlp.Unit
         /// 1）功能描述：新建⼝语化词列表
         /// 2）接⼝地址： omit/add
         /// </summary>
-        /// <param name="skillId"></param>
-        /// <param name="omitValue"></param>
+        /// <param name="skillId">技能id</param>
+        /// <param name="omitValue">⼝语化词词典值,单个词典值不能超过6个字符</param>
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject OmitAdd(long skillId, string omitValue, Dictionary<string, object> options = null)
