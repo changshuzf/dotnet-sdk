@@ -1437,7 +1437,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject SLotAdd(long skillId,
                                 string slotName,
-                                string slotDesc = "",
+                                string slotDesc = null,
                                 List<string> slotClarifyNameList = null,
                                 List<SlotSysDict> slotSysDict = null,
                                 int slotDictEfficient = 1,
@@ -1448,7 +1448,10 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotName"] = slotName;
-            aipReq.Bodys["slotDesc"] = slotDesc;
+            if (slotDesc != null)
+            {
+                aipReq.Bodys["slotDesc"] = slotDesc;
+            }
             if (slotClarifyNameList != null)
             {
                 aipReq.Bodys["slotClarifyNameList"] = slotClarifyNameList;
