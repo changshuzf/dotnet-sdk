@@ -2136,14 +2136,17 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject KeywordClearValue(long skillId,
                                 long keywordId,
-                                string keywordType = "",
+                                string keywordType = null,
                                 Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDCLEARVALUE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["keywordId"] = keywordId;
-            aipReq.Bodys["keywordType"] = keywordType;
+            if (keywordType != null)
+            {
+                aipReq.Bodys["keywordType"] = keywordType;
+            }
             PreAction();
 
             if (options != null)
