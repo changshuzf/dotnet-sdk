@@ -1965,13 +1965,17 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="pageSize"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject KeywordBatchDelete(long skillId, List<long> keywordIds, int pageSize = 10, Dictionary<string, object> options = null)
+        public JObject KeywordBatchDelete(long skillId, List<long> keywordIds, int pageSize = 0, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(KEYWORDBATCHDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["keywordIds"] = JsonConvert.SerializeObject(keywordIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["pageSize"] = pageSize;
+            aipReq.Bodys["keywordIds"] = keywordIds;
+            if (pageSize != 0)
+            {
+                aipReq.Bodys["pageSize"] = pageSize;
+            }
+
             PreAction();
 
             if (options != null)
