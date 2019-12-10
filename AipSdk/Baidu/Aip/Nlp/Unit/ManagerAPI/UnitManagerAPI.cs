@@ -3476,8 +3476,14 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["pageNo"] = pageNo;
             aipReq.Bodys["pageSize"] = pageSize;
-            aipReq.Bodys["searchKey"] = searchKey;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore }); ;
+            if (searchKey != null)
+            {
+                aipReq.Bodys["searchKey"] = searchKey;
+            }
+            if (faqIds != null)
+            {
+                aipReq.Bodys["faqIds"] = faqIds;
+            }
             PreAction();
 
             if (options != null)
