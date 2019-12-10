@@ -1449,8 +1449,15 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["slotName"] = slotName;
             aipReq.Bodys["slotDesc"] = slotDesc;
-            aipReq.Bodys["slotClarifyNameList"] = JsonConvert.SerializeObject(slotClarifyNameList, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["slotSysDict"] = JsonConvert.SerializeObject(slotSysDict, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            if (slotClarifyNameList != null)
+            {
+                aipReq.Bodys["slotClarifyNameList"] = slotClarifyNameList;
+            }
+            if (slotSysDict != null)
+            {
+                aipReq.Bodys["slotSysDict"] = slotSysDict;
+
+            }
             aipReq.Bodys["slotDictEfficient"] = slotDictEfficient;
             aipReq.Bodys["slotSysDictEfficient"] = slotSysDictEfficient;
             PreAction();
