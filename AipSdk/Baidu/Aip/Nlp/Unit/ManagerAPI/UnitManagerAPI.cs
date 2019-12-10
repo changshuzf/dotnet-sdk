@@ -4739,13 +4739,16 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="modelVersion">模型版本，如果不填写，默认部署当前沙盒⽣效的模型版本</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DeploymentUpdateModelVersion(long skillId, string region, string modelVersion = "", Dictionary<string, object> options = null)
+        public JObject DeploymentUpdateModelVersion(long skillId, string region, string modelVersion = null, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DEPLOYMENTUPDATEMODELVERSION);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["region"] = region;
-            aipReq.Bodys["modelVersion"] = modelVersion;
+            if (modelVersion != null)
+            {
+                aipReq.Bodys["modelVersion"] = modelVersion;
+            }
             PreAction();
 
             if (options != null)
