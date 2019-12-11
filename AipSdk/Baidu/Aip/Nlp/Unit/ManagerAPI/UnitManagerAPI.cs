@@ -2886,21 +2886,21 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject FAQSkillFAQPairAdd(long skillId,
-                                            List<JObject> faqQuestions,
-                                            List<JObject> faqAnswers,
+                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.FaqQuestion> faqQuestions,
+                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.FaqQuestion> faqAnswers,
                                             string faqStdQuestion = "",
-                                            List<string> faqPatterns = null,
+                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.faqPattern> faqPatterns = null,
                                             List<long> sluTagIds = null,
                                             Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRADD);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqQuestions"] = JsonConvert.SerializeObject(faqQuestions, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["faqAnswers"] = JsonConvert.SerializeObject(faqAnswers, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqQuestions"] = faqQuestions;
+            aipReq.Bodys["faqAnswers"] = faqAnswers;
             aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
-            aipReq.Bodys["faqPatterns"] = JsonConvert.SerializeObject(faqPatterns, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["sluTagIds"] = JsonConvert.SerializeObject(sluTagIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqPatterns"] = faqPatterns;
+            aipReq.Bodys["sluTagIds"] = sluTagIds;
             PreAction();
 
             if (options != null)
