@@ -2887,7 +2887,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject FAQSkillFAQPairAdd(long skillId,
                                             List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.FaqQuestion> faqQuestions,
-                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.FaqQuestion> faqAnswers,
+                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.faqAnswers> faqAnswers,
                                             string faqStdQuestion = "",
                                             List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.faqPattern> faqPatterns = null,
                                             List<long> sluTagIds = null,
