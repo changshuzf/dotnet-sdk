@@ -2985,14 +2985,14 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject FAQSkillFAQPairUpdateTags(long skillId,
                                             List<long> faqIds,
-                                            List<JObject> sluTags,
+                                            List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.SluTag> sluTags,
                                             Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQSKILLFAQPAIRUPDATETAGS);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["faqIds"] = JsonConvert.SerializeObject(faqIds, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            aipReq.Bodys["sluTags"] = JsonConvert.SerializeObject(sluTags, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["faqIds"] = faqIds;
+            aipReq.Bodys["sluTags"] = sluTags;
             PreAction();
 
             if (options != null)
