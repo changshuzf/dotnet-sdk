@@ -3468,12 +3468,13 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.4.3.6. 标签查找
         /// 1）功能描述：标签查找
         /// 2）接⼝地址： tag/search
+        /// 搜素标签关键词,问答对ID列表 必须二选一
         /// </summary>
-        /// <param name="skillId"></param>
-        /// <param name="pageNo"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="searchKey"></param>
-        /// <param name="faqIds"></param>
+        /// <param name="skillId">技能 id</param>
+        /// <param name="pageNo">⻚码⼤于等于1</param>
+        /// <param name="pageSize">每⻚记录数</param>
+        /// <param name="searchKey">搜素标签关键词</param>
+        /// <param name="faqIds">问答对ID列表</param>
         /// <param name="options"></param>
         /// <returns></returns>
         public JObject TagSearch(long skillId,
@@ -3633,12 +3634,12 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="skillSetting">⾼级设置具体内容</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject FAQSkillSettingUpdate(long skillId, JObject skillSetting, Dictionary<string, object> options = null)
+        public JObject FAQSkillSettingUpdate(long skillId, Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.SkillSetting skillSetting, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(FAQSKILLSETTINGUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["botSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["botSetting"] = skillSetting;
             PreAction();
 
             if (options != null)

@@ -66,6 +66,17 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
     public class PatternString
     {
         /// <summary>
+        /// patternString[]结构：
+        /// </summary>
+        /// <param name="threshold">阈值</param>
+        /// <param name="content">模板⽚段列表</param>
+        public PatternString(float threshold, List<Content> content)
+        {
+            this.threshold = threshold;
+            this.content = content;
+        }
+
+        /// <summary>
         /// 阈值
         /// </summary>
         public float threshold { get; set; }
