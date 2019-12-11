@@ -2467,7 +2467,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="query">样本信息</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject QueryAdd(long skillId, long querySetId, JObject query, Dictionary<string, object> options = null)
+        public JObject QueryAdd(long skillId, long querySetId, Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.QueryAdd_Query query, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(QUERYADD);
 
