@@ -2888,7 +2888,7 @@ namespace Baidu.Aip.Nlp.Unit
         public JObject FAQSkillFAQPairAdd(long skillId,
                                             List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.FaqQuestion> faqQuestions,
                                             List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.faqAnswers> faqAnswers,
-                                            string faqStdQuestion = "",
+                                            string faqStdQuestion = null,
                                             List<Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT.faqPattern> faqPatterns = null,
                                             List<long> sluTagIds = null,
                                             Dictionary<string, object> options = null)
@@ -2898,9 +2898,18 @@ namespace Baidu.Aip.Nlp.Unit
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["faqQuestions"] = faqQuestions;
             aipReq.Bodys["faqAnswers"] = faqAnswers;
-            aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
-            aipReq.Bodys["faqPatterns"] = faqPatterns;
-            aipReq.Bodys["sluTagIds"] = sluTagIds;
+            if (faqStdQuestion != null)
+            {
+                aipReq.Bodys["faqStdQuestion"] = faqStdQuestion;
+            }
+            if (faqPatterns != null)
+            {
+                aipReq.Bodys["faqPatterns"] = faqPatterns;
+            }
+            if (sluTagIds != null)
+            {
+                aipReq.Bodys["sluTagIds"] = sluTagIds;
+            }
             PreAction();
 
             if (options != null)
