@@ -3639,7 +3639,7 @@ namespace Baidu.Aip.Nlp.Unit
             var aipReq = DefaultRequest(FAQSKILLSETTINGUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
-            aipReq.Bodys["botSetting"] = skillSetting;
+            aipReq.Bodys["skillSetting"] = JsonConvert.SerializeObject(skillSetting, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             PreAction();
 
             if (options != null)
