@@ -705,19 +705,19 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.2.1. 查询⽂档列表
         /// </summary>
         private const string DDQAFILELIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/list";
 
         /// <summary>
         /// 2.5.2.2. 上传⽂档
         /// </summary>
         private const string DDQAFILEUPLOAD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/upload";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/upload";
 
         /// <summary>
         /// 2.5.2.3. 删除⽂档
         /// </summary>
         private const string DDQAFILEDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/file/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/delete";
         #endregion 2.5.2. ⽂档
 
         #region 2.5.3. 模型
@@ -725,7 +725,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.3.1. 训练模型
         /// </summary>
         private const string DDQAMODELTRAIN =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/model/train";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/model/train";
         #endregion 2.5.3. 模型
 
         #region 2.5.4. 设置
@@ -733,7 +733,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.4.1. 对话式⽂档问答阈值设置
         /// </summary>
         private const string DDQASETTINGUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/setting/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/setting/update";
         #endregion 2.5.4. 设置
 
         #endregion 2.5 对话式⽂档问答技能
@@ -3790,7 +3790,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="skillDesc">技能描述，⻓度范围0~50</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DDAQSkillAdd(string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        public JObject DDQASkillAdd(string skillName, string skillDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DDQASKILLADD);
 
@@ -3814,7 +3814,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="skillDesc">技能描述， 0~50个字符</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DDAQSkillUpdate(long skillId, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
+        public JObject DDQASkillUpdate(long skillId, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DDQASKILLUPDATE);
 
@@ -3837,7 +3837,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="skillId">技能id</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public JObject DDAQSkillDelete(long skillId, Dictionary<string, object> options = null)
+        public JObject DDQASkillDelete(long skillId, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(DDQASKILLDELETE);
 
