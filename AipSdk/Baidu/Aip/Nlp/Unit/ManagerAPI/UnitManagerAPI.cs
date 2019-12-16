@@ -678,26 +678,26 @@ namespace Baidu.Aip.Nlp.Unit
         /// <summary>
         /// 2.5.1.1. 查询技能列表
         /// </summary>
-        private const string DDAQSKILLLIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/list";
+        private const string DDQASKILLLIST =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/skill/list";
 
         /// <summary>
         /// 2.5.1.2. 新建技能
         /// </summary>
-        private const string DDAQSKILLADD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/add";
+        private const string DDQASKILLADD =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/skill/add";
 
         /// <summary>
         /// 2.5.1.3. 修改技能属性
         /// </summary>
-        private const string DDAQSKILLUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/update";
+        private const string DDQASKILLUPDATE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/skill/update";
 
         /// <summary>
         /// 2.5.1.4. 删除技能
         /// </summary>
-        private const string DDAQSKILLDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddaq/skill/delete";
+        private const string DDQASKILLDELETE =
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/skill/delete";
         #endregion 2.5.1. 技能 
 
         #region 2.5.2. ⽂档
@@ -3768,7 +3768,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject DDQASkillList(string skillCategory = "innovation", int pageNo = 1, int pageSize = 50, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLLIST);
+            var aipReq = DefaultRequest(DDQASKILLLIST);
 
             aipReq.Bodys["skillCategory"] = skillCategory;
             aipReq.Bodys["pageNo"] = pageNo;
@@ -3792,7 +3792,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject DDAQSkillAdd(string skillName, string skillDesc = "", Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLADD);
+            var aipReq = DefaultRequest(DDQASKILLADD);
 
             aipReq.Bodys["skillName"] = skillName;
             aipReq.Bodys["skillDesc"] = skillDesc;
@@ -3816,7 +3816,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject DDAQSkillUpdate(long skillId, string skillName, string skillDesc = "", Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLUPDATE);
+            var aipReq = DefaultRequest(DDQASKILLUPDATE);
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["skillName"] = skillName;
@@ -3839,7 +3839,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// <returns></returns>
         public JObject DDAQSkillDelete(long skillId, Dictionary<string, object> options = null)
         {
-            var aipReq = DefaultRequest(DDAQSKILLDELETE);
+            var aipReq = DefaultRequest(DDQASKILLDELETE);
 
             aipReq.Bodys["skillId"] = skillId;
             PreAction();
