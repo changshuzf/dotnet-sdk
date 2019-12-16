@@ -705,19 +705,19 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.2.1. 查询⽂档列表
         /// </summary>
         private const string DDQAFILELIST =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/list";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/file/list";
 
         /// <summary>
         /// 2.5.2.2. 上传⽂档
         /// </summary>
         private const string DDQAFILEUPLOAD =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/upload";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/file/upload";
 
         /// <summary>
         /// 2.5.2.3. 删除⽂档
         /// </summary>
         private const string DDQAFILEDELETE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/file/delete";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/file/delete";
         #endregion 2.5.2. ⽂档
 
         #region 2.5.3. 模型
@@ -725,7 +725,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.3.1. 训练模型
         /// </summary>
         private const string DDQAMODELTRAIN =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/model/train";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/model/train";
         #endregion 2.5.3. 模型
 
         #region 2.5.4. 设置
@@ -733,7 +733,7 @@ namespace Baidu.Aip.Nlp.Unit
         /// 2.5.4.1. 对话式⽂档问答阈值设置
         /// </summary>
         private const string DDQASETTINGUPDATE =
-            "https://aip.baidubce.com/rpc/2.0/unit/v3/DDQA/setting/update";
+            "https://aip.baidubce.com/rpc/2.0/unit/v3/ddqa/setting/update";
         #endregion 2.5.4. 设置
 
         #endregion 2.5 对话式⽂档问答技能
