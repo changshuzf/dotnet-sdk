@@ -23,6 +23,10 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
             {
                 this.intentId = intentId;
             }
+            else
+            {
+                this.intentId = null;
+            }
             if (slots != null)
             {
                 this.slots = slots;
@@ -41,12 +45,52 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         /// <summary>
         /// 意图id
         /// </summary>
-        public long intentId { get; set; }
+        public long? intentId { get; set; }
 
         /// <summary>
         /// 词槽标注信息
         /// </summary>
         public List<QueryAdd_Slot> slots { get; set; }
+    }
+
+    /// <summary>
+    /// QueryUpdate_Query
+    /// </summary>
+    public class QueryUpdate_Query : QueryAdd_Query
+    {
+        /// <summary>
+        /// QueryUpdate_Query 构造函数
+        /// </summary>
+        /// <param name="queryString">样本</param>
+        /// <param name="queryId">样本id</param>
+        /// <param name="intentId">意图id</param>
+        /// <param name="slots">词槽标注信息</param>
+        public QueryUpdate_Query(long queryId, string queryString, long intentId = 0, List<QueryAdd_Slot> slots = null) : base(queryString, intentId, slots)
+        {
+            this.queryId = queryId;
+            this.queryString = queryString;
+            if (intentId != 0)
+            {
+                this.intentId = intentId;
+            }
+            else
+            {
+                this.intentId = null;
+            }
+            if (slots != null)
+            {
+                this.slots = slots;
+            }
+            else
+            {
+                this.slots = new List<QueryAdd_Slot>();
+            }
+        }
+
+        /// <summary>
+        /// 样本id
+        /// </summary>
+        public long queryId { get; set; }
     }
 
     public class QueryAdd_Slot
