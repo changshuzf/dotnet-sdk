@@ -23,10 +23,6 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
             {
                 this.intentId = intentId;
             }
-            else
-            {
-                this.intentId = null;
-            }
             if (slots != null)
             {
                 this.slots = slots;
@@ -45,7 +41,7 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
         /// <summary>
         /// 意图id
         /// </summary>
-        public long? intentId { get; set; }
+        public long intentId { get; set; }
 
         /// <summary>
         /// 词槽标注信息
@@ -72,10 +68,6 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
             if (intentId != 0)
             {
                 this.intentId = intentId;
-            }
-            else
-            {
-                this.intentId = null;
             }
             if (slots != null)
             {
