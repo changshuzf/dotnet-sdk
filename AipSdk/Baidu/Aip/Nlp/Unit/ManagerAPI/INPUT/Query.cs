@@ -27,6 +27,10 @@ namespace Baidu.Aip.Nlp.Unit.ManagerAPI.INPUT
             {
                 this.slots = slots;
             }
+            else
+            {
+                this.slots = new List<QueryAdd_Slot>();
+            }
         }
 
         /// <summary>

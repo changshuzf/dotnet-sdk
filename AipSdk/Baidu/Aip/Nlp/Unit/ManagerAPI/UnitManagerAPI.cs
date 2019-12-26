@@ -2473,7 +2473,7 @@ namespace Baidu.Aip.Nlp.Unit
 
             aipReq.Bodys["skillId"] = skillId;
             aipReq.Bodys["querySetId"] = querySetId;
-            aipReq.Bodys["query"] = JsonConvert.SerializeObject(query, Formatting.Indented,new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            aipReq.Bodys["query"] = query;
             PreAction();
 
             if (options != null)
