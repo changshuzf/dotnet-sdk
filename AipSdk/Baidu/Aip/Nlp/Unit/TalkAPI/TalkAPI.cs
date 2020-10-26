@@ -23,11 +23,68 @@ namespace Baidu.Aip.Nlp.Unit
 {
     public class TalkAPI : AipServiceBase
     {
+        /// <summary>
+        /// 机器人对话沙盒环境
+        /// </summary>
         private const string BOTCHAT =
     "https://aip.baidubce.com/rpc/2.0/unit/service/chat";
 
+        /// <summary>
+        /// 【华北机房】https://unit.bj.baidubce.com/rpc/2.0/unit/service/chat
+        /// </summary>
+        private const string BOTCHAT_Product_bj =
+            "https://unit.bj.baidubce.com/rpc/2.0/unit/service/chat";
+
+        /// <summary>
+        /// 【华东机房】https://unit.su.baidubce.com/rpc/2.0/unit/service/chat
+        /// </summary>
+        private const string BOTCHAT_Product_su =
+             "https://unit.su.baidubce.com/rpc/2.0/unit/service/chat";
+
+        /// <summary>
+        /// 【华南机房】https://unit.gz.baidubce.com/rpc/2.0/unit/service/chat
+        /// </summary>
+        private const string BOTCHAT_Product_gz =
+           "https://unit.gz.baidubce.com/rpc/2.0/unit/service/chat";
+
+        /// <summary>
+        /// 【全国域名】https://unit-api.baidu.com/rpc/2.0/unit/service/chat
+        /// </summary>
+        private const string BOTCHAT_Product_all =
+            "https://unit-api.baidu.com/rpc/2.0/unit/service/chat";
+
+
+
+        /// <summary>
+        /// 技能对话沙盒环境
+        /// </summary>
         private const string SKILLCHAT =
             "https://aip.baidubce.com/rpc/2.0/unit/bot/chat";
+
+
+        /// <summary>
+        /// 【华北机房】https://unit.bj.baidubce.com/rpc/2.0/unit/bot/chat
+        /// </summary>
+        private const string SKILLCHAT_Product_bj =
+            "https://unit.bj.baidubce.com/rpc/2.0/unit/bot/chat";
+
+        /// <summary>
+        /// 【华东机房】https://unit.su.baidubce.com/rpc/2.0/unit/bot/chat
+        /// </summary>
+        private const string SKILLCHAT_Product_su =
+             "https://unit.su.baidubce.com/rpc/2.0/unit/bot/chat";
+
+        /// <summary>
+        /// 【华南机房】https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat
+        /// </summary>
+        private const string SKILLCHAT_Product_gz =
+           "https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat";
+
+        /// <summary>
+        /// 【全国域名】https://unit-api.baidu.com/rpc/2.0/unit/bot/chat
+        /// </summary>
+        private const string SKILLCHAT_Product_all =
+            "https://unit.gz.baidubce.com/rpc/2.0/unit/bot/chat";
 
         public TalkAPI(string apiKey, string secretKey) : base(apiKey, secretKey)
         {
@@ -49,6 +106,8 @@ namespace Baidu.Aip.Nlp.Unit
         /// </summary>
         /// <param name="service_id">机器人ID，service_id 与skill_ids不能同时缺失，至少一个有值。</param>
         /// <param name="request"></param>
+        /// <param name="ProductEnv">是否使用生产环境，默认为false</param>
+        /// <param name="ProductSite">生产环境站点，华北bj,华东su,华南gz,全国域名all</param>
         /// <param name="log_id"></param>
         /// <param name="version"></param>
         /// <param name="skill_ids">技能ID列表。我们允许开发者指定调起哪些技能。这个列表是有序的——排在越前面的技能，优先级越高。技能优先级体现在response的排序上。具体排序规则参见【应答参数说明】service_id和skill_ids可以组合使用，详见【请求参数详细说明】</param>
@@ -56,10 +115,35 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="dialog_state"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public ReturnJsonBotChat BotChat(string service_id, Request request, string log_id = "",
+        public ReturnJsonBotChat BotChat(string service_id, Request request, bool ProductEnv= false, string ProductSite= "", string log_id = "",
             string version = "2.0", List<string> skill_ids = null, string session_id = "", object dialog_state = null, Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(BOTCHAT);
+            if (ProductEnv == true)
+            {
+                switch (ProductSite)
+                {
+                    case "bj":
+                        aipReq = DefaultRequest(BOTCHAT_Product_bj);
+                        break;
+                    case "su":
+                        aipReq = DefaultRequest(BOTCHAT_Product_su);
+                        break;
+                    case "gz":
+                        aipReq = DefaultRequest(BOTCHAT_Product_gz);
+                        break;
+                    case "all":
+                        aipReq = DefaultRequest(BOTCHAT_Product_all);
+                        break;
+                    default:
+                        aipReq = DefaultRequest(BOTCHAT_Product_all);
+                        break;
+                }
+            }
+            else
+            {
+                aipReq = DefaultRequest(BOTCHAT);
+            }
 
             aipReq.Bodys["version"] = version;
             aipReq.Bodys["service_id"] = service_id;
@@ -90,13 +174,35 @@ namespace Baidu.Aip.Nlp.Unit
         /// <param name="bot_id">BOT唯一标识，在『我的BOT』的BOT列表中第一列数字即为bot_id</param>
         /// <param name="log_id">开发者需要在客户端生成的唯一id，用来定位请求，响应中会返回该字段。对话中每轮请求都需要一个log_id。</param>
         /// <param name="request">本轮请求体</param>
+        /// <param name="ProductEnv">是否使用生产环境，默认为false</param>
+        /// <param name="ProductSite">生产环境站点，华北bj,华东su,华南gz,全国域名all</param>
         /// <param name="version">=2.0，当前api版本对应协议版本号为2.0，固定值。</param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public ReturnJsonBotChat SkillChat(string bot_id, Request request, string log_id = "",
+        public ReturnJsonBotChat SkillChat(string bot_id, Request request, bool ProductEnv, string ProductSite, string log_id = "",
             string version = "2.0", string bot_session = "", Dictionary<string, object> options = null)
         {
             var aipReq = DefaultRequest(SKILLCHAT);
+            if (ProductEnv == true)
+            {
+                switch (ProductSite)
+                {
+                    case "bj": aipReq = DefaultRequest(SKILLCHAT_Product_bj);
+                        break;
+                    case "su": aipReq = DefaultRequest(SKILLCHAT_Product_su);
+                        break;
+                    case "gz": aipReq = DefaultRequest(SKILLCHAT_Product_gz);
+                        break;
+                    case "all": aipReq = DefaultRequest(SKILLCHAT_Product_all);
+                        break;
+                    default: aipReq = DefaultRequest(SKILLCHAT_Product_all);
+                        break;
+                }
+            }
+            else
+            {
+                aipReq = DefaultRequest(SKILLCHAT);
+            }
 
             aipReq.Bodys["version"] = version;
             aipReq.Bodys["bot_id"] = bot_id;
